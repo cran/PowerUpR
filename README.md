@@ -60,7 +60,7 @@ For reference variance (`R12`, `R22`, `R32`) values see Bloom, Richburg-Hayes, a
 Deke et al. (2010), Dong et al. (2016), Hedges and Hedberg (2013),  Kelcey, and Phelps (2013), Spybrook, Westine,and Taylor (2016), Westine, Spybrook, and Taylor (2013).
 Users can also obtain design parameters for various levels using publicly available state or district data.
 
-For an example describing how to use `PowerUpR` package click [vignettes](http://rpubs.com/metinbulus/powerupr_vignettes) or go to *vignette* folder.
+For an example describing how to use `PowerUpR` package click [vignettes](http://rpubs.com/metinbulus/powerupr_vignettes) or go to *vignettes* folder.
 
 Please email us any issues or suggestions.
 
