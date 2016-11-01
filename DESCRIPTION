@@ -1,0 +1,23 @@
+Package: PowerUpR
+Type: Package
+Title: Power Analysis Tools for Individual/Cluster Randomized Trials
+Version: 0.1.2
+Date: 2016-10-31
+Author: 
+  Metin Bulus [aut,cre]
+  Nianbo Dong [aut,cre]
+Maintainer: Metin Bulus <bulus.metin@gmail.com>
+Description: 
+  Statistical power analysis tools for designing individual or cluster randomized trials.
+ Includes functions to calculate statistical power (1 - type II error), minimum detectable effect size (MDES),
+ minimum required sample size (MRSS), functions to solve constrained optimal sample allocation (COSA) problems,
+ and to visualize duo or trio relationships between statistical power, MDES, MRSS, and COSA.
+URL: https://github.com/metinbulus/PowerUpR
+BugReports: https://github.com/metinbulus/PowerUpR/issues?state=open
+Depends: nloptr(>= 1.0.4)
+License: GPL (>= 3)
+LazyData: TRUE
+NeedsCompilation: no
+Packaged: 2016-10-31 22:27:39 UTC; METIN
+Repository: CRAN
+Date/Publication: 2016-11-01 11:07:20
