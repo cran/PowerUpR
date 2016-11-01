@@ -77,7 +77,7 @@ Deke, John, Dragoset, Lisa, and Moore, Ravaris (2010). Precision Gains from Publ
 Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes
 for Experimental and Quasi-Experimental Design Studies,*Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
 
-Dong, N., Reinke, W. M., Herman, K. C., Bradshaw, C. P., & Murray, D. W. (2016). Meaningful effect sizes, intraclass correlations, and proportions of variance explained by covariates for panning two-and three-level cluster randomized trials of social and behavioral outcomes. \emph{Evaluation Review}. doi: 10.1177/0193841X16671283
+Dong, N., Reinke, W. M., Herman, K. C., Bradshaw, C. P., & Murray, D. W. (2016). Meaningful effect sizes, intraclass correlations, and proportions of variance explained by covariates for panning two-and three-level cluster randomized trials of social and behavioral outcomes. *Evaluation Review*. doi: 10.1177/0193841X16671283
 
 Hedges, L. V., & Borenstein, M. (2014). Conditional Optimal Design in Three- and Four-Level Experiments.
 *Journal of Educational and Behavioral Statistics, 39(4)*, 257-281.
@@ -95,7 +95,7 @@ Hedges, L. & Rhoads, C.(2009). Statistical Power Analysis in Education Research 
 Washington, DC: National Center for Special Education Researc , Institute of Education Sciences, U.S. Department of Education.
 Retrieved from http://ies.ed.gov/ncser.
 
-Kelcey, B., & Phelps, G. (2013). Strategies for improving power in school randomized studies of professional development. \emph{Evaluation Review, 37(6)}, 520-554.
+Kelcey, B., & Phelps, G. (2013). Strategies for improving power in school randomized studies of professional development. *Evaluation Review, 37(6)*, 520-554.
 
 R Core Team (2016). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/
 
