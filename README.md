@@ -67,6 +67,12 @@ Please email us any issues or suggestions.
 Metin Bulus bulus.metin@gmail.com  
 Nianbo Dong dong.nianbo@gmail.com  
 
+## Suggested Citations
+Bulus, M., Dong, N. (2016).  `PowerUpR`: Power Analysis Tools for Individual/Cluster Randomized Trials. R package version 0.1.2.
+
+Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes
+for Experimental and Quasi-Experimental Design Studies,*Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
+
 ## References
 Bloom, H. S., Richburg- Hayes, L. & Black, A. R. (2007).
 Using Covariates to Improve Precision for Studies that Randomize Schools to Evaluate Educational Interventions.
