@@ -1,5 +1,9 @@
 # Introduction to `PowerUpR`
 
+[![CRAN Version](http://www.r-pkg.org/badges/version/PowerUpR)](http://cran.rstudio.com/web/packages/PowerUpR)
+[![Monthly Downloads](http://cranlogs.r-pkg.org/badges/PowerUpR)](http://cranlogs.r-pkg.org/badges/PowerUpR)
+[![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/PowerUpR)](http://cranlogs.r-pkg.org/badges/grand-total/PowerUpR)
+
 To install `PowerUpR` package
 
 ```{r}
@@ -18,7 +22,7 @@ COSA problems can be solved in the following forms,
 (iv) under sample size constraints for one or more levels along with any of the i ii, or iii options.
 Congruent with the three fundemental concepts the package also provides tools for graphing two or three dimensional relationships to investiage relative standing of power, MDES, MRSS or a component of COSA.
 
-A design parameter (one of the MDES, MRSS, power, or OSS) can be requested by using approriate function
+A design parameter (one of the MDES, MRSS, power, or COSA) can be requested by using approriate function
 given design characteristics. Except for graphing functions, each function begins with an **output** name,
 following by a period, and a **design** name. There are four types of output; `mdes`,  `power`, `mrss`, and `optimal`,
 and 14 types of design; `ira1r1`, `bira2r1`, `bira2f1`, `bira2c1`, `cra2r2`, `bira3r1`, `bcra3r2`, `bcra3f2`, `cra3r3`,
