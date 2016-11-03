@@ -1,6 +1,6 @@
 Package: PowerUpR
 Type: Package
-Title: Power Analysis Tools for Individual/Cluster Randomized Trials
+Title: Power Analysis Tools for Multilevel Randomized Experiments
 Version: 0.1.2
 Date: 2016-10-31
 Author: 
@@ -8,7 +8,7 @@ Author:
   Nianbo Dong [aut,cre]
 Maintainer: Metin Bulus <bulus.metin@gmail.com>
 Description: 
-  Statistical power analysis tools for designing individual or cluster randomized trials.
+ Statistical power analysis tools for designing multilevel randomized experiments.
  Includes functions to calculate statistical power (1 - type II error), minimum detectable effect size (MDES),
  minimum required sample size (MRSS), functions to solve constrained optimal sample allocation (COSA) problems,
  and to visualize duo or trio relationships between statistical power, MDES, MRSS, and COSA.
