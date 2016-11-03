@@ -4,11 +4,7 @@
 [![Monthly Downloads](http://cranlogs.r-pkg.org/badges/PowerUpR)](http://cranlogs.r-pkg.org/badges/PowerUpR)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/PowerUpR)](http://cranlogs.r-pkg.org/badges/grand-total/PowerUpR)
 
-To install `PowerUpR` package
-```{r}
-install.packages("PowerUpR")
-```
-For an example describing how to use `PowerUpR` package click [vignettes](http://rpubs.com/metinbulus/powerupr_vignettes) or go to *vignettes* folder.
+To install `PowerUpR` package `install.packages("PowerUpR")`. For an example describing how to use `PowerUpR` package click [vignettes](http://rpubs.com/metinbulus/powerupr_vignettes) or go to *vignettes* folder.
 
 `PowerUpR` is an implementation of *PowerUp!* in R environment (R Core Team, 2016). *PowerUp!* is a statistical power analysis tool to calculate
 minimum detectable effect size (MDES) and top level minimum required sample size (MRSS)
