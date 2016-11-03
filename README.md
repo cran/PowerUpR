@@ -12,13 +12,13 @@ For an introductory tutorial on `PowerUpR` package click [vignettes](http://rpub
 
 `PowerUpR` is an implementation of *PowerUp!* in R environment (R Core Team, 2016). *PowerUp!* is a statistical power analysis tool to calculate
 minimum detectable effect size (MDES) and top level minimum required sample size (MRSS)
-for various experimental and quasi-experimental designs including individual/cluster randomized trials (Dong & Maynard, 2013). 
-`PowerUpR` package solely focuses on individual/cluster randomized trials with several additional features.
+for various experimental and quasi-experimental designs including multilevel randomized trials (Dong & Maynard, 2013). 
+`PowerUpR` package solely focuses on multilevel randomized trials with several additional features.
 The package bases its framework on three fundemental concepts in statistical power analysis; power calculation, MDES calculation, and sample size calculation. Congruent with this framework, `PowerUpR` provides tools to calculate power, MDES, MRSS for any level, and to solve constrained optimal sample allocation (COSA) problems (Hedges & Borenstein, 2014; Raudenbush, 1997; Raudenbush & Liu, 2000).
 COSA problems can be solved in the following forms,
-(i) under budgetary constraints given marginal costs per unit,
-(ii) under power constraints given marginal costs per unit, 
-(ii) under MDES constraints given marginal costs per unit, and 
+(i) under budgetary constraints given marginal costs per unit while maximizing the power,
+(ii) under power constraints given marginal costs per unit while minimizing the cost, 
+(ii) under MDES constraints given marginal costs per unit while minimizing the cost, and 
 (iv) under sample size constraints for one or more levels along with any of the i ii, or iii options.
 Congruent with the three fundemental concepts the package also provides tools for graphing two or three dimensional relationships to investiage relative standing of power, MDES, MRSS or a component of COSA.
 
