@@ -25,7 +25,7 @@
   \item{constrain}{parameter to contrain; \code{"cost"}, \code{"power"}, or \code{"mdes"}.}
   \item{n}{harmonic mean of level 1 units across level 2 units (or simple average).}
   \item{J}{harmonic mean of level 2 units across level 3 units (or simple average).}
-  \item{K}{harmonic mean of level 3 units across level 3 units (or simple average).}
+  \item{K}{harmonic mean of level 3 units across level 4 units (or simple average).}
   \item{L}{number of level 4 units.}
   \item{K0}{starting value for estimating number of level 3 units.}
   \item{L0}{starting value for estimating number of level 4 units.}
@@ -43,8 +43,7 @@
 \details{
 
 Level 3 and level 4 sample sizes (\code{K} and \code{L}) are calculated
-using an iterative procedure described in Dong & Maynard (2013) due to
-model degrees of freedom dependency on \code{K} and \code{L}.
+using an iterative procedure described in Dong & Maynard (2013) due to degrees of freedom dependency on \code{K} and \code{L}.
 For other levels (\code{n} and \code{J}) MRSS calculation is simply solving for the unknown.
 MRSS calculator returns values that are not integer. Rounding may produce
 MDES and power values different from what was specified,
@@ -82,7 +81,7 @@ Further definition of design parameters can be found in Dong & Maynard (2013).
 \references{
 
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 
 }

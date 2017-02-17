@@ -30,7 +30,7 @@
   \item{cost}{total cost or budget.}
   \item{n}{harmonic mean of level 1 units across level 2 units (or simple average).}
   \item{J}{harmonic mean of level 2 units across level 3 units (or simple average).}
-  \item{K}{harmonic mean of level 3 units across level 3 units (or simple average).}
+  \item{K}{harmonic mean of level 3 units across level 4 units (or simple average).}
   \item{L}{number of level 4 units.}
   \item{power}{statistical power (1 - type II error).}
   \item{mdes}{minimum detectable effect size.}
@@ -107,7 +107,7 @@ Birgin, E. G., Martinez, J. M. (2008) Improving ultimate convergence of an augme
 
 Conn, A. R., Gould, N. I. M., & Toint, P.L. (1991). A globally convergent augmented Lagrangian algorithm for optimization with general constraints and simple bounds. \emph{SIAM J. Numer. Anal. 28(2)}, 545-572.
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 Hedges, L. V., & Borenstein, M. (2014). Conditional Optimal Design in Three- and Four-Level Experiments. \emph{Journal of Educational and Behavioral Statistics, 39(4)}, 257-281
 

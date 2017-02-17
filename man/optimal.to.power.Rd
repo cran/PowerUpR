@@ -41,6 +41,6 @@
 
 
 \seealso{
-  \code{\link{optimal.to.mdes}, \link{mrss.to.power}, \link{mrss.to.power}}
+  \code{\link{optimal.to.mdes}, \link{mrss.to.mdes}, \link{mrss.to.power}}
 }
 \keyword{conversion}
