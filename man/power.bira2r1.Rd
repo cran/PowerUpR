@@ -40,8 +40,8 @@ Power formula was derived within power analysis framework descibed by Hedges & R
 \value{
   \item{fun}{function name.}
   \item{par}{list of parameters used in power calculation.}
-  \item{df}{model degrees of freedom}
-  \item{M}{multiplier for MDES calcuation given model degrees of freedom, \eqn{\alpha} and \eqn{\beta} (1-power).}
+  \item{df}{degrees of freedom}
+  \item{M}{multiplier for MDES calcuation given degrees of freedom, \eqn{\alpha} and \eqn{\beta} (1-power).}
   \item{power}{statistical power (1 - type II error).}
 }
 
@@ -62,7 +62,7 @@ Power formula was derived within power analysis framework descibed by Hedges & R
 
 \references{
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 Hedges, L. & Rhoads, C.(2009). Statistical Power Analysis in Education
 Research (NCSER 2010-3006). Washington, DC: National Center for Special Education

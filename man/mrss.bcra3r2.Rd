@@ -42,8 +42,7 @@
 \details{
 
 Level 3 sample size ( \code{K}) is calculated
-using an iterative procedure described in Dong & Maynard (2013) due to
-model degrees of freedom dependency on \code{K}.
+using an iterative procedure described in Dong & Maynard (2013) due to degrees of freedom dependency on \code{K}.
 For other levels (\code{n} and \code{J}) MRSS calculation is simply solving for the unknown.
 MRSS calculator returns values that are not integer. Rounding may produce
 MDES and power values different from what was specified,
@@ -80,7 +79,7 @@ Further definition of design parameters can be found in Dong & Maynard (2013).
 \references{
 
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 
 }

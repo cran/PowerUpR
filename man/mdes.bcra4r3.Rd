@@ -31,7 +31,7 @@
   \item{RT42}{proportion of treatment effect variance among level 4 units explained by level 4 covariates.}
   \item{n}{harmonic mean of level 1 units across level 2 units (or simple average).}
   \item{J}{harmonic mean of level 2 units across level 3 units (or simple average).}
-  \item{K}{harmonic mean of level 3 units across level 3 units (or simple average).}
+  \item{K}{harmonic mean of level 3 units across level 4 units (or simple average).}
   \item{L}{number of level 4 units.}
     \item{...}{to handle extra parameters passed from other functions, do not define any additional parameters.}
 }
@@ -39,8 +39,8 @@
 \value{
   \item{fun}{function name.}
   \item{par}{list of parameters used in MDES calculation.}
-  \item{df}{model degrees of freedom}
-  \item{M}{multiplier for MDES calcuation given model degrees of freedom, \eqn{\alpha} and \eqn{\beta} (1-power).}
+  \item{df}{degrees of freedom}
+  \item{M}{multiplier for MDES calcuation given degrees of freedom, \eqn{\alpha} and \eqn{\beta} (1-power).}
   \item{mdes}{minimum detectable effect size and 95\% lower and upper confidence limits.}
 }
 
@@ -66,7 +66,7 @@ MDES formula and further definition of design parameters can be found in Dong & 
 
 \references{
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 }
 \seealso{

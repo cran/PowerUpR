@@ -1,24 +1,28 @@
 # Introduction to `PowerUpR`
+[![CRAN Version](http://www.r-pkg.org/badges/version/PowerUpR)](https://CRAN.R-project.org/package=PowerUpR)
+[![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/PowerUpR)](https://cranlogs.r-pkg.org/badges/grand-total/PowerUpR)
 
-To install `PowerUpR` package
-
+To install CRAN version
 ```{r}
 install.packages("PowerUpR")
 ```
 
+For an introductory tutorial on `PowerUpR` package click on 
+<a href="https://rpubs.com/metinbulus/powerupr_vignettes/" target="_blank">vignettes</a>.
+
 `PowerUpR` is an implementation of *PowerUp!* in R environment (R Core Team, 2016). *PowerUp!* is a statistical power analysis tool to calculate
 minimum detectable effect size (MDES) and top level minimum required sample size (MRSS)
-for various experimental and quasi-experimental designs including cluster randomized trials (Dong & Maynard, 2013). 
-`PowerUpR` package solely focuses on cluster randomized trials and adds several additional features.
+for various multilevel randomized experiments and quasi-experiments (Dong & Maynard, 2013). 
+`PowerUpR` package solely focuses on multilevel randomized experiments with several additional features.
 The package bases its framework on three fundemental concepts in statistical power analysis; power calculation, MDES calculation, and sample size calculation. Congruent with this framework, `PowerUpR` provides tools to calculate power, MDES, MRSS for any level, and to solve constrained optimal sample allocation (COSA) problems (Hedges & Borenstein, 2014; Raudenbush, 1997; Raudenbush & Liu, 2000).
 COSA problems can be solved in the following forms,
-(i) under budgetary constraints given marginal costs per unit,
-(ii) under power constraints given marginal costs per unit, 
-(ii) under MDES constraints given marginal costs per unit, and 
+(i) under budgetary constraints given marginal costs per unit while maximizing the power,
+(ii) under power constraints given marginal costs per unit while minimizing the cost, 
+(ii) under MDES constraints given marginal costs per unit while minimizing the cost, and 
 (iv) under sample size constraints for one or more levels along with any of the i ii, or iii options.
 Congruent with the three fundemental concepts the package also provides tools for graphing two or three dimensional relationships to investiage relative standing of power, MDES, MRSS or a component of COSA.
 
-A design parameter (one of the MDES, MRSS, power, or OSS) can be requested by using approriate function
+A design parameter (one of the power, MDES, MRSS, or COSA) can be requested by using approriate function
 given design characteristics. Except for graphing functions, each function begins with an **output** name,
 following by a period, and a **design** name. There are four types of output; `mdes`,  `power`, `mrss`, and `optimal`,
 and 14 types of design; `ira1r1`, `bira2r1`, `bira2f1`, `bira2c1`, `cra2r2`, `bira3r1`, `bcra3r2`, `bcra3f2`, `cra3r3`,
@@ -56,24 +60,29 @@ For reference variance (`R12`, `R22`, `R32`) values see Bloom, Richburg-Hayes, a
 Deke et al. (2010), Dong et al. (2016), Hedges and Hedberg (2013),  Kelcey, and Phelps (2013), Spybrook, Westine,and Taylor (2016), Westine, Spybrook, and Taylor (2013).
 Users can also obtain design parameters for various levels using publicly available state or district data.
 
-For an example describing how to use `PowerUpR` package click [vignettes](http://rpubs.com/metinbulus/powerupr_vignettes) or go to *vignette* folder.
-
 Please email us any issues or suggestions.
 
 Metin Bulus bulus.metin@gmail.com  
 Nianbo Dong dong.nianbo@gmail.com  
+
+**Suggested citation:**  
+
+Bulus, M., & Dong, N. (2016).  `PowerUpR`: Power Analysis Tools for Individual/Cluster Randomized Trials. R package version 0.1.2.
+
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minimum Detectable Effect Sizes and Minimum Required Sample Sizes
+for Experimental and Quasi-Experimental Design Studies, *Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
 
 ## References
 Bloom, H. S., Richburg- Hayes, L. & Black, A. R. (2007).
 Using Covariates to Improve Precision for Studies that Randomize Schools to Evaluate Educational Interventions.
 *Educational Evaluation and Policy Analysis, 29(1)*, 0-59.
 
-Deke, John, Dragoset, Lisa, and Moore, Ravaris (2010). Precision Gains from Publically Available School Proficiency Measures Compared to Study-Collected Test Scores in Education Cluster-Randomized Trials (NCEE 2010-4003). Washington, DC: National Center for Education Evaluation and Regional Assistance, Institute of Education Sciences, U.S. Department of Education. Retrieved from http://ies.ed.gov/ncee/pubs/20104003
+Deke, John, Dragoset, Lisa, and Moore, Ravaris (2010). Precision Gains from Publically Available School Proficiency Measures Compared to Study-Collected Test Scores in Education Cluster-Randomized Trials (NCEE 2010-4003). Washington, DC: National Center for Education Evaluation and Regional Assistance, Institute of Education Sciences, U.S. Department of Education. Retrieved from https://ies.ed.gov/ncee/pubs/20104003/
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes
-for Experimental and Quasi-Experimental Design Studies,*Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minimum Detectable Effect Sizes and Minimum Required Sample Sizes
+for Experimental and Quasi-Experimental Design Studies, *Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
 
-Dong, N., Reinke, W. M., Herman, K. C., Bradshaw, C. P., & Murray, D. W. (2016). Meaningful effect sizes, intraclass correlations, and proportions of variance explained by covariates for panning two-and three-level cluster randomized trials of social and behavioral outcomes. \emph{Evaluation Review}. doi: 10.1177/0193841X16671283
+Dong, N., Reinke, W. M., Herman, K. C., Bradshaw, C. P., & Murray, D. W. (2016). Meaningful effect sizes, intraclass correlations, and proportions of variance explained by covariates for panning two-and three-level cluster randomized trials of social and behavioral outcomes. *Evaluation Review*. doi: 10.1177/0193841X16671283
 
 Hedges, L. V., & Borenstein, M. (2014). Conditional Optimal Design in Three- and Four-Level Experiments.
 *Journal of Educational and Behavioral Statistics, 39(4)*, 257-281.
@@ -89,11 +98,11 @@ Two- and Three-Level Cluster-Randomized Experiments in Education. *Evaluation Re
 
 Hedges, L. & Rhoads, C.(2009). Statistical Power Analysis in Education Research (NCSER 2010-3006).
 Washington, DC: National Center for Special Education Researc , Institute of Education Sciences, U.S. Department of Education.
-Retrieved from http://ies.ed.gov/ncser.
+Retrieved from https://ies.ed.gov/ncser/.
 
-Kelcey, B., & Phelps, G. (2013). Strategies for improving power in school randomized studies of professional development. \emph{Evaluation Review, 37(6)}, 520-554.
+Kelcey, B., & Phelps, G. (2013). Strategies for improving power in school randomized studies of professional development. *Evaluation Review, 37(6)*, 520-554.
 
-R Core Team (2016). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/
+R Core Team (2016). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.r-project.org/
 
 Raudenbush, S. W. (1997). Statistical analysis and optimal design for cluster randomized trials.
 *Psychological Methods, 2*, 173-185.

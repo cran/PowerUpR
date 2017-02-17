@@ -23,7 +23,7 @@ t1t2.error <- function(x){
     funt1 <- function(x){dt(x, df = df, ncp = ncp)} #non-central
 
     # plot central t distribution
-    plot(funt0, xlim=c(-3,7), ylim = c(0, 0.5), yaxs="i", xaxs="i", bty="l",
+    plot(funt0, xlim=c(-3,10), ylim = c(0, 0.5), yaxs="i", xaxs="i", bty="l",
          main = expression(paste("Type I ",(alpha)," and "," Type II ",(beta)," Error Rates")),
          sub=paste("Type I =", round(alpha,digits=3), ",",
                    "Type II =", round(beta,digits=3), ",",
@@ -31,11 +31,11 @@ t1t2.error <- function(x){
          xlab="", ylab="")
     par(new=TRUE)
     # plot non-central t distribution
-    plot(funt1, xlim=c(-3,7), ylim = c(0, 0.5), yaxs="i", xaxs="i", yaxt="n", xaxt="n", bty="l",
+    plot(funt1, xlim=c(-3,10), ylim = c(0, 0.5), yaxs="i", xaxs="i", yaxt="n", xaxt="n", bty="l",
          xlab="", ylab="")
     legend("topright", title="Shaded Areas", c(expression(alpha), expression(beta)),
            x.intersp = 0.5, y.intersp = 0.75,
-           pch=c(19,19), col=c(adjustcolor(2, alpha.f=0.3),adjustcolor(4, alpha.f=0.3)))
+           pch=c(19,19), col=c(adjustcolor(2, alpha.f=0.3), adjustcolor(4, alpha.f=0.3)))
     legend("right", title="Dashed Lines", c(ifelse(two.tail==TRUE,expression(t[alpha/2]),
                                                    expression(t[alpha])), expression(ncp)),
            x.intersp = 0.5, y.intersp = 0.75,
@@ -51,7 +51,7 @@ t1t2.error <- function(x){
     abline(v=talpha, lty=2, col=2) # t-critical in dashed red line
 
     # shaded area in red for alpha
-    xalpha0 <- seq(from=talpha, to=9, by=.001)
+    xalpha0 <- seq(from=talpha, to=10, by=.001)
     yalpha0 <- rep(NA, length(xalpha0))
     for(i in 1:length(xalpha0)){yalpha0[i] <- funt0(xalpha0[i])}
 
@@ -60,7 +60,7 @@ t1t2.error <- function(x){
     polygon(x=xalpha, y=yalpha, col=adjustcolor(2, alpha.f=0.3))
 
     # shaded area in light blue for beta
-    xbeta0 <- seq(from=-2,to=talpha, by=.001)
+    xbeta0 <- seq(from=-3,to=talpha, by=.001)
     ybeta0 <- rep(NA, length(xbeta0))
     for(i in 1:length(xbeta0)){ybeta0[i] <- funt1(xbeta0[i])}
 

@@ -33,7 +33,7 @@
 \details{
 
 Sample size \code{n}) is calculated using an iterative procedure described in Dong & Maynard (2013)
-due to model degrees of freedom dependency on \code{n}.
+due to degrees of freedom dependency on \code{n}.
 
 Further definition of design parameters can be found in Dong & Maynard (2013).
 
@@ -63,7 +63,7 @@ Further definition of design parameters can be found in Dong & Maynard (2013).
 \references{
 
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 
 }

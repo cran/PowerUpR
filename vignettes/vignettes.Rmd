@@ -1,0 +1,325 @@
+---
+title: "PowerUpR Vignettes"
+author: "Metin Bulus & Nianbo Dong"
+date: "February 17, 2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PowerUpR Vignettes}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# Problem
+
+Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student's algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a 3-level cluster randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, teachers, and students, and the cost associated with data collection from this sample needs to be justified. We will use [`PowerUpR`](https://github.com/metinbulus/PowerUpR) package (Bulus & Dong, 2016) an implementation of [*PowerUp!*](http://www.causalevaluation.org) (Dong & Maynard, 2013) software in R environment (R Core Team, 2017). 
+
+## Statistical Model
+Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect ($\delta$) can be estimated via the following 3-level hierarchical linear model (HLM, Raudenbush & Bryk, 2002)
+
+$$\begin{eqnarray}
+  L1: Y_{ijk} &=& \beta_{0jk} + \beta_{1jk}X + r_{ijk}, \quad r_{ijk} \thicksim N(0,\sigma_{|X}^2) \newline
+  L2: \beta_{0jk} &=& \gamma_{00k} + \gamma_{01k}W + \mu_{0jk}, \quad \mu_{0jk} \thicksim N(0,\tau_{2|W}^2) \newline
+      \beta_{1jk} &=& \gamma_{10k} \newline
+  L3: \gamma_{00k} &=& \xi_{001} + \delta T_k + \xi_{002}V + \varsigma_{00k}, \quad \varsigma_{00k} \thicksim N(0,\tau_{3|V}^2) \newline
+      \gamma_{01k} &=& \xi_{010} \newline
+      \gamma_{10k} &=& \xi_{100}
+  \end{eqnarray}$$
+
+where, $Y$: Student algebra posttest score. $X$: Student algebra pretest score. $W$: Classroom mean algebra pretest score. $V$: School mean algebra pretest score. $T$: Treatment status. Consider the following hypothetical values for design parameters
+
+- Proportion of variance in algebra posttest at the school level ($\tau_3^2$): $.15$
+- Proportion of variance in algebra posttest at the classroom level ($\tau_2^2$):  $.05$
+- Proportion of variance in algebra posttest at the student level ($\sigma^2$): $.65$
+- Proportion of variance in algebra posttest explained by school mean algebra pretest: ($R_3^2 = 1 - \frac{\tau_{3|V}^2}{\tau_{3}^2}$):  $.45$
+- Proportion of variance in algebra posttest explained by classroom mean algebra pretest: ($R_2^2 = 1 - \frac{\tau_{2|W}^2}{\tau_{2}^2}$): $.50$
+- Proportion of variance in algebra posttest explained by student algebra pretest: ($R_1^2 = 1 - \frac{\sigma_{|X}^2}{\sigma^2}$): $.55$
+
+Then, intraclass correlation coefficients are
+
+  - $\rho_2 = \tau_2^2 / (\sigma^2 + \tau_2^2 + \tau_3^2) = .05 /(.65 + .15 + .05) = 0.059$ 
+  - $\rho_3 = \tau_3^2 / (\sigma^2 + \tau_2^2 + \tau_3^2) = .15 /(.65 + .15 + .05) = 0.176$ 
+
+## Minimum Detectable Effect Size (MDES)
+### Scenario 1: Find MDES
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $83$
+- Average number of classrooms per school ($J$): $2$
+- Average number of students per classroom ($n$) : $10$
+- Statistical power ($1-\beta$): $.80$ 
+
+Given design parameters and further assumptions, what is minimum detectable effect size?
+```{r, message=FALSE, warning=FALSE}
+library(PowerUpR)
+```
+
+```{r, message=FALSE}
+design1 <- mdes.cra3r3(power=.80, rho2=.06, rho3=.18,
+                       g3=1, R12=.55, R22=.50, R32=.45,
+                       P=.40, n=10, J=2, K=83)
+print(design1$mdes)
+```
+
+## Statistical Power
+### Scenario 2: Find Statistical Power
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $60$
+- Average number of classrooms per school ($J$): $2$
+- Average number of students per classroom ($n$) : $10$
+- Minimum detectable effect size (MDES): $.232$
+
+Given design parameters and further assumptions, what is statistical power?
+
+```{r, message=FALSE}
+design2 <- power.cra3r3(mdes=.23, rho2=.06, rho3=.18,
+                        g3=1, R12=.55, R22=.50, R32=.45,
+                        P=.40, n=10, J=2, K=83)
+print(design2$power)
+```
+
+
+## Minimum Required Sample Size (MRSS) 
+### Scenario 3: Number of Schools (K)
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Average number of classrooms per school ($J$): $2$
+- Average number of students per classroom ($n$) : $10$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.232$
+
+Given design parameters and further assumptions, how many schools should be recruited?
+
+```{r, message=FALSE}
+design3 <- mrss.cra3r3(power=.80, mdes=.23, rho2=.06, rho3=.18,
+                       g3=1, R12=.55, R22=.50, R32=.45,
+                       P=.40, n=10, J=2)
+print(design3$round.mrss)
+```
+
+### Scenario 4: Number of Classrooms (J)
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $60$
+- Average number of students per classroom ($n$) : $10$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.232$
+
+Given design parameters and further assumptions, how many classrooms should be recruited per school on average?
+
+```{r, message=FALSE}
+design4 <- mrss.cra3r3(power=.80, mdes=.23, rho2=.06, rho3=.18,
+                       g3=1, R12=.55, R22=.50, R32=.45,
+                       P=.40, n=10, K=83)
+print(design4$round.mrss)
+```
+
+### Scenario 5: Number of Students (n)
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $60$
+- Average number of classrooms per school ($J$): $2$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.232$
+  
+Given design parameters and further assumptions, how many studetns should be recruited per classroom on average?
+
+```{r, message=FALSE}
+design5 <- mrss.cra3r3(power=.80, mdes=.23, rho2=.06, rho3=.18,
+                       g3=1, R12=.55, R22=.50, R32=.45,
+                       P=.40, J=2, K=83)
+print(design5$round.mrss)
+```
+
+## Optimal Sample
+### Scenario 6: Constrain Power
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.232$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+  
+Given design parameters and further assumptions, how many schools, classrooms and students should be recruited to achieve 80% power while minimizing the total cost? What are alternative combinations of $n$, $J$, and $K$? 
+
+```{r, message=FALSE}
+design6 <- optimal.cra3r3(cn=10, cJ=200, cK=500, constrain="power", power=.80, gm=5, ncase=20,
+                          mdes=.23, rho2=.06, rho3=.18,
+                          g3=1, R12=.55, R22=.50, R32=.45,
+                          P=.40)
+print(design6$round.optim)
+print(design6$integer.optim)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.23). 
+
+### Scenario 7: Constrain Power and Number of Classrooms
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.232$
+- Average number of classrooms per school ($J$): $2$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+  
+Given design parameters and further assumptions, how many schools, and students should be recrutied to achieve 80% power while minimizing the total cost?
+
+```{r, message=FALSE}
+design7 <- optimal.cra3r3(cn=10, cJ=200, cK=500, constrain="power", power=.80, J=2, 
+                          mdes=.23, rho2=.06, rho3=.18,
+                          g3=1, R12=.55, R22=.50, R32=.45,
+                          P=.40)
+print(design7$round.optim)
+print(design7$integer.optim)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.23). 
+
+### Scenario 8: Constrain MDES and Number of Classrooms
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.20$
+- Average number of classrooms per school ($J$): $2$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+  
+Given design parameters and further assumptions, how many schools, and students should be recruited to achieve an MDES of .20 while minimizing the total cost?
+
+```{r, message=FALSE}
+design8 <- optimal.cra3r3(cn=10, cJ=200, cK=500, constrain="mdes", mdes=.20, J=2,
+                          power=.80, rho2=.06, rho3=.18,
+                          g3=1, R12=.55, R22=.50, R32=.45,
+                          P=.40)
+print(design8$round.optim)
+print(design8$integer.optim)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.20). 
+
+### Scenario 9: Constrain Cost and Number of Classrooms
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.20$
+- Average number of classrooms per school ($J$): $2$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+- Budget: $130,000$
+  
+Given design parameters and further assumptions, how many schools, and students should be recruited while maximizing the power?
+
+```{r, message=FALSE}
+design9 <- optimal.cra3r3(cn=10, cJ=200, cK=500, constrain="cost", cost=130000, J=2,
+                          power=.80, mdes=.20, rho2=.06, rho3=.18,
+                          g3=1, R12=.55, R22=.50, R32=.45,
+                          P=.40)
+print(design9$round.optim)
+print(design9$integer.optim)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.20).  
+
+### Scenario 10: Constrain Cost, Number of Classrooms, and Number of Students
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.20$
+- Average number of students per classroom ($J$): $20$
+- Average number of classrooms per school ($J$): $2$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+- Budget: $130,000$
+  
+Given design parameters and further assumptions, how many schools should be recruited while maximizing the power?
+
+```{r, message=FALSE}
+design10 <- optimal.cra3r3(cn=10, cJ=200, cK=500, constrain="cost", cost=130000, n=20, J=2,
+                           power=.80, mdes=.20, rho2=.06, rho3=.18,
+                           g3=1, R12=.55, R22=.50, R32=.45,
+                           P=.40)
+print(design10$round.optim)
+print(design10$integer.optim)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.20). 
+
+## Plots
+Users can produce 2D plots, 3D or contour plots by specifying `pars` and `type` arguments in `plot` function (S3 method for class 'pars'). By default object returned from `mdes` functions produces plots where MDES is on top axis. Similarly, object returned from `power` functions produces plots where power is on top axis. For objects returned from `mrss` or `optimal` functions by default MDES is on top axis. Users can switch the order in `pars` statement for an alternative plot. `type="p"` corresponds to perspective plot and `type="c"` corresponds to contour plot. *Note*: First argument in `pars` statement should be either `power` or `mdes`. 
+
+### Plot X-Y Relationships
+```{r, message=FALSE}
+## MDES - MRSS(K)
+## Red point indicates the design location
+plot(design10, pars=c("mdes","K"))
+```
+
+```{r, message=FALSE}
+## Power - MRSS(K)
+## Red point indicates the design location
+plot(design10, pars=c("power","K"))
+```
+
+### Plot X-Y-Z Relationships
+```{r, message=FALSE}
+## Perspective plot
+## Red point indicates the design location
+plot(design10, type="p")
+```
+
+```{r, message=FALSE}
+## Contour plot
+## Red point indicates the design location
+plot(design10, type="c")
+```
+
+## Summary
+```{r, message=FALSE}
+## confidence intervals for MDES
+design11 <- optimal.to.mdes(design10)
+print(design11$mdes)
+## percentile equivalance
+mdes.to.pctl(design11)
+
+```
+
+A 3-level hierarchical linear model is proposed to estimate treatment effect, where schools are randomly assigned to treatment and control conditions with 40% probability. We assume that proportion of variance in algebra posttest explained by school mean algebra pretest is 45%, proportion of variance in algebra posttest explained by classroom mean algebra pretest is 50%, proportion of variance in algebra posttest explained by student algebra pretest is 55%. Furthermore we assume intraclass correlation coefficient at the school level is 17.6%, and intraclass correlation coefficient at the classroom level is 5.9%. 
+
+Having $10 marginal cost per student, $200 marginal cost per classroom, $500 marginal cost per school, based on `PowerUpR` package (Bulus & Dong, 2017), with a budget of $130000 we can afford recruting 100 schools in total, each with two classrooms and 40 students on average. For a two-tailed hypothesis test for treatment effect, and Type I error rate of 5%, such sample is estimated to have statistical power of 79% for an effect size of .200, or estimated to detect an effect size as small as .202 95% CI[.060, .344] with statistical power of 80%, which is equaivalent to increasing an average student's algebra posttest score from 50th percentile to 58th percentile. 
+
+## References
+
+Bulus, M., & Dong, N. (2017). `PowerUpR`: Power Analysis Tools for Multilevel Randomized Experiments. R package version 0.1.3.
+
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minimum Detectable Effect Sizes and Minimum Required Sample Sizes
+for Experimental and Quasi-Experimental Design Studies, *Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
+
+R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.r-project.org/
+
+U.S. Department of Education, Institute of Education Sciences, What Works Clearinghouse. (2016, May).  Secondary Mathematics intervention report: Saxon Math. Retrieved from https://ies.ed.gov/ncee/wwc/Docs/InterventionReports/wwc_saxon_052416.pdf
+

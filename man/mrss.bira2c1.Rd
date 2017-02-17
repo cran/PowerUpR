@@ -36,8 +36,7 @@
 \details{
 
 Level 2 and level 1 sample sizes (\code{J} and \code{n}) are calculated
-using an iterative procedure described in Dong & Maynard (2013) due to
-model degrees of freedom dependency on \code{J} and \code{n}.
+using an iterative procedure described in Dong & Maynard (2013) due to degrees of freedom dependency on \code{J} and \code{n}.
 MRSS calculator returns values that are not integer. Rounding may produce
 MDES and power values different from what was specified,
 therefore an integer solution is approximated using brute force (See Value section).
@@ -71,7 +70,7 @@ Further definition of design parameters can be found in Dong & Maynard (2013).
 \references{
 
 
-Dong & Maynard (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
+Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
 
 
 }
