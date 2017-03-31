@@ -15,7 +15,7 @@ t1t2.error <- function(x){
   t1t2 <- function(ncp, df, alpha, two.tail){
     # t-critical, and power
     talpha <- ifelse(two.tail==FALSE, abs(qt(alpha, df)), abs(qt(alpha/2,df)))
-    beta= pt(talpha, df, ncp) - pt(-talpha, df, ncp)
+    beta <- ifelse(two.tail==FALSE, pt(talpha, df, ncp), pt(talpha, df, ncp) - pt(-talpha,df,ncp))
     power= 1-beta
 
     # define functions for central and non-central t distributions
