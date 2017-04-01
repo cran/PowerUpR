@@ -13,14 +13,13 @@ t1t2.error <- function(x){
 
   # plot function
   t1t2 <- function(ncp, df, alpha, two.tail){
-    
-    # t-critical
+
+    # t-critical, power and beta
     talpha <- ifelse(two.tail==FALSE, qt(alpha,df,lower.tail=FALSE), qt(alpha/2,df,lower.tail=FALSE))
-    # power and beta
     power <- ifelse(two.tail==FALSE,
-                  1-pt(qt(alpha,df,lower.tail=FALSE),df,ncp),
-                  1-pt(qt(alpha/2,df,lower.tail=FALSE),df,ncp)+
-                    pt(-qt(alpha/2,df,lower.tail=FALSE),df,ncp))
+                  1-pt(talpha,df,ncp),
+                  1-pt(talpha,df,ncp)+
+                    pt(-talpha,df,ncp))
     beta= 1-power
     
     # define functions for central and non-central t distributions
