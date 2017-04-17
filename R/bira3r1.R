@@ -20,7 +20,8 @@ mdes.bira3r1 <- function(power=.80, alpha=.05, two.tail=TRUE,
               n=n, J=J, K=K)
   mdes.out <- list(fun=fun,par=par,df=df,M=M,mdes=round(MLU,digits=3))
   class(mdes.out) <- c("pars")
-  return(mdes.out)
+  print(round(MLU, digits=3))
+  return(invisible(mdes.out))
 }
 
 # example
@@ -46,7 +47,8 @@ power.bira3r1 <- function(mdes=.25, alpha=.05, two.tail=TRUE,
               n=n, J=J, K=K)
   power.out <- list(fun=fun,par=par,df=df,lamda=lamda,power=round(power,digits=3))
   class(power.out) <- c("pars")
-  return(power.out)
+  print(paste("power = ", round(power, digits=3)))
+  return(invisible(power.out))
 }
 # example
 # power.bira3r1(rho3=.20, rho2=.15, omega3=.10, omega2=.10, n=69, J=10, K=100)
@@ -191,7 +193,8 @@ mrss.bira3r1 <- function(mdes=.25, power=.80, alpha=.05, two.tail=TRUE,
   mrss.out <- list(fun=fun,par=par,round.mrss=round(round.mrss, digits=3),
               integer.mrss=round(integer.mrss, digits=3))
   class(mrss.out) <- c("pars")
-  return(mrss.out)
+  print(round(round.mrss, digits=3))
+  return(invisible(mrss.out))
 }
   
 # example
@@ -342,23 +345,25 @@ optimal.bira3r1 <- function(cn, cJ, cK, cost=NULL, n=NULL, J=NULL, K=NULL,
     integer.optim[i,6] <- eq.power(gridnJK[i,])
   }
   
+  integer.optim <- round(integer.optim, digits=3)
+  
   # output result
   if(constrain=="power"){
-    idx <- order(abs(integer.optim[,6]),
+    idx <- order(abs(integer.optim[,6]), integer.optim[,4],
                  decreasing=FALSE)[1:ncase]
     integer.optim <- integer.optim[idx,]
     integer.optim[,5] <- integer.optim[,5] + mdes
     integer.optim[,6] <- integer.optim[,6] + power
     colnames(integer.optim) <- c("n", "J", "K", "cost", "mdes", "power")
   }else if(constrain=="mdes"){
-    idx <- order(abs(integer.optim[,5]),
+    idx <- order(abs(integer.optim[,5]), integer.optim[,4],
                  decreasing=FALSE)[1:ncase]
     integer.optim <- integer.optim[idx,]
     integer.optim[,5] <- integer.optim[,5] + mdes
     integer.optim[,6] <- integer.optim[,6] + power
     colnames(integer.optim) <- c("n", "J", "K", "cost", "mdes", "power")
   }else if(constrain=="cost"){
-    idx <- order(abs(integer.optim[,4]-cost),
+    idx <- order(abs(integer.optim[,4]-cost), -integer.optim[,6],
                  decreasing=FALSE)[1:ncase]
     integer.optim <- integer.optim[idx,]
     integer.optim[,5] <- integer.optim[,5] + mdes
@@ -386,7 +391,8 @@ optimal.bira3r1 <- function(cn, cJ, cK, cost=NULL, n=NULL, J=NULL, K=NULL,
               integer.optim=round(integer.optim, digits=3)
               )
   class(optim.out) <- c("pars")
-  return(optim.out)
+  print(round(round.optim, digits=3))
+  return(invisible(optim.out))
 }
 
 # examples
