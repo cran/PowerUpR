@@ -134,7 +134,6 @@ mrss.bcra3f2 <- function(mdes=.25, power=.80, alpha=.05, two.tail=TRUE,
          (P*(1-P)*J*K*(mdes/M)^2 - rho2*(1-R22))
     n <- round(n)
   }
-  nJK1 <- c(10,2,20)
   nJK1 <- c(n,J,K)
   if(any(nJK1<=0)|any(is.na(nJK1))){stop("Solution not feasible due to nonpositive sample size estimation.")}
   
