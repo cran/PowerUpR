@@ -10,15 +10,15 @@ install.packages("PowerUpR")
 For an introductory tutorial on `PowerUpR` package click on 
 <a href="https://rpubs.com/metinbulus/powerupr_vignettes/" target="_blank">vignettes</a>.
 
-`PowerUpR` is an implementation of *PowerUp!* in R environment (R Core Team, 2016). *PowerUp!* is a statistical power analysis tool to calculate
+`PowerUpR` is an implementation of *PowerUp!* in R environment (R Core Team, 2017). *PowerUp!* is a statistical power analysis tool to calculate
 minimum detectable effect size (MDES) and top level minimum required sample size (MRSS)
 for various multilevel randomized experiments and quasi-experiments (Dong & Maynard, 2013). 
 `PowerUpR` package solely focuses on multilevel randomized experiments with several additional features.
 The package bases its framework on three fundemental concepts in statistical power analysis; power calculation, MDES calculation, and sample size calculation. Congruent with this framework, `PowerUpR` provides tools to calculate power, MDES, MRSS for any level, and to solve constrained optimal sample allocation (COSA) problems (Hedges & Borenstein, 2014; Raudenbush, 1997; Raudenbush & Liu, 2000).
 COSA problems can be solved in the following forms,
-(i) under budgetary constraints given marginal costs per unit while maximizing the power,
-(ii) under power constraints given marginal costs per unit while minimizing the cost, 
-(ii) under MDES constraints given marginal costs per unit while minimizing the cost, and 
+(i) under budgetary constraints given marginal costs per unit while minimizing sampling variance fo the treatment effect,
+(ii) under power constraints given marginal costs per unit while minimizing the total cost, 
+(ii) under MDES constraints given marginal costs per unit while minimizing the total cost, and 
 (iv) under sample size constraints for one or more levels along with any of the i ii, or iii options.
 Congruent with the three fundemental concepts the package also provides tools for graphing two or three dimensional relationships to investiage relative standing of power, MDES, MRSS or a component of COSA.
 
@@ -67,7 +67,7 @@ Nianbo Dong dong.nianbo@gmail.com
 
 **Suggested citation:**  
 
-Bulus, M., & Dong, N. (2016).  `PowerUpR`: Power Analysis Tools for Individual/Cluster Randomized Trials. R package version 0.1.2.
+Bulus, M., & Dong, N. (2017).  `PowerUpR`: Power Analysis Tools for Mutilevel Randomized Experiments. R package version 0.1.3.
 
 Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minimum Detectable Effect Sizes and Minimum Required Sample Sizes
 for Experimental and Quasi-Experimental Design Studies, *Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
@@ -102,7 +102,7 @@ Retrieved from https://ies.ed.gov/ncser/.
 
 Kelcey, B., & Phelps, G. (2013). Strategies for improving power in school randomized studies of professional development. *Evaluation Review, 37(6)*, 520-554.
 
-R Core Team (2016). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.r-project.org/
+R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.r-project.org/
 
 Raudenbush, S. W. (1997). Statistical analysis and optimal design for cluster randomized trials.
 *Psychological Methods, 2*, 173-185.
