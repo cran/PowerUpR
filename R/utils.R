@@ -343,16 +343,16 @@
 
 # Type I  and Type II error plot wrapper
 .t1t2.error <- function(x){
-  if(substr(x$fun,1,7) == "optimal"){
+
+  if(class(x)[2] == "optimal"){
     x <- optimal.to.power(x)
-  }else if(substr(x$fun,1,4) == "mrss"){
-    x <- mrss.to.power(x)
   }
+
   # plot type I and type II error rates
   return(.t1t2(ncp = x$ncp,
-               df = x$df,
-               alpha = x$par$alpha,
-               two.tail = x$par$two.tail))
+               df = x$parms$df,
+               alpha = x$parms$alpha,
+               two.tail = x$parms$two.tail))
 }
 
 # comparison plots
@@ -462,7 +462,7 @@
   }
 
   # validity check for variance parameters, proportions, and probabilities
-  idx.var <- match(c("R12","R22","R32","R42", "RT22", "RT32", "RT42", "R2T2", "R3T2",
+  idx.var <- match(c("R12","R22","R32","R42", "RT22", "RT32", "RT42",
                      "rho2", "rho3", "rho4", "omega2", "omega3", "omega4", "P", "Q", "alpha", "power"),  names.x)
   if(any(x[idx.var[!is.na(idx.var)]] < 0) | any(x[idx.var[!is.na(idx.var)]] > 1)){
     stop(
@@ -472,7 +472,7 @@
     )
   }
 
-  idx.r2 <- match(c("R12","R22","R32","R42", "RT22", "RT32", "RT42", "R2T2", "R3T2"),  names.x)
+  idx.r2 <- match(c("R12","R22","R32","R42", "RT22", "RT32", "RT42"),  names.x)
   if(any(x[idx.r2[!is.na(idx.r2)]] > 0) & any(x[idx.g[!is.na(idx.g)]] == 0)){
     err.r2 <- names.x[idx.r2[!is.na(idx.r2)]][x[idx.r2[!is.na(idx.r2)]] > 0]
     err.g <- names.x[idx.g[!is.na(idx.g)]][x[idx.g[!is.na(idx.g)]] == 0]
@@ -503,7 +503,7 @@
   }
 
   # validty check for two-tailed test
-  if(!(x$two.tail  %in%  c(TRUE, FALSE, 0, 1))){
+  if(x$two.tail != TRUE & x$two.tail != FALSE){
     stop(
       simpleError(paste("Value for argument", sQuote(quote(two.tail)), "should be either 'TRUE' or 1, 'FALSE'or 0"))
     )
