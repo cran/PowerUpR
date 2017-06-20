@@ -477,9 +477,9 @@
     err.r2 <- names.x[idx.r2[!is.na(idx.r2)]][x[idx.r2[!is.na(idx.r2)]] > 0]
     err.g <- names.x[idx.g[!is.na(idx.g)]][x[idx.g[!is.na(idx.g)]] == 0]
     if(substr(err.r2, 2, 2) == substr(err.g, 2, 2)){
-      stop(
-        simpleError(
-          paste("Value of argument", sQuote(err.r2), "should correspond to the value of argument", sQuote(err.g))
+      warning(
+        simpleWarning(
+          paste("Value of argument", sQuote(err.r2), "should correspond to the value of argument", sQuote(err.g), ", results may not be precise")
         )
       )
     }
