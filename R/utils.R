@@ -143,41 +143,109 @@
 
   # constrain specified sample sizes, define limits
   if(nlevels == 2){
-    n0  <- ifelse(!is.null(n), n, nJ0[1])
-    nLB <- ifelse(!is.null(n), n, LB[1])
-    nUB <- ifelse(!is.null(n), n, Inf)
-    J0  <- ifelse(!is.null(J), J, nJ0[2])
-    JLB <- ifelse(!is.null(J), J, LB[2])
-    JUB <- ifelse(!is.null(J), J, Inf)
+
+    if(length(n) %in% c(0,1)){
+      n0  <- ifelse(!is.null(n), n, nJ0[1])
+      nLB <- ifelse(!is.null(n), n, LB[1])
+      nUB <- ifelse(!is.null(n), n, Inf)
+    }else if(length(n)>1){
+      n0  <- ifelse(!is.null(n), mean(n), nJ0[1])
+      nLB <- ifelse(!is.null(n), min(n), LB[1])
+      nUB <- ifelse(!is.null(n), max(n), Inf)
+    }
+
+    if(length(J) %in% c(0,1)){
+      J0  <- ifelse(!is.null(J), J, nJ0[2])
+      JLB <- ifelse(!is.null(J), J, LB[2])
+      JUB <- ifelse(!is.null(J), J, Inf)
+    }else if(length(J)>1){
+      J0  <- ifelse(!is.null(J), mean(J), nJ0[2])
+      JLB <- ifelse(!is.null(J), min(J), LB[2])
+      JUB <- ifelse(!is.null(J), max(J), Inf)
+    }
+
     ss0  <- c(n0,J0)
     ssLB <- c(nLB,JLB)
     ssUB <- c(nUB,JUB)
+
   }else if(nlevels == 3){
-    n0  <- ifelse(!is.null(n), n, nJK0[1])
-    nLB <- ifelse(!is.null(n), n, LB[1])
-    nUB <- ifelse(!is.null(n), n, Inf)
-    J0  <- ifelse(!is.null(J), J, nJK0[2])
-    JLB <- ifelse(!is.null(J), J, LB[2])
-    JUB <- ifelse(!is.null(J), J, Inf)
-    K0  <- ifelse(!is.null(K), K, nJK0[3])
-    KLB <- ifelse(!is.null(K), K, LB[3])
-    KUB <- ifelse(!is.null(K), K, Inf)
+
+    if(length(n) %in% c(0,1)){
+      n0  <- ifelse(!is.null(n), n, nJK0[1])
+      nLB <- ifelse(!is.null(n), n, LB[1])
+      nUB <- ifelse(!is.null(n), n, Inf)
+    }else if(length(n)>1){
+      n0  <- ifelse(!is.null(n), mean(n), nJK0[1])
+      nLB <- ifelse(!is.null(n), min(n), LB[1])
+      nUB <- ifelse(!is.null(n), max(n), Inf)
+    }
+
+    if(length(J) %in% c(0,1)){
+      J0  <- ifelse(!is.null(J), J, nJK0[2])
+      JLB <- ifelse(!is.null(J), J, LB[2])
+      JUB <- ifelse(!is.null(J), J, Inf)
+    }else if(length(J)>1){
+      J0  <- ifelse(!is.null(J), mean(J), nJK0[2])
+      JLB <- ifelse(!is.null(J), min(J), LB[2])
+      JUB <- ifelse(!is.null(J), max(J), Inf)
+    }
+
+    if(length(K) %in% c(0,1)){
+      K0  <- ifelse(!is.null(K), K, nJK0[3])
+      KLB <- ifelse(!is.null(K), K, LB[3])
+      KUB <- ifelse(!is.null(K), K, Inf)
+    }else if(length(K)>1){
+      K0  <- ifelse(!is.null(K), mean(K), nJK0[3])
+      KLB <- ifelse(!is.null(K), min(K), LB[3])
+      KUB <- ifelse(!is.null(K), max(K), Inf)
+    }
+
     ss0  <- c(n0,J0,K0)
     ssLB <- c(nLB,JLB,KLB)
     ssUB <- c(nUB,JUB,KUB)
+
   }else if(nlevels == 4){
-    n0  <- ifelse(!is.null(n), n, nJKL0[1])
-    nLB <- ifelse(!is.null(n), n, LB[1])
-    nUB <- ifelse(!is.null(n), n, Inf)
-    J0  <- ifelse(!is.null(J), J, nJKL0[2])
-    JLB <- ifelse(!is.null(J), J, LB[2])
-    JUB <- ifelse(!is.null(J), J, Inf)
-    K0  <- ifelse(!is.null(K), K, nJKL0[3])
-    KLB <- ifelse(!is.null(K), K, LB[3])
-    KUB <- ifelse(!is.null(K), K, Inf)
-    L0  <- ifelse(!is.null(L), L, nJKL0[4])
-    LLB <- ifelse(!is.null(L), L, LB[4])
-    LUB <- ifelse(!is.null(L), L, Inf)
+
+    if(length(n) %in% c(0,1)){
+      n0  <- ifelse(!is.null(n), n, nJKL0[1])
+      nLB <- ifelse(!is.null(n), n, LB[1])
+      nUB <- ifelse(!is.null(n), n, Inf)
+    }else if(length(n)>1){
+      n0  <- ifelse(!is.null(n), mean(n), nJKL0[1])
+      nLB <- ifelse(!is.null(n), min(n), LB[1])
+      nUB <- ifelse(!is.null(n), max(n), Inf)
+    }
+
+    if(length(J) %in% c(0,1)){
+      J0  <- ifelse(!is.null(J), J, nJKL0[2])
+      JLB <- ifelse(!is.null(J), J, LB[2])
+      JUB <- ifelse(!is.null(J), J, Inf)
+    }else if(length(J)>1){
+      J0  <- ifelse(!is.null(J), mean(J), nJKL0[2])
+      JLB <- ifelse(!is.null(J), min(J), LB[2])
+      JUB <- ifelse(!is.null(J), max(J), Inf)
+    }
+
+    if(length(K) %in% c(0,1)){
+      K0  <- ifelse(!is.null(K), K, nJKL0[3])
+      KLB <- ifelse(!is.null(K), K, LB[3])
+      KUB <- ifelse(!is.null(K), K, Inf)
+    }else if(length(K)>1){
+      K0  <- ifelse(!is.null(K), mean(K), nJKL0[3])
+      KLB <- ifelse(!is.null(K), min(K), LB[3])
+      KUB <- ifelse(!is.null(K), max(K), Inf)
+    }
+
+    if(length(L) %in% c(0,1)){
+      L0  <- ifelse(!is.null(L), L, nJKL0[4])
+      LLB <- ifelse(!is.null(L), L, LB[4])
+      LUB <- ifelse(!is.null(L), L, Inf)
+    }else if(length(L)>1){
+      L0  <- ifelse(!is.null(L), mean(L), nJKL0[4])
+      LLB <- ifelse(!is.null(L), min(L), LB[4])
+      LUB <- ifelse(!is.null(L), max(L), Inf)
+    }
+
     ss0  <- c(n0,J0,K0,L0)
     ssLB <- c(nLB,JLB,KLB,LLB)
     ssUB <- c(nUB,JUB,KUB,LUB)
@@ -187,9 +255,15 @@
   nlopt.ss <- nloptr::auglag(x0 = ss0, fn = fn.min, heq = fn.constr,
                              localsolver = local.optim, localtol = 1e-8,
                              lower = ssLB, upper = ssUB)
-  if(nlopt.ss$convergence<0 | all(nlopt.ss$par == ss0)){
-    warning("Solution may not be feasible. Change default settings")
-    }
+  if(nlopt.ss$convergence<0){
+   warning(simpleWarning("Solution may not be feasible, change default settings"))
+  }
+  if(all(nlopt.ss$par == ss0)){
+   warning(simpleWarning("Solution is same as starting values, it cannot be trusted"))
+  }
+  if(any(nlopt.ss$par<=0)){
+    stop(simpleError("Solution is not feasible due to non-positive sample size specifications"))
+  }
 
   # round solution
   ss1 <- round(nlopt.ss$par)
@@ -436,19 +510,23 @@
 
   # validity check for sample sizes
   idx.n <- match(c("n","J","K","L"),  names.x)
-  if(any(x[idx.n[!is.na(idx.n)]] <= 0)){
-    stop(
-      simpleError(
-        paste("Argument", sQuote(names.x[idx.n[!is.na(idx.n)]][x[idx.n[!is.na(idx.n)]] <= 0]), "cannot be negative")
+  length.list.n <- length(unlist(x[idx.n[!is.na(idx.n)]]))
+  length.unlist.n <- length(x[idx.n[!is.na(idx.n)]])
+  if(length.list.n == length.unlist.n){
+    if(any(x[idx.n[!is.na(idx.n)]] <= 0)){
+      stop(
+        simpleError(
+          paste("Argument", sQuote(names.x[idx.n[!is.na(idx.n)]][x[idx.n[!is.na(idx.n)]] <= 0]), "cannot be negative")
+        )
       )
-    )
-  }
-  if(any(x[idx.n[!is.na(idx.n)]] == 1)){
-    warning(
-      simpleWarning(
-        paste("Argument", sQuote(names.x[idx.n[!is.na(idx.n)]][x[idx.n[!is.na(idx.n)]] == 1]), "is 1")
+    }
+    if(any(x[idx.n[!is.na(idx.n)]] == 1)){
+      warning(
+        simpleWarning(
+          paste("Argument", sQuote(names.x[idx.n[!is.na(idx.n)]][x[idx.n[!is.na(idx.n)]] == 1]), "is 1")
+        )
       )
-    )
+    }
   }
 
   # validity check for number of covariates
@@ -477,9 +555,9 @@
     err.r2 <- names.x[idx.r2[!is.na(idx.r2)]][x[idx.r2[!is.na(idx.r2)]] > 0]
     err.g <- names.x[idx.g[!is.na(idx.g)]][x[idx.g[!is.na(idx.g)]] == 0]
     if(substr(err.r2, 2, 2) == substr(err.g, 2, 2)){
-      warning(
-        simpleWarning(
-          paste("Value of argument", sQuote(err.r2), "should correspond to the value of argument", sQuote(err.g), ", results may not be precise")
+      stop(
+        simpleError(
+          paste("Value of argument", sQuote(err.r2), "should correspond to the value of argument", sQuote(err.g))
         )
       )
     }
