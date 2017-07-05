@@ -17,5 +17,5 @@ Example usage to design a three-level cluster randomized trial to detect main tr
 Example usage to design a three-level cluster randomized trial to detect moderator effect:    
 [http://rpubs.com/metinbulus/powerupr_viga_mod](http://rpubs.com/metinbulus/powerupr_viga_mod)
 
-&#9888; Important tips for constrained optimal sample allocation:    
+&#9888; Important update for constrained optimal sample allocation:    
 [http://rpubs.com/metinbulus/powerupr_cosa_opt_choice](http://rpubs.com/metinbulus/powerupr_cosa_opt_choice)
