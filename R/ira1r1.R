@@ -34,7 +34,7 @@ power.ira1r1 <- function(mdes=.25, alpha=.05, two.tail=TRUE,
 # example
 # power.ira1r1(n=200)
 
-optimal.ira1r1 <- function(mdes=.25, power=.80, alpha=.05, two.tail=TRUE,
+cosa.ira1r1 <- function(mdes=.25, power=.80, alpha=.05, two.tail=TRUE,
                         n0=10, tol=.10,
                         P=.50, g1=0, R12=0){
     parms <- as.list(environment(), all=TRUE)
@@ -53,14 +53,19 @@ optimal.ira1r1 <- function(mdes=.25, power=.80, alpha=.05, two.tail=TRUE,
       i <- i+1
     }
     n <- round(ifelse(df>0,round(n0),NA))
-    n.out <-  list(fun = "optimal.ira1r1",
+    n.out <-  list(fun = "cosa.ira1r1",
                        parms = parms,
                        n = n)
-    class(n.out) <- c("parms", "optimal")
+    class(n.out) <- c("parms", "cosa")
 
   print(paste("n =",round(n)))
   return(invisible(n.out))
 }
 
+optimal.ira1r1 <- function(...){
+  .Deprecated(new="cosa.ira1r1")
+  cosa.ira1r1(...)
+}
+
 # example
-# optimal.ira1r1()
+# cosa.ira1r1()

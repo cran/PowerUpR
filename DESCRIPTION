@@ -1,23 +1,25 @@
 Package: PowerUpR
 Type: Package
 Title: R version of PowerUp!
-Version: 1.1.3
-Date: 2017-06-15
+Version: 0.1.3.9000
+Date: 2017-07-04
 Authors@R: c(
     person("Metin", "Bulus", email = "bulusmetin@gmail.com", role = c("aut", "cre", "trl")), 
     person("Nianbo", "Dong", role = "aut"), 
-	person("Benjamin", "Kelcey", role = "aut"),
+	  person("Benjamin", "Kelcey", role = "aut"),
     person("Jessaca", "Spybrook", role = "aut"),   
     person("Bang", "Le", role = c("aut"))
     )
 Description: 
- R version of PowerUp! allows calculation of statistical power, minimum detectable effect size,
- and constrained optimal sample allocation for main, and moderator effects
- in various multilevel randomized experiments.
+ Tools to calculate statistical power, minimum detectable effect size,
+ and constrained optimal sample allocation for main and moderator effects
+ in various randomized controlled trials (individual- or cluster-level randomization, and single- or multi-site),
+ and for main effects in various regression discontinuity designs (individual- or cluster-level discontinuity, and single- or multi-site)
+ with continuous outcomes.
 URL: https://github.com/metinbulus/PowerUpR
 BugReports: https://github.com/metinbulus/PowerUpR/issues
-Depends: 
-  nloptr(>= 1.0.4)
+Depends:
+    nloptr(>= 1.0.4)
 Suggests: 
   knitr,
   rmarkdown

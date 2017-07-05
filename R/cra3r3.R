@@ -314,40 +314,48 @@ power.mod3.cra3r3 <- function(mdes=.25, alpha=.05, two.tail=TRUE,
 # power.mod3.cra3r3(mdes=.30, rho3=.1, rho2=.1, omega3=.05, Q=.5, g3=1, R12=.3, R22=.4, R32=.5, n=20, J=4, K=60)
 # power.mod3.cra3r3(mdes=.15, rho3=.1, rho2=.1, omega3=.05, g3=1, R12=.3, R22=.4, R32=.5, n=20, J=4, K=60)
 
-optimal.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=NULL,
+cosa.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL,
+                                n=NULL, J=NULL, K=NULL, P=NULL,
+                                nJK0=c(10,10,10), P0=.50,
                                 power=.80, mdes=.25, alpha=.05, two.tail=TRUE,
-                                nJK0=c(10,10,10), ncase=10, gm=2,
-                                constrain="power", optimizer="auglag_cobyla",
-                                rho2, rho3, P=.50, g3=0, R12=0, R22=0, R32=0){
+                                constrain="power", optimizer="auglag_slsqp", gm=2, ncase=10,
+                                rho2, rho3, g3=0, R12=0, R22=0, R32=0){
   # design-specific
   parms <- as.list(environment(), all=TRUE)
   .error.handler(parms)
-  fun = "optimal.cra3r3"
+  fun <- "cosa.cra3r3"
   LB <- c(1, 1, g3+2+1)
   df <- quote(K - g3 - 2)
   SSE <- quote(sqrt(rho3*(1-R32)/(P*(1-P)*K) +
                 rho2*(1-R22)/(P*(1-P)*J*K) +
                 (1-rho3-rho2)*(1-R12)/(P*(1-P)*J*K*n)))
-  # optimal-specific
-  optim.out <- do.call(".optimal.fun", parms)
-  class(optim.out) <- c("parms", "optimal")
+  # cosa-specific
+  optim.out <- do.call(".cosa.fun", parms)
+  class(optim.out) <- c("parms", "cosa")
   print(round(optim.out$round.optim, digits=3))
   return(invisible(optim.out))
 }
+
+optimal.cra3r3 <- function(...){
+  .Deprecated(new="cosa.cra3r3")
+  cosa.cra3r3(...)
+}
+
 # example
-# optimal.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
+# cosa.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
 
 
 
-optimal.mod1n.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=NULL,
+cosa.mod1n.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL,
+                                 n=NULL, J=NULL, K=NULL, P=NULL,
+                                 nJK0=c(10,10,10), P0=.50,
+                                 constrain="power", optimizer="auglag_slsqp", gm=2, ncase=10,
                                  power=.80, mdes=.25, alpha=.05, two.tail=TRUE,
-                                 nJK0=c(10,10,10), ncase=10, gm=2,
-                                 constrain="power", optimizer="auglag_cobyla",
-                                 rho2, rho3, P=.50, Q=NULL, g1=0, R12=0){
+                                 rho2, rho3, Q=NULL, g1=0, R12=0){
   # design-specific
   parms <- as.list(environment(), all=TRUE)
   .error.handler(parms)
-  fun = "optimal.mod1n.cra3r3"
+  fun <- "cosa.mod1n.cra3r3"
   LB <- c(2, 2, g1+2+1)
   df <- quote(n*J*K - J*K - K - g1 - 2)
   SSE <- if(is.null(Q)){
@@ -355,24 +363,25 @@ optimal.mod1n.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=
   }else{
     quote(sqrt((1-rho3-rho2)*(1-R12)/(P*(1-P)*Q*(1-Q)*J*K*n))) # binary mod
   }
-  # optimal-specific
-  optim.out <- do.call(".optimal.fun", parms)
-  class(optim.out) <- c("parms", "optimal")
+  # cosa-specific
+  optim.out <- do.call(".cosa.fun", parms)
+  class(optim.out) <- c("parms", "cosa")
   print(round(optim.out$round.optim, digits=3))
   return(invisible(optim.out))
 }
 # example
-# optimal.mod1n.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
+# cosa.mod1n.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
 
-optimal.mod1r.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=NULL,
+cosa.mod1r.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL,
+                                 n=NULL, J=NULL, K=NULL, P=NULL,
+                                 nJK0=c(10,10,10), P0=.50,
+                                 constrain="power", optimizer="auglag_slsqp", gm=2, ncase=10,
                                  power=.80, mdes=.25, alpha=.05, two.tail=TRUE,
-                                 nJK0=c(10,10,10), ncase=10, gm=2,
-                                 constrain="power", optimizer="auglag_cobyla",
-                                 rho2, rho3, omega2, omega3, P=.50, Q=NULL, g1=0, R12=0, RT22=0, RT32=0){
+                                 rho2, rho3, omega2, omega3, Q=NULL, g1=0, R12=0, RT22=0, RT32=0){
   # design-specific
   parms <- as.list(environment(), all=TRUE)
   .error.handler(parms)
-  fun = "optimal.mod1r.cra3r3"
+  fun <- "cosa.mod1r.cra3r3"
   LB <- c(1, 1, g1+1+1)
   df <- quote(K - g1 - 1)
   SSE <- if(is.null(Q)){
@@ -384,24 +393,25 @@ optimal.mod1r.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=
                  rho2*omega2*(1-RT22)/(P*(1-P)*K*J) +
                  (1-rho2-rho3)*(1-R12)/(P*(1-P)*Q*(1-Q)*K*J*n))) # binary mod
   }
-  # optimal-specific
-  optim.out <- do.call(".optimal.fun", parms)
-  class(optim.out) <- c("parms", "optimal")
+  # cosa-specific
+  optim.out <- do.call(".cosa.fun", parms)
+  class(optim.out) <- c("parms", "cosa")
   print(round(optim.out$round.optim, digits=3))
   return(invisible(optim.out))
 }
 # example
-# optimal.mod1r.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10, omega2=.10, omega3=.10)
+# cosa.mod1r.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10, omega2=.10, omega3=.10)
 
-optimal.mod2n.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=NULL,
+cosa.mod2n.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL,
+                                 n=NULL, J=NULL, K=NULL, P=NULL,
+                                 nJK0=c(10,10,10), P0=.50,
+                                 constrain="power", optimizer="auglag_slsqp", gm=2, ncase=10,
                                  power=.80, mdes=.25, alpha=.05, two.tail=TRUE,
-                                 nJK0=c(10,10,10), ncase=10, gm=2,
-                                 constrain="power", optimizer="auglag_cobyla",
-                                 rho2, rho3, P=.50, Q=NULL, g2=0, R12=0, R22=0){
+                                 rho2, rho3, Q=NULL, g2=0, R12=0, R22=0){
   # design-specific
   parms <- as.list(environment(), all=TRUE)
   .error.handler(parms)
-  fun = "optimal.mod2n.cra3r3"
+  fun <- "cosa.mod2n.cra3r3"
   LB <- c(1, 2, g2+2+1)
   df <- quote(J*K - K - g2 - 2)
   SSE <- if(is.null(Q)){
@@ -411,24 +421,25 @@ optimal.mod2n.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=
     quote(sqrt(rho2*(1-R22)/(P*(1-P)*Q*(1-Q)*J*K) +
                  (1-rho3-rho2)*(1-R12)/(P*(1-P)*Q*(1-Q)*J*K*n))) # binary mod
   }
-  # optimal-specific
-  optim.out <- do.call(".optimal.fun", parms)
-  class(optim.out) <- c("parms", "optimal")
+  # cosa-specific
+  optim.out <- do.call(".cosa.fun", parms)
+  class(optim.out) <- c("parms", "cosa")
   print(round(optim.out$round.optim, digits=3))
   return(invisible(optim.out))
 }
 # example
-# optimal.mod2n.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
+# cosa.mod2n.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
 
-optimal.mod2r.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=NULL,
+cosa.mod2r.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL,
+                                 n=NULL, J=NULL, K=NULL, P=NULL,
+                                 nJK0=c(10,10,10), P0=.50,
+                                 constrain="power", optimizer="auglag_slsqp", gm=2, ncase=10,
                                  power=.80, mdes=.25, alpha=.05, two.tail=TRUE,
-                                 nJK0=c(10,10,10), ncase=10, gm=2,
-                                 constrain="power", optimizer="auglag_cobyla",
-                                 rho2, rho3, omega3, P=.50, Q=NULL, g2=0, R12=0, R22=0, RT32=0){
+                                 rho2, rho3, omega3, Q=NULL, g2=0, R12=0, R22=0, RT32=0){
   # design-specific
   parms <- as.list(environment(), all=TRUE)
   .error.handler(parms)
-  fun = "optimal.mod2r.cra3r3"
+  fun <- "cosa.mod2r.cra3r3"
   LB <- c(1, 1, g2+1+1)
   df <- quote(K - g2 - 1)
   SSE <- if(is.null(Q)){
@@ -440,24 +451,25 @@ optimal.mod2r.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=
                  rho2*(1-R22)/(P*(1-P)*Q*(1-Q)*K*J) +
                  (1-rho2-rho3)*(1-R12)/(P*(1-P)*Q*(1-Q)*K*J*n))) # binary mod
   }
-  # optimal-specific
-  optim.out <- do.call(".optimal.fun", parms)
-  class(optim.out) <- c("parms", "optimal")
+  # cosa-specific
+  optim.out <- do.call(".cosa.fun", parms)
+  class(optim.out) <- c("parms", "cosa")
   print(round(optim.out$round.optim, digits=3))
   return(invisible(optim.out))
 }
 # example
-# optimal.mod2r.cra3r3(cn=1, cJ=10, cK=100, constrain="mdes", rho2=.20, rho3=.10, omega3=.10)
+# cosa.mod2r.cra3r3(cn=1, cJ=10, cK=100, constrain="mdes", rho2=.20, rho3=.10, omega3=.10)
 
-optimal.mod3.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=NULL,
+cosa.mod3.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL,
+                                n=NULL, J=NULL, K=NULL, P=NULL,
+                                nJK0=c(10,10,10), P0=.50,
+                                constrain="power", optimizer="auglag_slsqp", gm=2, ncase=10,
                                 power=.80, mdes=.25, alpha=.05, two.tail=TRUE,
-                                nJK0=c(10,10,10), ncase=10, gm=2,
-                                constrain="power", optimizer="auglag_cobyla",
-                                rho2, rho3, P=.50, Q=NULL, g3=0, R12=0, R22=0, R32=0){
+                                rho2, rho3, Q=NULL, g3=0, R12=0, R22=0, R32=0){
   # design-specific
   parms <- as.list(environment(), all=TRUE)
   .error.handler(parms)
-  fun = "optimal.mod3.cra3r3"
+  fun <- "cosa.mod3.cra3r3"
   LB <- c(1, 1, g3+4+1)
   df <- quote(K - g3 - 4)
   SSE <- if(is.null(Q)){
@@ -469,11 +481,11 @@ optimal.mod3.cra3r3 <- function(cn=0, cJ=0, cK=0, cost=NULL, n=NULL, J=NULL, K=N
                  rho2*(1-R22)/(P*(1-P)*Q*(1-Q)*J*(K - g3 - 4)) +
                  (1-rho3-rho2)*(1-R12)/(P*(1-P)*Q*(1-Q)*J*(K - g3 - 4)*n))) # binary mod
   }
-  # optimal-specific
-  optim.out <- do.call(".optimal.fun", parms)
-  class(optim.out) <- c("parms", "optimal")
+  # cosa-specific
+  optim.out <- do.call(".cosa.fun", parms)
+  class(optim.out) <- c("parms", "cosa")
   print(round(optim.out$round.optim, digits=3))
   return(invisible(optim.out))
 }
 # example
-# optimal.mod3.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
+# cosa.mod3.cra3r3(cn=1, cJ=10, cK=100, n=10, constrain="mdes", rho2=.20, rho3=.10)
