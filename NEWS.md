@@ -1,4 +1,4 @@
-# Changes in PowerUpR v1.1.3
+# Changes in PowerUpR v0.1.3.9000
  - \+ moderator effects for two- and three-level cluster random assignment designs
  - \+ regression discontiuity designs
  - ~ efficiency improvements, better error handling
