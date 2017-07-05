@@ -42,7 +42,7 @@
 }
 
 \seealso{
-  \code{\link{power.bira2c1}, \link{optimal.bira2c1}}
+  \code{\link{power.bira2c1}, \link{cosa.bira2c1}}
 }
 
 \keyword{mdes}

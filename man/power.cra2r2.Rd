@@ -38,14 +38,13 @@
 \examples{
 \dontrun{
 
-   power.cra2r2(rho2=.20,
-                      n=4, J=20)
+   power.cra2r2(rho2=.20, n=4, J=20)
 
   }
 }
 
 \seealso{
-  \code{\link{mdes.cra2r2}, \link{optimal.cra2r2}}
+  \code{\link{mdes.cra2r2}, \link{cosa.cra2r2}}
 }
 
 \keyword{power}

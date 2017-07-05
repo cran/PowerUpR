@@ -39,14 +39,13 @@
 \examples{
 \dontrun{
 
- mdes.bcra3f2(rho2=.10, n=20,
-             J=44, K=5)
+ mdes.bcra3f2(rho2=.10, n=20, J=44, K=5)
 
   }
 }
 
 \seealso{
-  \code{\link{power.bcra3f2}, \link{optimal.bcra3f2}}
+  \code{\link{power.bcra3f2}, \link{cosa.bcra3f2}}
 }
 
 \keyword{mdes}

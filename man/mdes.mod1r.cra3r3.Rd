@@ -52,7 +52,7 @@
 }
 
 \seealso{
-  \code{\link{power.mod1r.cra3r3}, \link{optimal.mod1r.cra3r3}}
+  \code{\link{power.mod1r.cra3r3}, \link{cosa.mod1r.cra3r3}}
 }
 
 \keyword{mdes}

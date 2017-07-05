@@ -49,7 +49,7 @@
 }
 
 \seealso{
-  \code{\link{power.bira3r1}, \link{optimal.bira3r1}}
+  \code{\link{power.bira3r1}, \link{cosa.bira3r1}}
 }
 
 \keyword{mdes}

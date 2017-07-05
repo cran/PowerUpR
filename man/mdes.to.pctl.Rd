@@ -36,7 +36,7 @@
 }
 
 \seealso{
-  \code{\link{optimal.to.mdes}}
+  \code{\link{cosa.to.mdes}}
 }
 
 \keyword{object conversion}

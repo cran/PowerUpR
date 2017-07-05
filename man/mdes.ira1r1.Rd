@@ -41,7 +41,7 @@
 }
 
 \seealso{
-  \code{\link{power.ira1r1}, \link{optimal.ira1r1}}
+  \code{\link{power.ira1r1}, \link{cosa.ira1r1}}
 }
 
 \keyword{mdes}

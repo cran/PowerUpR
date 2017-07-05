@@ -53,7 +53,7 @@
 }
 
 \seealso{
-  \code{\link{power.bcra4r3}, \link{optimal.bcra4r3}}
+  \code{\link{power.bcra4r3}, \link{cosa.bcra4r3}}
 }
 
 \keyword{mdes}

@@ -46,7 +46,7 @@
 }
 
 \seealso{
-  \code{\link{power.mod1r.cra2r2}, \link{optimal.mod1r.cra2r2}}
+  \code{\link{power.mod1r.cra2r2}, \link{cosa.mod1r.cra2r2}}
 }
 
 \keyword{mdes}

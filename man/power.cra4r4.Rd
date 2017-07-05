@@ -53,7 +53,7 @@
 }
 
 \seealso{
-  \code{\link{mdes.cra4r4}, \link{optimal.cra4r4}}
+  \code{\link{mdes.cra4r4}, \link{cosa.cra4r4}}
 }
 
 \keyword{power}
