@@ -8,7 +8,7 @@ devtools::install_github("metinbulus/PowerUpR")
 
 ## Links
 
-`PowerUpR` (v0.1.3.9000) introduction:    
+Introduction, framework, naming conventions, and default values:    
 [http://rpubs.com/metinbulus/powerupr_intro](http://rpubs.com/metinbulus/powerupr_intro)
 
 Example usage to design three-level cluster randomized trial to detect main treatment effect:    
