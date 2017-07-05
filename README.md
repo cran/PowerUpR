@@ -5,3 +5,17 @@ To install development version (v0.1.3.9000) on GitHub:
 # install.packages("devtools")
 devtools::install_github("metinbulus/PowerUpR")
 ```
+
+## Links
+
+`PowerUpR` (v0.1.3.9000) introduction: 
+[http://rpubs.com/metinbulus/powerupr_intro](http://rpubs.com/metinbulus/powerupr_intro)
+
+Example usage to design three-level cluster randomized trial to detect main treatment effect:
+[http://rpubs.com/metinbulus/powerupr_viga_main](http://rpubs.com/metinbulus/powerupr_viga_main)
+
+Example usage to design three-level cluster randomized trial to detect moderator effect:
+[http://rpubs.com/metinbulus/powerupr_viga_mod](http://rpubs.com/metinbulus/powerupr_viga_mod)
+
+Important tips for constrained optimal sample allocation:
+[http://rpubs.com/metinbulus/powerupr_cosa_opt_choice](http://rpubs.com/metinbulus/powerupr_cosa_opt_choice)
