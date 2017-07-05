@@ -1,11 +1,11 @@
 
 \name{mdes.ira1r1}
 \alias{mdes.ira1r1}
-\title{Model 1.0: MDES Calculator for Individual Random Assignment Designs, Completely Randomized Controlled Trials}
+\title{MDES Calculator for Individual Random Assignment Designs, Completely Randomized Controlled Trials}
 
 \description{
   \code{mdes.ira1r1} calculates minimum detectable effect size (MDES) for completely randomized controlled trials
-    where individuals are randomly assigned to treatment and control groups.
+    where individuals are randomly assigned to treatment or control groups.
 }
 
 \usage{
@@ -15,7 +15,7 @@
 }
 
 \arguments{
-  \item{power}{statistical power (1 - type II error).}
+  \item{power}{statistical power \eqn{(1-\beta)}.}
   \item{alpha}{probability of type I error.}
   \item{two.tail}{logical; \code{TRUE} for two-tailed hypothesis testing, \code{FALSE} for one-tailed hypothesis testing. }
   \item{P}{proportion of units randomly assigned to treatment.}
@@ -27,16 +27,9 @@
 
 \value{
   \item{fun}{function name.}
-  \item{par}{list of parameters used in MDES calculation.}
-  \item{df}{degrees of freedom}
-  \item{M}{multiplier for MDES calcuation given degrees of freedom, \eqn{\alpha} and \eqn{\beta} (1-power).}
-  \item{mdes}{minimum detectable effect size and 95\% lower and upper confidence limits.}
-}
-
-\details{
-
-MDES formula and further definition of design parameters can be found in Dong & Maynard (2013).
-
+  \item{parms}{list of parameters used in MDES calculation.}
+  \item{ncp}{noncentrality parameter.}
+  \item{mdes}{minimum detectable effect size and \eqn{(1-\alpha)}\% lower and upper confidence limits.}
 }
 
 \examples{
@@ -47,17 +40,10 @@ MDES formula and further definition of design parameters can be found in Dong & 
   }
 }
 
-\author{
-  Metin Bulus \email{bulus.metin@gmail.com}
-  Nianbo Dong \email{dong.nianbo@gmail.com}
-}
-
-\references{
-
-Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
-
-}
 \seealso{
-  \code{\link{power.ira1r1}, \link{mrss.ira1r1}, \link{optimal.ira1r1}}
+  \code{\link{power.ira1r1}, \link{optimal.ira1r1}}
 }
+
 \keyword{mdes}
+\keyword{main effect}
+\keyword{individual random assignment}

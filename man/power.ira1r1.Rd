@@ -1,11 +1,11 @@
 
 \name{power.ira1r1}
 \alias{power.ira1r1}
-\title{Model 1.0: Statistical Power Calculator for Individual Random Assignment Designs, Completely Randomized Controlled Trials}
+\title{Statistical Power Calculator for Individual Random Assignment Designs, Completely Randomized Controlled Trials}
 
 \description{
   \code{power.ira1r1} calculates statistical power for completely randomized controlled trials
-    where individuals are randomly assigned to treatment and control groups.
+    where individuals are randomly assigned to treatment or control groups.
 }
 
 \usage{
@@ -25,21 +25,12 @@
   \item{...}{to handle extra parameters passed from other functions, do not define any additional parameters.}
 }
 
-
-\details{
-
-Power formula was derived within power analysis framework descibed by Hedges & Rhoads (2009). Further definition of design parameters can be found in Dong & Maynard (2013).
-
-}
-
 \value{
   \item{fun}{function name.}
-  \item{par}{list of parameters used in power calculation.}
-  \item{df}{degrees of freedom}
-  \item{M}{multiplier for MDES calcuation given degrees of freedom, \eqn{\alpha} and \eqn{\beta} (1-power).}
-  \item{power}{statistical power (1 - type II error).}
+  \item{parms}{list of parameters used in power calculation.}
+  \item{ncp}{noncentrality parameter.}
+  \item{power}{statistical power \eqn{(1-\beta)}.}
 }
-
 
 \examples{
 \dontrun{
@@ -49,22 +40,10 @@ Power formula was derived within power analysis framework descibed by Hedges & R
   }
 }
 
-\author{
-  Metin Bulus \email{bulus.metin@gmail.com}
-  Nianbo Dong \email{dong.nianbo@gmail.com}
-}
-
-\references{
-
-Dong, N., & Maynard, R. A. (2013). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,\emph{Journal of Research on Educational Effectiveness, 6(1)}, 24-6.
-
-Hedges, L. & Rhoads, C.(2009). Statistical Power Analysis in Education
-Research (NCSER 2010-3006). Washington, DC: National Center for Special Education
-Research, Institute of Education Sciences, U.S. Department of Education. This report is
-available on the IES website at \url{http://ies.ed.gov/ncser/}.
-
-}
 \seealso{
-  \code{\link{mdes.ira1r1}, \link{mrss.ira1r1}, \link{optimal.ira1r1}}
+  \code{\link{mdes.ira1r1}, \link{optimal.ira1r1}}
 }
+
 \keyword{power}
+\keyword{main effect}
+\keyword{individual random assignment}

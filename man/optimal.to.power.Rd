@@ -8,11 +8,11 @@
 }
 
 \usage{
-  optimal.to.power(design)
+  optimal.to.power(x)
 }
 
 \arguments{
-  \item{design}{an object returned from one of the \code{optimal} functions.}
+  \item{x}{an object returned from one of the \code{optimal} functions.}
 }
 
 
@@ -34,13 +34,8 @@
   }
 }
 
-\author{
-  Metin Bulus \email{bulus.metin@gmail.com}
-  Nianbo Dong \email{dong.nianbo@gmail.com}
-}
-
-
 \seealso{
-  \code{\link{optimal.to.mdes}, \link{mrss.to.mdes}, \link{mrss.to.power}}
+  \code{\link{optimal.to.mdes}}
 }
-\keyword{conversion}
+
+\keyword{object conversion}
