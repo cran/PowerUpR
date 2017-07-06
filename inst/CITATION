@@ -1,14 +1,14 @@
 citHeader("To cite PowerUpR in publications use:")
 
 citEntry(entry = "Unpublished",
-  title        = "{PowerUpR}: Power Analysis Tools for Multilevel Randomized Experiments",
-  author       = as.person("Metin Bulus, Nianbo Dong"),
-  note         = "R package version 0.1.3",
+  title        = "{PowerUpR}: R Version of PowerUp!",
+  author       = as.person("Metin Bulus, Nianbo Dong, Benjamin Kelcey, Jessaca Spybrook, Bang Le,"),
+  note         = "R package version 1.1.3",
   year         = 2017
  ,
 
   textVersion  =
-  paste("Bulus, M., & Dong, N. (2017).",
-        "PowerUpR:  Power Analysis Tools for Multilevel Randomized Experiments.",
-        "R package version 0.1.3.")
+  paste("Bulus, M., Dong, N., Kelcey, B., Spybrook, J., &  Le, B., (2017).",
+        "PowerUpR:  R Version of PowerUp!.",
+        "R package version 1.1.3.")
 )
