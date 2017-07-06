@@ -1,0 +1,263 @@
+---
+title: "COSA: Optimizer Choice"
+date: "July 05, 2017"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{COSA - Optimizer Choice}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(PowerUpR)
+```
+
+-----
+*Note*: The following vignette refers to `PowerUpR` development version (v0.1.3.9000). Regression discontinuity designs, moderator effects, unequal cost per unit, and bound constraints are not available in earlier versions (<= v0.1.3). However, the following recomendations with respect to the choice of algorithm applies to earlier versions as well. **The default optimizer in earlier versions is `auglag_cobyla`, the least efficient among the others.** In earlier versions COSA is supported in `optimal` functions.  
+-----
+
+The following examples compare constrained optimal sample allocation (COSA) algorithms for two-, three- and four-level cluster randomized trials. Warnings are suppressed, thus important information such as feasibility of results might be missing from this vignette.
+
+For two-, three- and four-level cluster randomized trials, `optimizer="auglag_lbfgs"` and `optimizer="auglag_slsqp"` (default) options produced superior results (if converged). Performance of algorithms might be case-specific, therefore comparing various algorithms under variety of constraints will help with a final decision regarding optimal sample sizes. Finally, bound constraints both improve starting values and limit search area with which convergence and a global solution are more likely. 
+
+*Note*: Unequal cost per unit, and bound constraints are not available in earlier `PowerUpR` versions (<= v0.1.3). In earlier versions COSA is supported in `optimal` functions. 
+
+## Section 1: Two-Level Cluster Randomized Trials
+
+### *Constrain cost (equal cost per unit) - minimize sampling variance of the treatment effect*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, and P 
+d2L.1 <- cosa.cra2r2(cn=10, cJ=100, 
+                       constrain="cost", cost=10000,
+                       rho2=.20)
+compare.cosa(d2L.1)
+# request J, and P 
+d2L.2 <- cosa.cra2r2(cn=10, cJ=100, 
+                       constrain="cost", cost=10000, n=20,
+                       rho2=.20)
+compare.cosa(d2L.2)
+```
+### *Constrain power - minimize cost (equal cost per unit)*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, and P 
+d2L.3 <- cosa.cra2r2(cn=10, cJ=100, cost=10000,
+                       constrain="power", power=.80,
+                       rho2=.20)
+compare.cosa(d2L.3)
+# request J, and P 
+d2L.4 <- cosa.cra2r2(cn=10, cJ=100, cost=10000,
+                       constrain="power", power=.80, n=20,
+                       rho2=.20)
+compare.cosa(d2L.4)
+```
+### *Constrain cost (unequal cost per unit) - minimize sampling variance of the treatment effect*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, and P 
+d2L.5 <- cosa.cra2r2(cn=c(10,5), cJ=c(100,50), 
+                       constrain="cost", cost=10000,
+                       rho2=.20)
+compare.cosa(d2L.5)
+# request J, and P 
+d2L.6 <- cosa.cra2r2(cn=c(10,5), cJ=c(100,50), 
+                       constrain="cost", cost=10000, n=20,
+                       rho2=.20)
+compare.cosa(d2L.6)
+```
+### *Constrain power - minimize cost (unequal cost per unit)*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, and P 
+d2L.7 <- cosa.cra2r2(cn=c(10,5), cJ=c(100,50), cost=10000,
+                       constrain="power", power=.80,
+                       rho2=.20)
+compare.cosa(d2L.7)
+# request J, and P 
+d2L.8 <- cosa.cra2r2(cn=c(10,5), cJ=c(100,50), cost=10000,
+                       constrain="power", power=.80, n=20,
+                       rho2=.20)
+compare.cosa(d2L.8)
+```
+
+## Section 2: Three-Level Cluster Randomized Trials
+### *Constrain cost (equal cost per unit) - minimize sampling variance of the treatment effect*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, and P 
+d3L.1 <- cosa.cra3r3(cn=10, cJ=100, cK=500,
+                       constrain="cost", cost=100000,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.1)
+# request J, K, and P 
+d3L.2 <- cosa.cra3r3(cn=10, cJ=100, cK=500,
+                       constrain="cost", cost=100000, n=20,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.2)
+# request K, and P 
+d3L.3 <- cosa.cra3r3(cn=10, cJ=100, cK=500,
+                       constrain="cost", cost=100000, n=20, J=3,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.3)
+```
+### *Constrain power - minimize cost (equal cost per unit)* 
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, and P 
+d3L.4 <- cosa.cra3r3(cn=10, cJ=100, cK=500, cost=100000,
+                       constrain="power", power=.80, 
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.4)
+# request J, K, and P 
+d3L.5 <- cosa.cra3r3(cn=10, cJ=100, cK=500, cost=100000,
+                       constrain="power", power=.80, n=20,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.5)
+# request K, and P 
+d3L.6 <- cosa.cra3r3(cn=10, cJ=100, cK=500, cost=100000,
+                       constrain="power", power=.80, n=20, J=3,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.6)
+```
+### *Constrain cost (unequal cost per unit) - minimize sampling variance of the treatment effect*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, and P 
+d3L.7 <- cosa.cra3r3(cn=c(10,5), cJ=c(100,50), cK=c(500,250),
+                       constrain="cost", cost=100000,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.7)
+# request J, K, and P 
+d3L.8 <- cosa.cra3r3(cn=c(10,5), cJ=c(100,50), cK=c(500,250),
+                       constrain="cost", cost=100000, n=20,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.8)
+# request K, and P 
+d3L.9 <- cosa.cra3r3(cn=c(10,5), cJ=c(100,50), cK=c(500,250),
+                       constrain="cost", cost=100000, n=20, J=3,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.9)
+```
+### *Constrain power - minimize cost (unequal cost per unit)*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, and P 
+d3L.10 <- cosa.cra3r3(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cost=100000,
+                       constrain="power", power=.80, 
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.10)
+# request J, K, and P 
+d3L.11 <- cosa.cra3r3(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cost=100000,
+                       constrain="power", power=.80, n=20,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.11)
+# request K, and P 
+
+d3L.12 <- cosa.cra3r3(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cost=100000,
+                       constrain="power", power=.80, n=20, J=3,
+                       rho2=.2, rho3=.2)
+compare.cosa(d3L.12)
+```
+
+## Section 3: Four-Level Cluster Randomized Trials
+### *Constrain cost (equal cost per unit) - minimize sampling variance of the treatment effect*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, L, and P 
+d4L.1 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000,
+                       constrain="cost", cost=100000,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.1)
+# request J, K, L, and P 
+d4L.2 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000,
+                       constrain="cost", cost=100000, n=20,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.2)
+# request K, L, and P 
+d4L.3 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000,
+                       constrain="cost", cost=100000, n=20, J=3,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.3)
+# request L, and P 
+d4L.4 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000,
+                       constrain="cost", cost=100000, n=20, J=3, K=10,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.4)
+```
+### *Constrain power - minimize cost (equal cost per unit)*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, L, and P 
+d4L.5 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000, cost=100000,
+                       constrain="power", power=.80, 
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.5)
+# request J, K, L, and P 
+d4L.6 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000, cost=100000,
+                       constrain="power", power=.80, n=20,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.6)
+# request K, L, and P 
+d4L.7 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000, cost=100000,
+                       constrain="power", power=.80, n=20, J=3,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.7)
+# request L, and P 
+d4L.8 <- cosa.cra4r4(cn=10, cJ=100, cK=500, cL=1000, cost=100000,
+                       constrain="power", power=.80, n=20, J=3, K=10,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.8)
+```
+### *Constrain cost (unequal cost per unit) - minimize sampling variance of the treatment effect* 
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, L, and P 
+d4L.9 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500),
+                       constrain="cost", cost=100000,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.9)
+# request J, K, L, and P 
+d4L.10 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500),
+                       constrain="cost", cost=100000, n=20,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.10)
+# request K, L, and P 
+d4L.11 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500),
+                       constrain="cost", cost=100000, n=20, J=3,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.11)
+# request L, and P 
+d4L.12 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500),
+                        constrain="cost", cost=100000, n=20, J=3, K=10,
+                        rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.12)
+```
+### *Constrain power - minimize cost (unequal cost per unit)*
+```{r, message=FALSE, warning=FALSE}
+# request n, J, K, L, and P 
+d4L.13 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500), cost=100000,
+                       constrain="power", power=.80, 
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.13)
+# request J, K, L, and P 
+d4L.14 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500), cost=100000,
+                       constrain="power", power=.80, n=20,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.14)
+# request K, L, and P | eunqual cost per treatment and control units
+d4L.15 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500), cost=100000,
+                       constrain="power", power=.80, n=20, J=3,
+                       rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.15)
+# request L, and P 
+d4L.16 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500), cost=100000,
+                        constrain="power", power=.80, n=20, J=3, K=10,
+                        rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.16)
+```
+
+## Bound Constraints
+
+Bound constraints are useful as they both improve starting values and limit the search area with which convergence and a global solution are more likely. 
+
+```{r, message=FALSE, warning=FALSE}
+# request bound constrained n, J, L, and P 
+d4L.17 <- cosa.cra4r4(cn=c(10,5), cJ=c(100,50), cK=c(500,250), cL=c(1000,500), 
+                        constrain="cost", cost=100000, optimizer="auglag_lbfgs",
+                        n=c(15,20), J=c(3,5), K=c(10,50), L=c(10,20), P=c(.30,.50),
+                        rho2=.2, rho3=.2, rho4=.20)
+compare.cosa(d4L.17)
+```
