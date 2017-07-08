@@ -1,0 +1,314 @@
+---
+title: "Vignette B: Designing a Three-Level Cluster Randomized Trial to Detect Moderator Effect"
+date: "July 07, 2017"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Vignette B - Moderator Effect}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+-----
+*Note*: This vignette refers to `PowerUpR` development version (v0.1.3.9000). Regression discontinuity designs, moderator effects, unequal cost per unit, and bound constraints are not available in earlier versions (<= v0.1.3). In earlier versions COSA is supported in `optimal` functions. 
+-----
+
+# Problem
+
+Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student's algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). In addition to the main treatment effect, as in vignette A, assume it is also desired to detect differential effect based on school types (urban vs rural). To evaluate the differential effectiveness of Saxon Math curriculum, assume a 3-level cluster randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, teachers, and students, and the cost associated with data collection from this sample needs to be justified. For concistency and comparison we will follow the same steps as in Vignette A. 
+
+## Statistical Model
+Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect ($\delta$) can be estimated via the following 3-level hierarchical linear model (HLM, Raudenbush & Bryk, 2002)
+
+$$\begin{eqnarray}
+  L1: Y_{ijk} &=& \beta_{0jk} + \beta_{1jk}X + r_{ijk}, \quad r_{ijk} \thicksim N(0,\sigma_{|X}^2) \newline
+  L2: \beta_{0jk} &=& \gamma_{00k} + \gamma_{01k}W + \mu_{0jk}, \quad \mu_{0jk} \thicksim N(0,\tau_{2|W}^2) \newline
+      \beta_{1jk} &=& \gamma_{10k} \newline
+  L3: \gamma_{00k} &=& \xi_{001} + \delta T_k + \xi_{002}S + \xi_{003}ST + \xi_{004}V + \varsigma_{00k}, \quad \varsigma_{00k} \thicksim N(0,\tau_{3|V}^2) \newline
+      \gamma_{01k} &=& \xi_{010} \newline
+      \gamma_{10k} &=& \xi_{100}
+  \end{eqnarray}$$
+
+where, $Y$: Student algebra posttest score. $X$: Student algebra pretest score. $W$: Classroom mean algebra pretest score. $V$: School mean algebra pretest score. $T$: Treatment status. $S$: School type (binary). Consider the following hypothetical values for design parameters
+
+- Proportion of variance in algebra posttest at the school level ($\tau_3^2$): $.15$
+- Proportion of variance in algebra posttest at the classroom level ($\tau_2^2$):  $.05$
+- Proportion of variance in algebra posttest at the student level ($\sigma^2$): $.65$
+- Proportion of variance in algebra posttest explained by school mean algebra pretest: ($R_3^2 = 1 - \frac{\tau_{3|V}^2}{\tau_{3}^2}$):  $.45$
+- Proportion of variance in algebra posttest explained by classroom mean algebra pretest: ($R_2^2 = 1 - \frac{\tau_{2|W}^2}{\tau_{2}^2}$): $.50$
+- Proportion of variance in algebra posttest explained by student algebra pretest: ($R_1^2 = 1 - \frac{\sigma_{|X}^2}{\sigma^2}$): $.55$
+
+Then, intraclass correlation coefficients are
+
+  - $\rho_2 = \tau_2^2 / (\sigma^2 + \tau_2^2 + \tau_3^2) = .05 /(.65 + .15 + .05) = 0.059$ 
+  - $\rho_3 = \tau_3^2 / (\sigma^2 + \tau_2^2 + \tau_3^2) = .15 /(.65 + .15 + .05) = 0.176$ 
+
+## Minimum Detectable Effect Size (MDES)
+### Scenario 1: Find MDES
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $83$
+- Average number of classrooms per school ($J$): $2$
+- Average number of students per classroom ($n$) : $10$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Statistical power ($1-\beta$): $.80$ 
+
+Given design parameters and further assumptions, what is minimum detectable effect size?
+```{r, message=FALSE, warning=FALSE}
+library(PowerUpR)
+```
+
+```{r, message=FALSE}
+design1 <- mdes.mod3.cra3r3(power=.80, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50, n=10, J=2, K=83)
+```
+
+## Statistical Power
+### Scenario 2: Find Statistical Power
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $60$
+- Average number of classrooms per school ($J$): $2$
+- Average number of students per classroom ($n$) : $10$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Minimum detectable effect size (MDES): $.475$
+
+Given design parameters and further assumptions, what is statistical power?
+
+```{r, message=FALSE}
+design2 <- power.mod3.cra3r3(mdes=.475, rho2=.06, rho3=.18,
+                             g3=1, R12=.55, R22=.50, R32=.45,
+                             P=.40, Q=.50, n=10, J=2, K=83)
+```
+
+
+## Constrained Optimal Sample Allocation
+
+### Scenario 3: Number of Schools (K)
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Average number of classrooms per school ($J$): $2$
+- Average number of students per classroom ($n$) : $10$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+
+Given design parameters and further assumptions, how many schools should be recruited?
+
+```{r, message=FALSE}
+design3 <- cosa.mod3.cra3r3(power=.80, mdes=.475, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50, n=10, J=2)
+```
+
+### Scenario 4: Number of Classrooms (J)
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $60$
+- Average number of students per classroom ($n$) : $10$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+
+Given design parameters and further assumptions, how many classrooms should be recruited per school on average?
+
+```{r, message=FALSE}
+design4 <- cosa.mod3.cra3r3(power=.80, mdes=.475, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50, n=10, K=83)
+```
+
+### Scenario 5: Number of Students (n)
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Number of schools ($K$): $60$
+- Average number of classrooms per school ($J$): $2$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+  
+Given design parameters and further assumptions, how many students should be recruited per classroom on average?
+
+```{r, message=FALSE}
+design5 <- cosa.mod3.cra3r3(power=.80, mdes=.475, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50, J=2, K=83)
+```
+
+### Scenario 6: Constrain Power
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+  
+Given design parameters and further assumptions, how many schools, classrooms and students should be recruited to achieve 80% power while minimizing the total cost?
+
+```{r, message=FALSE}
+design6 <- cosa.mod3.cra3r3(cn=10, cJ=200, cK=500,
+                            constrain="power", power=.80,
+                            mdes=.475, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.475). 
+
+### Scenario 7: Constrain Power and Number of Classrooms
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+- Average number of classrooms per school ($J$): $2$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+  
+Given design parameters and further assumptions, how many schools, and students should be recrutied to achieve 80% power while minimizing the total cost?
+
+```{r, message=FALSE}
+design7 <- cosa.mod3.cra3r3(cn=10, cJ=200, cK=500, 
+                            constrain="power", power=.80, J=2, 
+                            mdes=.475, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.475). 
+
+### Scenario 8: Constrain MDES and Number of Classrooms
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+- Average number of classrooms per school ($J$): $2$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+  
+Given design parameters and further assumptions, how many schools, and students should be recruited to achieve an MDES of .475 while minimizing the total cost?
+
+```{r, message=FALSE}
+design8 <- cosa.mod3.cra3r3(cn=10, cJ=200, cK=500, 
+                            constrain="mdes", mdes=.475, J=2,
+                            power=.80, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.475). 
+
+### Scenario 9: Constrain Cost and Number of Classrooms
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+- Average number of classrooms per school ($J$): $2$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+- Budget: $130,000$
+  
+Given design parameters and further assumptions, how many schools, and students should be recruited while maximizing the power?
+
+```{r, message=FALSE}
+design9 <- cosa.mod3.cra3r3(cn=10, cJ=200, cK=500,
+                            constrain="cost", cost=130000, J=2,
+                            power=.80, mdes=.475, rho2=.06, rho3=.18,
+                            g3=1, R12=.55, R22=.50, R32=.45,
+                            P=.40, Q=.50)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.475).  
+
+### Scenario 10: Constrain Cost, Number of Classrooms, and Number of Students
+Further assumptions 
+
+- Alpha level ($\alpha$): $0.05$
+- Statistical power ($1-\beta$): $.80$ 
+- Minimum detectable effect size (MDES): $.475$
+- Average number of students per classroom ($n$): $20$
+- Average number of classrooms per school ($J$): $2$
+- Proportion of schools in urban location ($Q$) : $.50$
+- Marginal cost per student ($cn$): $10$
+- Marginal cost per classroom ($cJ$): $200$
+- Marginal cost per school ($cK$): $500$
+- Budget: $130,000$
+  
+Given design parameters and further assumptions, how many schools should be recruited while maximizing the power?
+
+```{r, message=FALSE}
+design10 <- cosa.mod3.cra3r3(cn=10, cJ=200, cK=500,
+                             constrain="cost", cost=130000, n=20, J=2,
+                             power=.80, mdes=.475, rho2=.06, rho3=.18,
+                             g3=1, R12=.55, R22=.50, R32=.45,
+                             P=.40, Q=.50)
+```
+
+Note that MDES values in the output are calculated at the specified power value (.80), and power values in the output are
+calculated at the specified MDES value (.475). 
+
+## Summary
+In reality, moderator effect is smaller than main treatment effect, therefore, designing an experiment that have a minimum detectable effect size of .10 is a reasonable expectation. Furthermore, the cost associated with recruting treatment and control schools may not be equal, therefore we may not want to fix proportion of treatment schools. How many schools do we need and how much would that cost, if control schools cost half as much. 
+
+```{r, message=FALSE}
+design11 <- cosa.mod3.cra3r3(cn=c(10,5), cJ=c(200,100), cK=c(500,250),
+                             constrain="mdes", mdes=.10, n=20, J=2, ncase=5,
+                             power=.80, rho2=.06, rho3=.18,
+                             g3=1, R12=.55, R22=.50, R32=.45,
+                             Q=.50)
+## integer appromixations
+design11$integer.optim
+## get confidence interval for MDES
+mdes95CI <- cosa.to.mdes(design11)
+## get percentile equivalance
+mdes.to.pctl(mdes95CI)
+
+```
+
+A three-level hierarchical linear model is proposed to estimate differantial effect, where schools are randomly assigned to treatment and control conditions with 40% probability, and where 50% of schools are in urban location. We assume that proportion of variance in algebra posttest explained by school mean algebra pretest is 45%, proportion of variance in algebra posttest explained by classroom mean algebra pretest is 50%, proportion of variance in algebra posttest explained by student algebra pretest is 55%. Furthermore we assume intraclass correlation coefficient at the school level is 17.6%, and intraclass correlation coefficient at the classroom level is 5.9%. 
+
+Having \$10 marginal cost per student, \$200 marginal cost per classroom, \$500 marginal cost per school in treatment group, and half as much cost per student, per classroom and per school in control group, based on `PowerUpR` package (Bulus, Dong, Kelcey, Spybrook, & Le, 2017), with a budget of \$1,464,450 we can afford recruting 1,595 schools in total, each with two classrooms and 40 students on average. For a two-tailed hypothesis test for moderator effect, and Type I error rate of 5%, such sample is estimated to have statistical power of 80% for an effect size difference of .10 95% CI[.03, .17], which is equaivalent to increasing an average student's algebra posttest score from 50th percentile to 54th percentile. 
+
+
+## Relevant Citations
+
+Bulus, M., & Dong, N., Kelcey, B., Spybrook, J., Le, B. (2017). `PowerUpR`: R version of PowerUp!. R package version 1.1.3.
+
+Dong, N., Kelcey, B., & Spybrook, J. (2017). Power analyses of moderator effects in three-level cluster randomized trials. *Journal of Experimental Education*. Advance online publication. doi: 10.1080/00220973.2017.1315714.
+
+Dong, N., Kelcey, B., Spybrook, J. & Maynard, R. A. (2016). PowerUp!-Moderator: A tool for
+calculating statistical power and minimum detectable effect size differences of the
+moderator effects in cluster randomized trials. [Software]. Accessed from
+ [http://www.causalevaluation.org/](http://www.causalevaluation.org/).
+ 
+Spybrook, J., Kelcey, B., & Dong, N. (2016). Power for detecting treatment by moderator effects in two-and three-level cluster randomized trials. *Journal of Educational and Behavioral Statistics, 41(6)*, 605-627.
+
+U.S. Department of Education, Institute of Education Sciences, What Works Clearinghouse. (2016, May).  Secondary Mathematics intervention report: Saxon Math. Retrieved from [https://ies.ed.gov/ncee/wwc/Docs/InterventionReports/wwc_saxon_052416.pdf](https://ies.ed.gov/ncee/wwc/Docs/InterventionReports/wwc_saxon_052416.pdf)
+

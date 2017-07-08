@@ -8,16 +8,16 @@
 }
 
 \usage{
-  mdes.to.pctl(design)
+  mdes.to.pctl(x)
 }
 
 \arguments{
-  \item{design}{an object returned from \code{mdes} function.}
+  \item{x}{an object returned from \code{mdes} function or a numeric value in standard deviation units.}
 }
 
 
 \details{
-  \code{mdes.to.pctl} converts MDES values returned from \code{mdes} function into percentile values.Values should be interpreted as percentile increase with reference to 50th percentile.
+  \code{mdes.to.pctl} converts MDES values returned from \code{mdes} function into percentile values. Values should be interpreted as percentile increase with reference to 50th percentile.
 
 }
 
@@ -35,13 +35,8 @@
   }
 }
 
-\author{
-  Metin Bulus \email{bulus.metin@gmail.com}
-  Nianbo Dong \email{dong.nianbo@gmail.com}
-}
-
-
 \seealso{
-  \code{\link{optimal.to.mdes}, \link{mrss.to.mdes}}
+  \code{\link{cosa.to.mdes}}
 }
-\keyword{conversion}
+
+\keyword{object conversion}

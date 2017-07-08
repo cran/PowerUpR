@@ -1,0 +1,160 @@
+---
+title: "PowerUpR: An Introduction"
+date: "July 07, 2017"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Vignette B - Moderator Effect}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+-----
+*Note*: This introduction refers to `PowerUpR` development version (v0.1.3.9000). Regression discontinuity designs, moderator effects, unequal cost per unit, and bound constraints are not available in earlier versions (<= v0.1.3). In earlier versions COSA is supported in `optimal` functions. 
+-----
+
+`PowerUpR` is an implementation of *PowerUp!* (Dong & Maynard, 2013a, 2013b), and *PowerUp!-Moderator* (Dong, Kelcey, Spybrook & Maynard, 2016a)  in R environment (R Core Team, 2017). *PowerUp!* series consist of convenient excel based functions to conduct statistical power analysis for various experimental and quasi-experimental designs (Dong & Maynard, 2013).
+  It also enables users to conduct statistical power analysis for moderator effects in two- and three-level cluster randomized trials (Dong, Kelcey, Spybrook & Maynard, 2016a; Dong, Kelcey, & Spybrook, 2017; Dong, Spybrook, Kelcey, & Bulus, revise & resubmit; Spybrook, Kelcey, & Dong, 2017), and for mediator effects in two-level cluster randomized trials (Dong, Kelcey, Spybrook & Maynard, 2016b; Kelcey, Dong, Spybrook, & Cox, 2017; Kelcey, Dong, Spybrook, & Shen, in press).
+
+## Framework
+
+  The `PowerUpR` package bases its framework on three fundemental concepts in statistical power analysis; power calculation, minimum detectable effect size calculation, and constrained optimal sample allocation (COSA; Hedges & Borenstein, 2014; Raudenbush, 1997; Raudenbush & Liu, 2000).
+  COSA problems can be solved in the following forms,
+
+   1. under budgetary constraints given marginal costs per unit,
+   2. under power constraints given marginal costs per unit,
+   3. under MDES constraints given marginal costs per unit, and
+   4. under sample size constraints for one or more levels along with any of the 1, 2 or 3 options.
+
+## Function Naming Conventions
+
+A design parameter (one of the MDES, power, or COSA) can be requested by using approriate function given design characteristics. Each function typically begins with an **output** keyword, followed by a period, and ends with a **design** keyword. An additional key word is placed inbetween for **estimand** other than main effect (if available). There are three types of output; `mdes` to request minimum detectable effect size,  `power` to request statistical power, and `cosa` to request constrained optimal sample allocation.
+
+Currently main effects are available for all design types, and moderator effects are avilable in two- and three-level cluster randomized trials. A function with two keyword implies main effect as design name includes information about the level of treatment effect and whether it is random, fixed or constant across higher level units. There are three moderator effects available for design `cra2r2`; `mod1n`, `mod1r`, and `mod2`, and five moderator effects available for design `cra3r3`; `mod1n`, `mod1r`, `mod2n`, `mod2r`, and `mod3`.The number and the single letter at the end stands for the level of moderator variable and whether it varies randomly or non-randomly across higher level units.
+
+The first three or four letters of the design stands for the type of assignment, for individual random assignment `ira`, for blocked individual random assignment `bira`, for cluster random assignment `cra`, and for blocked cluster random assignment `bcra`, similiarly, for individual regression discontinuity `ird`, for blocked individual regression discontinuity `bird`, for cluster regression discontinuity `crd`, and for blocked cluster regression discontinuity `bcrd`. It is followed by a number indicating number of levels. A single letter followed by a number indicates whether a block is considered to be `r`, random; `f`, fixed; or `c`, constant and the level at which random assingment takes place.
+There are 14 types of designs for random assignment studies; `ira1r1`, `bira2r1`, `bira2f1`, `bira2c1`, `cra2r2`, `bira3r1`, `bcra3r2`, `bcra3f2`, `cra3r3`, `bira4r1`, `bcra4r2`, `bcra4r3`, `bcra4f3`, and `cra4r4`, and seven types of designs for regression discontinuity studies; `ird1r1`, `bird2r1`, `bird2f1`, `crd2r2`, `bcrd3r2`, `bcrd3f2`, and `crd3r3`.
+
+For example, to find MDES for main effect in two-level cluster randomized design where random assignment is at level-2, function `mdes.cra2r2` is used. Similiarly, to find MDES for a non-randomly varying moderator effect at level-1 for the same design, function `mdes.mod1n.cra2r2` is used.
+
+## Default Values
+
+Each function requires slightly different arguments depending on the output it produces and the design. Most of the arguments have default values to provide users a starting point, which can be found in *usage* section of the documentation.
+
+For all functions
+
+  - `mdes` = .25
+  - `power` = .80
+  - `alpha` = .05
+  - `two.tail` = `TRUE`
+  - `P` = .50`
+  
+for COSA functions
+
+  - any sequence of `cn`, `cJ`, `cK`, `cL` = 0
+  - `cost` = `NULL`
+  - `optimizer` = `auglag_slsqp`
+
+in addition, for regression discontinuity designs
+
+  - `RTZ` = `NULL`
+  - `k1` = -6
+  - `k2` = 6
+  - `dist.Z` = `normal`
+
+and depending on the effect and design
+
+  - any of one of `g1`, `g2`, `g3`, `g4` = 0
+  - any sequence of `R12`, `R22`, `R32`, `R42` = 0
+  - any sequence of `RT22`, `RT32`, `RT42` = 0
+  - `Q` = `NULL`, implies continuous moderator
+
+Users should be aware of default values and change them if necessary. Depending on the function minimum required arguments are
+
+  - any sequence of `rho2`, `rho3`, `rho4`
+  - any sequence of `omega2`, `omega3`, `omega4`
+  - any one of, any sequence of, or any combination of `n`, `J`, `K`, `L`
+
+For definition of above-mentioned parameters, statistical models and formulas see Dong and Maynard (2013), Dong, Kelcey, and Spybrook (2017), Kelcey, Dong, Spybrook, and Cox (2017), and  Kelcey, Dong, Spybrook, and Shen (in press), and Schochet (2008, 2009), and Spybrook, Kelcey, and Dong (2016).
+
+## An Update Note
+
+  In `cosa` functions, costs may not be equal per treatment and per control units, in this case, marginal cost per a unit can be in the form of a vector with a legth of two (e.g., `c(10, 5)`). The first value is the cost associated with the treatment unit, and second value is the cost associated with the control unit. Furthermore, constraints on the sample sizes can have a length of one (fixed), two or more (e.g., `c(15, 25)`). In the latter case, the minimum and the maximum of the series constitutes boundry constraints while the average of the series is replaced with the starting value. More constraints produce better solutions. When more than two parameters are requested, or when the solution is not feasible, changing default values or comparing various algorithms using `compare.cosa` function is recommended.
+
+
+## Resources
+
+For reference intraclass correlation (`rho2`, `rho3`)
+values see Dong, Reinke, Herman, Bradshaw, and Murray (2016), Hedberg and Hedges (2014), Hedges and Hedberg (2007, 2013), Kelcey, and Phelps (2013), Schochet (2008), Spybrook, Westine, and Taylor (2016). For reference variance (`R12`, `R22`, `R32`}) values see Bloom, Richburg-Hayes, and Black (2007), Deke et al. (2010), Dong et al. (2016), Hedges and Hedberg (2013), Kelcey, and Phelps (2013), Spybrook, Westine,and Taylor (2016), Westine, Spybrook, and Taylor (2013).
+Users can also obtain design parameters for various levels using publicly available state or district data.
+
+### Funding
+
+This project has been funded by the National Science Foundation [DGE-1437679, DGE-1437692, DGE-1437745]. The opinions expressed herein are those of the authors and not the funding agency.
+
+
+## References
+
+Bloom, H. S., Richburg- Hayes, L. & Black, A. R. (2007).  Using Covariates to Improve Precision for Studies that Randomize Schools to Evaluate Educational Interventions.  *Educational Evaluation and Policy Analysis, 29(1)*, 0-59.
+
+Deke, John, Dragoset, Lisa, and Moore, Ravaris (2010). Precision Gains from Publically Available School Proficiency Measures Compared to Study-Collected Test Scores in Education Cluster-Randomized Trials (NCEE 2010-4003). Washington, DC: National Center for Education Evaluation and Regional Assistance, Institute of Education Sciences, U.S. Department of Education.  [http://ies.ed.gov/ncee/pubs/20104003/](http://ies.ed.gov/ncee/pubs/20104003/)
+
+Dong, N., Kelcey, B., & Spybrook, J. (2017). Power analyses of moderator effects in three-level cluster randomized trials. *Journal of Experimental Education*. Advance online publication. doi: 10.1080/00220973.2017.1315714.
+
+Dong, N., & Maynard, R. A. (2013a). PowerUp!: A Tool for Calculating Minum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies,*Journal of Research on Educational Effectiveness, 6(1)*, 24-6.
+
+Dong, N., & Maynard, R. A. (2013b). PowerUp!: A tool for calculating minimum detectable
+effect sizes and minimum required sample sizes for experimental and quasi-experimental
+design studies. [Software]. Accessed from [http://www.causalevaluation.org/](http://www.causalevaluation.org/).
+
+Dong, N., Kelcey, B., Spybrook, J. & Maynard, R. A. (2016a). PowerUp!-Moderator: A tool for
+calculating statistical power and minimum detectable effect size differences of the
+moderator effects in cluster randomized trials. [Software].
+Accessed from [http://www.causalevaluation.org/](http://www.causalevaluation.org/).
+
+Dong, N., Kelcey, B., Spybrook, J. & Maynard, R. A. (2016b). PowerUp!-Mediator: A tool for
+calculating statistical power for causally-defined mediation in cluster randomized trials.
+[Software]. Accessed from [http://www.causalevaluation.org/](http://www.causalevaluation.org/).
+
+Dong, N., Reinke, W. M., Herman, K. C., Bradshaw, C. P., & Murray, D. W. (2016). Meaningful effect sizes, intraclass correlations, and proportions of variance explained by covariates for panning two-and three-level cluster randomized trials of social and behavioral outcomes. *Evaluation Review*. doi: 10.1177/0193841X16671283
+
+Dong, N., Spybrook, J., Kelcey, B., & Bulus, M. (revise & resubmit). Power analyses for moderator effects with (non)random slopes in cluster randomized trials. Journal of Research on Educational Effectiveness.
+
+Hedges, L. V., & Borenstein, M. (2014). Conditional Optimal Design in Three- and Four-Level Experiments. *Journal of Educational and Behavioral Statistics, 39(4)*, 257-281
+
+Hedberg, E., & Hedges, L. V.(2014). Reference Values of Within-District Intraclass Correlations of Academic Achivement by District Characteristics: Results From a Meta-Analysis of District-Specified Values. *Evaluation Review, 38(6)*, 546-582.
+
+Hedges, L. V., & Hedberg, E. (2007). Interclass correlation values for planning group-randomized trials in education. *Educational Evaluation and Policy Analysis, 29(1)*, 60-87.
+
+Hedges, L. V., & Hedberg, E. (2013). Interclass Correlations and Covariate Outcome Correlations for Planning Two- and Three-Level Cluster-Randomized Experiments in Education. *Evaluation Review, 37(6)*, 445-489.
+
+Kelcey, B., Dong, N., Spybrook, J., & Cox, K. (2017). Statistical Power for Causally Defined Indirect Effects in Group-Randomized Trials With Individual-Level Mediators. *Journal of Educational and Behavioral Statistics*, 1076998617695506.
+
+Kelcey, B., Dong, N., Spybrook, J., & Shen, Z. (in press). Statistical power for causally-defined
+mediation in group-randomized studies. *Multivariate Behavioral Research*.
+
+Kelcey, B., & Phelps, G. (2013). Strategies for improving power in school randomized studies of professional development. *Evaluation Review, 37(6)*, 520-554.
+
+R Core Team (2017). R: A language and environment for statistical computin . R Foundation for Statistical Computing, Vienna, Austria. [https://www.R-project.org](https://www.R-project.org).
+
+Raudenbush, S. W. (1997). Statistical analysis and optimal design for cluster randomized trials. *Psychological Methods, 2*,* 173-185.
+
+Raudenbush, S. W., & Liu, X. (2000). Statistical power and optimal design for multisite trials. *Psychological Methods, 5*, 199-213.
+
+Schochet, P. Z. (2008). Statistical Power for Random Assignment Evaluations of Education Programs. *Journal of Educational and Behavioral Statistics, 33(1)*, 62-87
+
+Schochet, P. Z. (2008). Technical Methods Report: Statistical Power for Regression Discontinuity Designs in Education Evaluations. NCEE 2008-4026. *National Center for Education Evaluation and Regional Assistance*.
+
+Schochet, P. Z. (2009). Statistical power for regression discontinuity designs in education evaluations. *Journal of Educational and Behavioral Statistics, 34(2)*, 238-266.
+
+Spybrook, J., Kelcey, B., & Dong, N. (2016). Power for detecting treatment by moderator effects in two-and three-level cluster randomized trials. *Journal of Educational and Behavioral Statistics, 41(6)*, 605-627.
+
+Spybrook, J., Westine, C. D., & Taylor, J. A. (2016). Design Parameters for Impact Research in Science Education: A Multisite Anlaysis. *AERA Open, 2(1)*, 1-15.
+
+Westine, C. D., Spybrook, J.,  & Taylor, J. A. (2013). An Empirical Investigation of Variance Design Parameters for Planning Cluster-Randomized Trials of Science Achievement. *Evaluation Review, 37(6)*, 490-519.
+
