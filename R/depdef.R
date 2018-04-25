@@ -50,6 +50,7 @@ optimal.to.power <- function(...){
 
 
 # deprecated and defunct arguments
+# function not utilized in v1.0.0
 .depdef <- function(x, envir = parent.frame()) {
   names.x <- names(x)
   if("R12" %in% names.x) {
