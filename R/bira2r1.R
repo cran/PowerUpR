@@ -1,9 +1,8 @@
 mdes.bira2r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                         rho2,  omega2, p=.50, g2=0, r21=0, r2t2=0,
-                        n, J, ...){
+                        n, J){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   df <- J - g2 - 1
@@ -30,10 +29,9 @@ mdes.bira2r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 
 power.bira2r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                          rho2,  omega2, g2=0, p=.50, r21=0, r2t2=0,
-                         n, J, ...){
+                         n, J){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   df <- J - g2 - 1
@@ -59,10 +57,9 @@ power.bira2r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 
 mrss.bira2r1 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                          n, J0=10, tol=.10,
-                         rho2, omega2, g2=0, p=.50, r21=0, r2t2=0, ...){
+                         rho2, omega2, g2=0, p=.50, r21=0, r2t2=0){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   i <- 0

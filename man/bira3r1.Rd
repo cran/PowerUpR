@@ -6,24 +6,24 @@
 \title{Three-Level Blocked Individual-level Random Assignment Design, Treatment at Level 1}
 
 \description{
-  \code{mdes.bira3r1} calculates minimum detectable effect size, \code{power.bira3r1} calculates statistical power, \code{mrss.bira3r1} calculates minimum required sample size.
+  Use \code{mdes.bira3r1()} to calculate minimum detectable effect size, \code{power.bira3r1()} to calculate statistical power, and \code{mrss.bira3r1()} to calculate minimum required sample size.
 }
 
 \usage{
 mdes.bira3r1(power=.80, alpha=.05, two.tailed=TRUE,
              rho2, rho3, omega2, omega3,
              p=.50, r21=0, r2t2=0, r2t3=0, g3=0,
-             n, J, K, ...)
+             n, J, K)
 
 power.bira3r1(es=.25, alpha=.05, two.tailed=TRUE,
               rho2, rho3, omega2, omega3,
               p=.50, r21=0, r2t2=0, r2t3=0, g3=0,
-              n, J, K, ...)
+              n, J, K)
 
 mrss.bira3r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
              n, J, K0=10, tol=.10,
              rho2, rho3, omega2, omega3,
-             p=.50, r21=0, r2t2=0, r2t3=0, g3=0, ...)
+             p=.50, r21=0, r2t2=0, r2t3=0, g3=0)
 }
 
 \arguments{
@@ -31,8 +31,8 @@ mrss.bira3r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{es}{effect size.}
   \item{alpha}{probability of type I error.}
   \item{two.tailed}{logical; \code{TRUE} for two-tailed hypothesis testing, \code{FALSE} for one-tailed hypothesis testing. }
-  \item{rho2}{proportion of variance in the outcome explained by level 2 units.}
-  \item{rho3}{proportion of variance in the outcome explained by level 3 units.}
+  \item{rho2}{proportion of variance in the outcome between level 2 units (unconditional ICC2).}
+  \item{rho3}{proportion of variance in the outcome between level 3 units (unconditional ICC3).}
   \item{omega2}{treatment effect heterogeneity as ratio of treatment effect variance among level 2 units to the residual variance at level 2.}
   \item{omega3}{treatment effect heterogeneity as ratio of treatment effect variance among level 3 units to the residual variance at level 3.}
   \item{p}{average proportion of level 1 units randomly assigned to treatment within level 2 units.}
@@ -45,7 +45,6 @@ mrss.bira3r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{K}{number of level 3 units.}
   \item{K0}{starting value for \code{K}.}
   \item{tol}{tolerance to end iterative process for finding \code{K}.}
-  \item{...}{to handle depreciated or defunct arguments.}
 }
 
 \value{
@@ -64,11 +63,9 @@ mrss.bira3r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 mdes.bira3r1(rho3=.20, rho2=.15,
              omega3=.10, omega2=.10,
              n=69, J=10, K=100)
-
 power.bira3r1(es = .045, rho3=.20, rho2=.15,
               omega3=.10, omega2=.10,
               n=69, J=10, K=100)
-
 mrss.bira3r1(es = .045, rho3=.20, rho2=.15,
              omega3=.10, omega2=.10,
              n=69, J=10)

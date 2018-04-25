@@ -7,7 +7,7 @@
 \alias{mdes.to.pctl}
 
 \description{
-  \code{mrss.to.mdes} converts an object returned from MRSS functions into an object returned from MDES functions. \code{mrss.to.power} converts an object returned from MRSS functions into an object returned from power functions.\code{power.to.mdes} converts an object returned from power functions into an object returned from MDES functions. \code{mdes.to.power} converts an object returned from MDES functions into an object returned from power functions. \code{mdes.to.pctl} converts effect sizes from an object returned from MDES functions into percentiles.
+  Use \code{mrss.to.mdes()} to convert an object returned from MRSS functions into an object returned from MDES functions, \code{mrss.to.power()} to convert an object returned from MRSS functions into an object returned from power functions, \code{power.to.mdes()} to convert an object returned from power functions into an object returned from MDES functions, \code{mdes.to.power()} to convert an object returned from MDES functions into an object returned from power functions, and \code{mdes.to.pctl()} to convert effect sizes or an object returned from MDES functions into percentiles.
 }
 
 \usage{
@@ -24,7 +24,7 @@
 
 
 \examples{
-design1 <- power.bira2r1(mdes=.15, rho2=.35, omega2=.10, n=83, J=10)
+design1 <- power.bira2r1(es=.15, rho2=.35, omega2=.10, n=83, J=10)
 design2 <- power.to.mdes(design1)
 mdes.to.pctl(design2)
 }

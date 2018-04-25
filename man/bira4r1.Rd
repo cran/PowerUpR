@@ -6,24 +6,24 @@
 \title{Four-Level Blocked Individual-level Random Assignment Design, Treatment at Level 1}
 
 \description{
-  \code{mdes.bira4r1} calculates minimum detectable effect size, \code{power.bira4r1} calculates statistical power, \code{mrss.bira4r1} calculates minimum required sample size.
+  Use \code{mdes.bira4r1()} to calculate minimum detectable effect size, \code{power.bira4r1()} to calculate statistical power, and \code{mrss.bira4r1()} to calculate minimum required sample size.
 }
 
 \usage{
 mdes.bira4r1(power=.80, alpha=.05, two.tailed=TRUE,
              rho2, rho3, rho4, omega2, omega3, omega4,
              p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0,
-             n, J, K, L, ...)
+             n, J, K, L)
 
 power.bira4r1(es=.25, alpha=.05, two.tailed=TRUE,
               rho2, rho3, rho4, omega2, omega3, omega4,
               p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0,
-              n, J, K, L, ...)
+              n, J, K, L)
 
 mrss.bira4r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
              n, J, K, L0=10, tol=.10,
              rho2, rho3, rho4, omega2, omega3, omega4,
-             p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0, ...)
+             p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0)
 }
 
 \arguments{
@@ -31,9 +31,9 @@ mrss.bira4r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{es}{effect size.}
   \item{alpha}{probability of type I error.}
   \item{two.tailed}{logical; \code{TRUE} for two-tailed hypothesis testing, \code{FALSE} for one-tailed hypothesis testing. }
-  \item{rho2}{proportion of variance in the outcome explained by level 2 units.}
-  \item{rho3}{proportion of variance in the outcome explained by level 3 units.}
-  \item{rho4}{proportion of variance in the outcome explained by level 4 units.}
+  \item{rho2}{proportion of variance in the outcome between level 2 units (unconditional ICC2).}
+  \item{rho3}{proportion of variance in the outcome between level 3 units (unconditional ICC3).}
+  \item{rho4}{proportion of variance in the outcome between level 4 units (unconditional ICC4).}
   \item{omega2}{treatment effect heterogeneity as ratio of treatment effect variance among level 2 units to the residual variance at level 2.}
   \item{omega3}{treatment effect heterogeneity as ratio of treatment effect variance among level 3 units to the residual variance at level 3.}
   \item{omega4}{treatment effect heterogeneity as ratio of treatment effect variance among level 4 units to the residual variance at level 4.}
@@ -49,7 +49,6 @@ mrss.bira4r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{L}{number of level 4 units.}
   \item{L0}{starting value for \code{L}.}
   \item{tol}{tolerance to end iterative process for finding \code{L}.}
-  \item{...}{to handle depreciated or defunct arguments.}
 }
 
 \value{
@@ -67,11 +66,9 @@ mrss.bira4r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 mdes.bira4r1(rho4=.05, rho3=.15, rho2=.15,
              omega4=.50, omega3=.50, omega2=.50,
              n=10, J=4, K=4, L=27)
-
 power.bira4r1(es = 0.142, rho4=.05, rho3=.15, rho2=.15,
               omega4=.50, omega3=.50, omega2=.50,
               n=10, J=4, K=4, L=27)
-
 mrss.bira4r1(es = 0.142, rho4=.05, rho3=.15, rho2=.15,
              omega4=.50, omega3=.50, omega2=.50,
              n=10, J=4, K=4)
