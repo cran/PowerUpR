@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2018-02-16" />
+<meta name="date" content="2018-05-17" />
 
 <title>Three-Level Cluster Randomized Trial</title>
 
@@ -68,14 +68,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Three-Level Cluster Randomized Trial</h1>
-<h4 class="date"><em>2018-02-16</em></h4>
+<h4 class="date"><em>2018-05-17</em></h4>
 
 
 
-<p>To install <code>PowerUpR</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;PowerUpR&quot;</span>)</code></pre></div>
-<p>Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student’s algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, teachers, and students, and the cost associated with data collection from this sample needs to be justified. See Vignette B for designing a three-level cluster randomized trial that is sensetive to moderator effect.</p>
-<p>Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect (<span class="math inline">\(\delta\)</span>) can be estimated via the following 3-level hierarchical linear model (HLM, Raudenbush &amp; Bryk, 2002)</p>
+<p>To install and load <code>PowerUpR</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;PowerUpR&quot;</span>)
+<span class="kw">library</span>(PowerUpR)</code></pre></div>
+<p>Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student’s algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster-randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, clasrooms, and students needs to be justified. Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect (<span class="math inline">\(\delta\)</span>) can be estimated via the following three-level hierarchical linear model (Raudenbush &amp; Bryk, 2002)</p>
 <p><span class="math display">\[\begin{eqnarray}
   L1: Y_{ijk} &amp;=&amp; \beta_{0jk} + \beta_{1jk}X + r_{ijk}, \quad r_{ijk} \thicksim N(0,\sigma_{|X}^2) \newline
   L2: \beta_{0jk} &amp;=&amp; \gamma_{00k} + \gamma_{01k}W + \mu_{0jk}, \quad \mu_{0jk} \thicksim N(0,\tau_{2|W}^2) \newline
@@ -113,29 +113,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <span class="dt">g3=</span><span class="dv">1</span>, <span class="dt">r21=</span>.<span class="dv">55</span>, <span class="dt">r22=</span>.<span class="dv">50</span>, <span class="dt">r23=</span>.<span class="dv">45</span>,
             <span class="dt">p=</span>.<span class="dv">40</span>, <span class="dt">n=</span><span class="dv">10</span>, <span class="dt">J=</span><span class="dv">2</span>, <span class="dt">K=</span><span class="dv">83</span>)</code></pre></div>
 <pre><code>## 
-##  Minimum detectable effect size: 
-##  --------------------------------------- 
-##  MDES is 0.23 95% CI [0.069,0.392] with 80% power 
-##  ---------------------------------------
-##  Degrees of freedom:80
-##  Standardized standard error:0.081
-##  Type I error rate:0.05
-##  Type II error rate:0.2
-##  Two-tailed test:TRUE</code></pre>
+## Minimum detectable effect size: 
+## --------------------------------------- 
+## MDES is 0.23 95% CI [0.069,0.392] with 80% power 
+## ---------------------------------------
+## Degrees of freedom: 80
+## Standardized standard error: 0.081
+## Type I error rate: 0.05
+## Type II error rate: 0.2
+## Two-tailed test: TRUE</code></pre>
 <p>Given design parameters and further assumptions, what is the statistical power?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">power.cra3r3</span>(<span class="dt">es=</span>.<span class="dv">23</span>, <span class="dt">rho2=</span>.<span class="dv">06</span>, <span class="dt">rho3=</span>.<span class="dv">18</span>,
              <span class="dt">g3=</span><span class="dv">1</span>, <span class="dt">r21=</span>.<span class="dv">55</span>, <span class="dt">r22=</span>.<span class="dv">50</span>, <span class="dt">r23=</span>.<span class="dv">45</span>,
              <span class="dt">p=</span>.<span class="dv">40</span>, <span class="dt">n=</span><span class="dv">10</span>, <span class="dt">J=</span><span class="dv">2</span>, <span class="dt">K=</span><span class="dv">83</span>)</code></pre></div>
 <pre><code>## 
-##  Statistical power: 
-##  --------------------------------------- 
-##  80% power to detect an ES of 0.23 95% CI [0.069,0.391] 
-##  --------------------------------------- 
-##  Degrees of freedom:80
-##  Standardized standard error:0.081
-##  Type I error rate:0.05
-##  Type II error rate:0.2
-##  Two-tailed test:TRUE</code></pre>
+## Statistical power: 
+## --------------------------------------- 
+##  80% power 
+## --------------------------------------- 
+## Degrees of freedom: 80
+## Standardized standard error: 0.081
+## Type I error rate: 0.05
+## Type II error rate: 0.2
+## Two-tailed test: TRUE</code></pre>
 <div id="relevant-citations" class="section level2">
 <h2>Relevant Citations</h2>
 <p>Dong, N., &amp; Maynard, R. A. (2013a). PowerUp!: A Tool for Calculating Minimum Detectable Effect Sizes and Minimum Required Sample Sizes for Experimental and Quasi-Experimental Design Studies, <em>Journal of Research on Educational Effectiveness, 6(1)</em>, 24-6.</p>

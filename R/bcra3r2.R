@@ -1,9 +1,8 @@
 mdes.bcra3r2 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                         rho2, rho3, omega3, p=.50, g3=0, r21=0, r22=0, r2t3=0,
-                        n, J, K, ...){
+                        n, J, K){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   df <- K - g3 - 1
@@ -32,10 +31,9 @@ mdes.bcra3r2 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 
 power.bcra3r2 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                          rho2, rho3,  omega3, p=.50, g3=0, r21=0, r22=0, r2t3=0,
-                         n, J, K, ...){
+                         n, J, K){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   df <- K - g3 - 1
@@ -63,10 +61,9 @@ power.bcra3r2 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 
 mrss.bcra3r2 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                          n, J, K0=10, tol=.10,
-                         rho2, rho3,  omega3, p=.50, g3=0, r21=0, r22=0, r2t3=0, ...){
+                         rho2, rho3,  omega3, p=.50, g3=0, r21=0, r22=0, r2t3=0){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   i <- 0

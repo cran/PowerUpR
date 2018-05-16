@@ -6,21 +6,21 @@
 \title{Three-Level (Fixed Treatment Effect) Blocked Cluster-level Random Assignment Design, Treatment at Level 2}
 
 \description{
-  \code{mdes.bcra3f2} calculates minimum detectable effect size, \code{power.bcra3f2} calculates statistical power, \code{mrss.bcra3f2} calculates minimum required sample size.
+  Use \code{mdes.bcra3f2()} to calculate minimum detectable effect size, \code{power.bcra3f2()} to calculate statistical power, and \code{mrss.bcra3f2()} to calculate minimum required sample size.
 }
 
 \usage{
 mdes.bcra3f2(power=.80, alpha=.05, two.tailed=TRUE,
              rho2, p=.50, g2=0, r21=0, r22=0,
-             n, J, K, ...)
+             n, J, K)
 
 power.bcra3f2(es=.25, alpha=.05, two.tailed=TRUE,
               rho2, p=.50, g2=0, r21=0, r22=0,
-              n, J, K, ...)
+              n, J, K)
 
 mrss.bcra3f2(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
              n, J, K0=10, tol=.10,
-             rho2, p=.50, g2=0, r21=0, r22=0, ...)
+             rho2, p=.50, g2=0, r21=0, r22=0)
 }
 
 \arguments{
@@ -28,7 +28,7 @@ mrss.bcra3f2(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{es}{effect size.}
   \item{alpha}{probability of type I error.}
   \item{two.tailed}{logical; \code{TRUE} for two-tailed hypothesis testing, \code{FALSE} for one-tailed hypothesis testing. }
-  \item{rho2}{proportion of variance in the outcome explained by level 2 units.}
+  \item{rho2}{proportion of variance in the outcome between level 2 units (unconditional ICC2).}
   \item{p}{average proportion of level 2 units randomly assigned to treatment within level 3 units.}
   \item{g2}{number of covariates at level 2.}
   \item{r21}{proportion of level 1 variance in the outcome explained by level 1 covariates.}
@@ -38,7 +38,6 @@ mrss.bcra3f2(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{K}{number of level 3 units.}
   \item{K0}{starting value for \code{K}.}
   \item{tol}{tolerance to end iterative process for finding \code{K}.}
-  \item{...}{to handle depreciated or defunct arguments.}
 }
 
 \value{
@@ -55,8 +54,6 @@ mrss.bcra3f2(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 \examples{
 # cross-checks
 mdes.bcra3f2(rho2=.10, n=20, J=44, K=5)
-
 power.bcra3f2(es = .145, rho2=.10, n=20, J=44, K=5)
-
 mrss.bcra3f2(es = .145, rho2=.10, n=20, J=44)
 }

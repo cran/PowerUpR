@@ -6,19 +6,19 @@
 \title{Individual-level Random Assignment Design}
 
 \description{
-  \code{mdes.ira1r1} calculates minimum detectable effect size, \code{power.ira1r1} calculates statistical power, \code{mrss.ira1r1} calculates minimum required sample size.
+  Use \code{mdes.ira1r1()} to calculate minimum detectable effect size, \code{power.ira1r1()} to calculate statistical power, and \code{mrss.ira1r1()} to calculate minimum required sample size.
 }
 
 \usage{
 mdes.ira1r1(power=.80, alpha=.05, two.tailed=TRUE,
-            p=.50, g1=0, r21=0, n, ...)
+            p=.50, g1=0, r21=0, n)
 
 power.ira1r1(es=.25, alpha=.05, two.tailed=TRUE,
-             p=.50, g1=0, r21=0, n, ...)
+             p=.50, g1=0, r21=0, n)
 
 mrss.ira1r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
             n0=10, tol=.10,
-            p=.50, g1=0, r21=0, ...)
+            p=.50, g1=0, r21=0)
 }
 
 \arguments{
@@ -32,7 +32,6 @@ mrss.ira1r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{n}{sample size.}
   \item{n0}{starting value for \code{n}.}
   \item{tol}{tolerance to end iterative process for finding \code{n}.}
-  \item{...}{to handle depreciated or defunct arguments.}
 }
 
 \value{
@@ -49,9 +48,7 @@ mrss.ira1r1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 \examples{
 # cross-checks
 mdes.ira1r1(n=250)
-
 power.ira1r1(es=.356, n=250)
-
 mrss.ira1r1(es=.356)
 }
 

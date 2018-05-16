@@ -13,15 +13,14 @@ knitr::opts_chunk$set(echo = TRUE)
 library(PowerUpR)
 ```
 
-To install `PowerUpR`:
+To install and load `PowerUpR`:
 ```{r,  message=FALSE, eval=FALSE}
 install.packages("PowerUpR")
+library(PowerUpR)
 ```
 
 
-Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student's algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, teachers, and students, and the cost associated with data collection from this sample needs to be justified. See Vignette B for designing a three-level cluster randomized trial that is sensetive to moderator effect. 
-
-Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect ($\delta$) can be estimated via the following 3-level hierarchical linear model (HLM, Raudenbush & Bryk, 2002)
+Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student's algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster-randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, clasrooms, and students needs to be justified. Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect ($\delta$) can be estimated via the following three-level hierarchical linear model (Raudenbush & Bryk, 2002)
 
 $$\begin{eqnarray}
   L1: Y_{ijk} &=& \beta_{0jk} + \beta_{1jk}X + r_{ijk}, \quad r_{ijk} \thicksim N(0,\sigma_{|X}^2) \newline

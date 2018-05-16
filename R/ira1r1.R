@@ -1,9 +1,8 @@
 
 mdes.ira1r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
-                             p=.50, g1=0, r21=0, n, ...){
+                             p=.50, g1=0, r21=0, n){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   df <- n-g1-2
@@ -26,10 +25,9 @@ mdes.ira1r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 
 
 power.ira1r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
-                              p=.50, g1=0, r21=0, n, ...){
+                              p=.50, g1=0, r21=0, n){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   df <- n-g1-2
@@ -52,10 +50,9 @@ power.ira1r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 
 mrss.ira1r1 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                         n0=10, tol=.10,
-                        p=.50, g1=0, r21=0, ...){
+                        p=.50, g1=0, r21=0){
 
-  user.parms <- as.list(match.call(expand.dots = TRUE))
-  .depdef(user.parms)
+  user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
   i <- 0

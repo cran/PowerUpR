@@ -6,19 +6,19 @@
 \title{Two-Level Blocked (Fixed Treatment Effect) Individual-level Random Assignment Design, Treatment at Level 1}
 
 \description{
-  \code{mdes.bira2f1} calculates minimum detectable effect size, \code{power.bira2f1} calculates statistical power, \code{mrss.bira2f1} calculates minimum required sample size.
+  Use \code{mdes.bira2f1()} to calculate minimum detectable effect size, \code{power.bira2f1()} to calculate statistical power, and \code{mrss.bira2f1()} to calculate minimum required sample size.
 }
 
 \usage{
 mdes.bira2f1(power=.80, alpha=.05, two.tailed=TRUE,
-             p=.50, g1=0, r21=0, n, J, ...)
+             p=.50, g1=0, r21=0, n, J)
 
 power.bira2f1(es=.25, alpha=.05, two.tailed=TRUE,
-              p=.50, g1=0, r21=0, n, J, ...)
+              p=.50, g1=0, r21=0, n, J)
 
 mrss.bira2f1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
              n, J0=10, tol=.10,
-             p=.50, g1=0, r21=0, ...)
+             p=.50, g1=0, r21=0)
 }
 
 \arguments{
@@ -33,7 +33,6 @@ mrss.bira2f1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{J}{level 2 sample size.}
   \item{J0}{starting value for \code{J}.}
   \item{tol}{tolerance to end iterative process for finding \code{J}.}
-  \item{...}{to handle depreciated or defunct arguments.}
 }
 
 \value{
@@ -50,8 +49,6 @@ mrss.bira2f1(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 \examples{
 # cross-checks
 mdes.bira2f1(n=15, J=20)
-
 power.bira2f1(es=.325, n=15, J=20)
-
 mrss.bira2f1(es=.325, n=15)
 }
