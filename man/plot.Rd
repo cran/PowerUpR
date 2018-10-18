@@ -2,23 +2,43 @@
 \name{plots}
 \alias{plot.power}
 \alias{plot.mdes}
+\alias{plot.mrss}
 
-\description{
-  \code{plot} plots power or MDES curves.
+\description{Plots statistical power or minimum detectable effect size curves with (1-\eqn{\alpha})x100 \% confidence interval.
 }
 
 \usage{
-  \method{plot}{power}(x, ypar = "power", xpar, ylim, xlim, ...)
-  \method{plot}{mdes}(x, ypar = "power", xpar, ylim, xlim, ...)
+  \method{plot}{power}(x, ypar = "mdes",  xpar = NULL,
+          xlim = NULL, ylim = NULL,
+          xlab = NULL, ylab = NULL,
+          main = NULL, sub = NULL,
+          locate = FALSE, ...)
+
+  \method{plot}{mdes}(x, ypar = "mdes",  xpar = NULL,
+          xlim = NULL, ylim = NULL,
+          xlab = NULL, ylab = NULL,
+          main = NULL, sub = NULL,
+          locate = FALSE, ...)
+
+  \method{plot}{mrss}(x, ypar = "mdes",  xpar = NULL,
+          xlim = NULL, ylim = NULL,
+          xlab = NULL, ylab = NULL,
+          main = NULL, sub = NULL,
+          locate = FALSE, ...)
 }
 
 \arguments{
   \item{x}{an object returned from one of the \code{PowerUpR} functions.}
-  \item{ypar}{character; \code{"mdes"}, or \code{"power"}.}
-  \item{xpar}{character; one of the sample sizes.}
-  \item{ylim}{limits for \code{ypar}.}
+  \item{ypar}{character; \code{"mdes"} or  \code{"power"} on \code{y} axis .}
+  \item{xpar}{character; one of the sample sizes on \code{x} axis.}
   \item{xlim}{limits for \code{xpar}.}
-  \item{...}{other graphical parameters.}
+  \item{ylim}{limits for \code{ypar}.}
+  \item{xlab}{\code{x} axis label.}
+  \item{ylab}{\code{y} axis label.}
+  \item{main}{title for the plot.}
+  \item{sub}{subtitle for the plot.}
+  \item{locate}{logical; \code{TRUE} locates parameter values for design \code{x} on the plot.}
+  \item{...}{other graphical parameters to pass to \code{plot.new()}.}
 }
 
 

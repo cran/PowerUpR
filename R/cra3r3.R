@@ -27,7 +27,7 @@ mdes.cra3r3 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 # example
 # mdes.cra3r3(rho3=.06, rho2=.17, n=15, J=3, K=60)
 
-mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod331 <- mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                         rho2, rho3, omegam2=0, omegam3=0,
                         g1=0, r21=0, r2m2=0, r2m3=0,
                         p=.50, q=NULL, n, J, K){
@@ -84,7 +84,7 @@ mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 #mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
 #mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, g1=1, r21=.20, r2m2=1, r2m3=1,  n=20, J=4, K=60)
 
-mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                               rho2, rho3, omegam3, g2=0, r21=0, r22=0, r2m3=0,
                               p=.50, q=NULL, n, J, K){
 
@@ -131,7 +131,7 @@ mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 #mdes.mod332(rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
 #mdes.mod332(rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
 
-mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                              rho2, rho3,  g3=0, r21=0, r22=0, r23=0,
                              p=.50, q=NULL, n, J, K){
 
@@ -554,7 +554,7 @@ mrss.mod333 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                    ncp = M,
                    K = K)
   cat(ifelse(is.null(q), "\nContinuous moderator", "\nBinary moderator"),
-      "\nJ =", J)
+      "\nK =", K)
   class(mrss.out) <- c("mod333", "mrss")
   return(invisible(mrss.out))
 }

@@ -17,6 +17,9 @@
 \alias{optimal.cra4r4}
 \alias{optimal.to.mdes}
 \alias{optimal.to.power}
+\alias{mdes.med211}
+\alias{mdes.med221}
+\alias{opt.mdes.med}
 
 
 \description{
@@ -45,6 +48,9 @@
       \item{\code{optimal.bira2r1} is defunct, see \pkg{cosa} package}
       \item{\code{optimal.to.mdes} is defunct,  there is no replacement function}
       \item{\code{optimal.to.power} is defunct, there is no replacement function}
+      \item{\code{mdes.med211} is defunct,  there is no replacement function}
+      \item{\code{mdes.med221} is defunct, there is no replacement function}
+      \item{\code{opt.mdes.med} is defunct,  there is no replacement function}
 
     }
 }

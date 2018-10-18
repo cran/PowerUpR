@@ -1,5 +1,5 @@
 ---
-title: "Three-Level Cluster Randomized Trial"
+title: "Planning a Three-Level Cluster Randomized Trial Sensitive to Detect Main Treatment Effect"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -20,7 +20,7 @@ library(PowerUpR)
 ```
 
 
-Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student's algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster-randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and a control condition. In the grant proposal number of schools, clasrooms, and students needs to be justified. Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect ($\delta$) can be estimated via the following three-level hierarchical linear model (Raudenbush & Bryk, 2002)
+Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student's algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster-randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and control conditions. In the grant proposal number of schools, clasrooms, and students needs to be justified. Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect ($\delta$) can be estimated via the following three-level hierarchical linear model (Raudenbush & Bryk, 2002)
 
 $$\begin{eqnarray}
   L1: Y_{ijk} &=& \beta_{0jk} + \beta_{1jk}X + r_{ijk}, \quad r_{ijk} \thicksim N(0,\sigma_{|X}^2) \newline
@@ -57,18 +57,26 @@ Further assumptions
 - Statistical power ($1-\beta$): $.80$ 
 
 Given design parameters and further assumptions, what is the minimum detectable effect size?
-```{r, message=FALSE}
-mdes.cra3r3(power=.80, rho2=.06, rho3=.18,
-            g3=1, r21=.55, r22=.50, r23=.45,
-            p=.40, n=10, J=2, K=83)
+```{r, message=FALSE, fig.width=7, fig.height=5}
+mdes <- mdes.cra3r3(power=.80, rho2=.06, rho3=.18,
+                    g3=1, r21=.55, r22=.50, r23=.45,
+                    p=.40, n=10, J=2, K=83)
+
+plot(mdes, ypar = "mdes", xlim = c(30, 150),
+     main = "MDES as a Function of Number of Schools",
+     locate = TRUE)
 ```
 
 Given design parameters and further assumptions, what is the statistical power?
 
-```{r, message=FALSE}
-power.cra3r3(es=.23, rho2=.06, rho3=.18,
-             g3=1, r21=.55, r22=.50, r23=.45,
-             p=.40, n=10, J=2, K=83)
+```{r, message=FALSE, fig.width=7, fig.height=5}
+power <- power.cra3r3(es=.23, rho2=.06, rho3=.18,
+                      g3=1, r21=.55, r22=.50, r23=.45,
+                      p=.40, n=10, J=2, K=83)
+
+plot(power, ypar = "power", xlim = c(30, 150),
+     main = "Statistical Power as a Function of Number of Schools",
+     locate = TRUE)
 
 ```
 

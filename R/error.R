@@ -2,7 +2,7 @@
 
   names.x <- names(x)
   if(any(!names.x %in% c("", "n", "J", "K", "L", "n0", "J0", "K0", "L0", "g1", "g2", "g3", "g4",
-                         "r21","r22","r23","r24", "r2t2", "r2t3", "r2t4", "rho2", "rho3", "rho4", "rhom2", 
+                         "r21","r22","r23","r24", "r2t2", "r2t3", "r2t4", "rho2", "rho3", "rho4", "rhom2",
                          "omega2", "omega3", "omega4", "omegam2", "omegam3", "r2m1", "r2m2", "r2m3",
                          "q", "p", "alpha", "power", "mdes", "es", "escp", "esa", "esb", "esb1", "esB",
                          "esab", "esab1", "esaB", "esa0", "esb0", "esb10", "esB0", "powera", "powerb",
@@ -144,16 +144,6 @@
        x$ndraws < 10 ||
        x$ndraws > 1e6){
       stop("Incorrect value for argument 'ndraws'", call.=FALSE)
-    }
-  }
-
-  # validty check for abstol
-  if("abstol" %in% names.x){
-    if(length(x$abstol) > 1 ||
-       !is.numeric(x$abstol) ||
-       x$abstol < 1e-10 ||
-       x$abstol > 1e-1){
-      stop("Incorrect value for argument 'abstol'", call.=FALSE)
     }
   }
 

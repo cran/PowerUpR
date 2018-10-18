@@ -48,46 +48,13 @@ optimal.to.power <- function(...){
   .Defunct(msg="This function is no longer in use")
 }
 
-
-# deprecated and defunct arguments
-# function not utilized in v1.0.0
-.depdef <- function(x, envir = parent.frame()) {
-  names.x <- names(x)
-  if("R12" %in% names.x) {
-    envir$r21 <- x$R12
-    warning("'R12' is renamed and will be removed in the next version, use 'r21' instead", call. = FALSE)
-  }
-  if("R22" %in% names.x) {
-    envir$r22 <- x$R22
-    warning("'R22' is renamed and will be removed in the next version, use 'r22' instead", call. = FALSE)
-  }
-  if("R32" %in% names.x) {
-    envir$r23 <- x$R32
-    warning("'R32' is renamed and will be removed in the next version, use 'r23' instead", call. = FALSE)
-  }
-  if("R42" %in% names.x) {
-    envir$r24 <- x$R42
-    warning("'R42' is renamed and will be removed in the next version, use 'r24' instead", call. = FALSE)
-  }
-
-  if("RT22" %in% names.x) {
-    envir$r2t2 <- x$RT22
-    warning("'RT22' is renamed and will be removed in the next version, use 'r2t2' instead", call. = FALSE)
-  }
-  if("RT32" %in% names.x) {
-    envir$r2t3 <- x$RT32
-    warning("'RT32' is renamed and will be removed in the next version, use 'r2t3' instead", call. = FALSE)
-  }
-  if("RT42" %in% names.x) {
-    envir$r2t4 <- x$RT42
-    warning("'RT42' is renamed and will be removed in the next version, use 'r2t4' instead", call. = FALSE)
-  }
-  if("P" %in% names.x) {
-    envir$p <- x$P
-    warning("'P' is renamed and will be removed in the next version, use 'p' instead", call. = FALSE)
-  }
-  if("mdes" %in% names.x) {
-    envir$es <- x$mdes
-    warning("'mdes' is renamed and will be removed in the next version, use 'es' instead", call. = FALSE)
-  }
+# MDES functions for mediation effects are removed
+mdes.med211 <- function(...){
+  .Defunct(msg="This function is no longer in use")
+}
+mdes.med221 <- function(...){
+  .Defunct(msg="This function is no longer in use")
+}
+opt.mdes.med <- function(...){
+  .Defunct(msg="This function is no longer in use")
 }

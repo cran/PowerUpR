@@ -4,6 +4,9 @@
 \alias{mdes.mod331}
 \alias{mdes.mod332}
 \alias{mdes.mod333}
+\alias{mdesd.mod331}
+\alias{mdesd.mod332}
+\alias{mdesd.mod333}
 \alias{power.cra3r3}
 \alias{power.mod331}
 \alias{power.mod332}
@@ -12,10 +15,11 @@
 \alias{mrss.mod331}
 \alias{mrss.mod332}
 \alias{mrss.mod333}
-\title{Three-level Cluster-randomized Trial to Detect Main and Moderator Effects}
+\title{Three-level Cluster-randomized Trials to Detect Main and Moderation Effects}
 
 \description{
-   Use \code{mdes.<design>()} to calculate minimum detectable effect size, \code{power.<design>()} to calculate statistical power, and \code{mrss.<design>()} to calculate minimum required sample size. Use \code{<output>.cra3r3()} for the main treatment effect, \code{<output>.mod331()} for the moderator effect at level 1, \code{<output>.mod332()} for the moderator effect at level 2, \code{<output>.mod333()} for the moderator effect at level 3.
+   Use \code{mdes.<design>()} to calculate minimum detectable effect size for main effect, \code{mdesd.<design>()} to calculate minimum detectable effect size difference for moderation effect, \code{power.<design>()} to calculate statistical power, and \code{mrss.<design>()} to calculate minimum required sample size.
+   Use \code{<output>.cra3r3()} for main effect, \code{<output>.mod331()} for moderator effect at level 1, \code{<output>.mod332()} for moderator effect at level 2, \code{<output>.mod333()} for moderator effect at level 3.
 }
 
 \usage{
@@ -23,16 +27,16 @@ mdes.cra3r3(power=.80, alpha=.05, two.tailed=TRUE,
             rho2, rho3, p=.50, g3=0, r21=0, r22=0, r23=0,
             n, J, K)
 
-mdes.mod331(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod331(power=.80, alpha=.05, two.tailed=TRUE,
             rho2, rho3, omegam2=0, omegam3=0,
             g1=0, r21=0, r2m2=0, r2m3=0,
             p=.50, q=NULL, n, J, K)
 
-mdes.mod332(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod332(power=.80, alpha=.05, two.tailed=TRUE,
             rho2, rho3, omegam3, g2=0, r21=0, r22=0, r2m3=0,
             p=.50, q=NULL, n, J, K)
 
-mdes.mod333(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod333(power=.80, alpha=.05, two.tailed=TRUE,
             rho2, rho3,  g3=0, r21=0, r22=0, r23=0,
             p=.50, q=NULL, n, J, K)
 
@@ -126,7 +130,7 @@ mrss.mod331(es=0.1248, alpha=.05, two.tailed=TRUE,
             q=NULL, n=15, J=3)
 
 # cross-checks for the non-randomly varying cont. L1 moderator effect
-mdes.mod331(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod331(power=.80, alpha=.05, two.tailed=TRUE,
             rho2=.17, rho3=.06, omegam2=0, omegam3=0,
             q=NULL, n=15, J=3, K=60)
 power.mod331(es=.0946, alpha=.05, two.tailed=TRUE,
@@ -137,7 +141,7 @@ mrss.mod331(es=.0946, alpha=.05, two.tailed=TRUE,
             q=NULL, n=15, J=3)
 
 # cross-checks for the randomly varying bin. L1 moderator effect
-mdes.mod331(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod331(power=.80, alpha=.05, two.tailed=TRUE,
             rho2=.17, rho3=.06, omegam2=.10, omegam3=.10,
             q=.50, n=15, J=3, K=60)
 power.mod331(es=.2082, alpha=.05, two.tailed=TRUE,
@@ -148,7 +152,7 @@ mrss.mod331(es=.2082, alpha=.05, two.tailed=TRUE,
             q=.50, n=15, J=3)
 
 # cross-checks for the non-randomly varying bin. L1 moderator effect
-mdes.mod331(power=.80, alpha=.05, two.tailed=TRUE,
+mdesd.mod331(power=.80, alpha=.05, two.tailed=TRUE,
             rho2=.17, rho3=.06, omegam2=0, omegam3=0,
             q=.50, n=15, J=3, K=60)
 power.mod331(es=.1893, alpha=.05, two.tailed=TRUE,

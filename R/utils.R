@@ -1,6 +1,7 @@
 # minimum detectable effect size
 .mdes.fun <- function(power, alpha, sse, df, two.tailed){
-  if(length(sse) > 1 || !is.numeric(sse) || sse < 0) {
+  if(length(sse) > 1 || !is.numeric(sse) || sse < 0 ||
+     length(df) > 1 || !is.numeric(df) || df < 1) {
     stop("Design not feasible", call. = FALSE)
   }
   t1 <- ifelse(two.tailed == TRUE, abs(qt(alpha / 2, df)), abs(qt(alpha, df)))
@@ -17,7 +18,8 @@
 
 # statistical power
 .power.fun <- function(es, alpha, sse, df, two.tailed){
-  if(length(sse) > 1 || !is.numeric(sse) || sse < 0) {
+  if(length(sse) > 1 || !is.numeric(sse) || sse < 0 ||
+     length(df) > 1 || !is.numeric(df) || df < 1) {
     stop("Design not feasible", call. = FALSE)
   }
   lambda <- es/sse
@@ -134,64 +136,5 @@
     rejmc <- c(rejmc, quantile(rnorm(ndraws, xstar, sex)*rnorm(ndraws, ystar, sey), probs = ifelse(two.tailed, alpha/2, alpha), na.rm = TRUE) > 0)
   }
   return(mean(rejmc))
-}
-
-
-# mdes function with two unknowns
-.mdes2.mc.cl <- function(ndraws = 5000, x, y, sex, sey, rhoxy = 0,
-                         alpha, two.tailed, mvrnmethod = "ed"){
-  pl <- ifelse(two.tailed, alpha/2, alpha)
-  covxy <- rhoxy * sqrt(sex^2 * sey^2)
-  mu <- c(x, y)
-  sigma <- matrix(c(sex^2, covxy,
-                    covxy, sey^2), 2, 2, byrow = TRUE
-  )
-  eigen <- eigen(sigma)
-  evec <- eigen$vectors
-  eval <- eigen$values
-  if(any(eval <= 0)){
-    stop("Non-positive definite matrix 'sigma'", call. = FALSE)
-  }
-  mvn_01 <- matrix(rnorm(length(mu)*ndraws), ncol = length(mu), nrow = ndraws, byrow = FALSE)
-  mvnmusigma  <- evec %*% diag(sqrt(pmax(eval, 0))) %*% t(mvn_01)
-
-  mvnmusigma <- t(mvnmusigma) + rep(1, ndraws) %*% t(mu)
-  xy <- mvnmusigma[,1]*mvnmusigma[,2]
-  clxy <- quantile(xy, probs = c(pl, 1 - pl), na.rm = TRUE)
-  lucl <- c(mean(xy), clxy)
-  return(lucl)
-}
-
-
-# mdes function with three unknowns
-.mdes3.mc.cl <- function(ndraws = 5000, x, y, z, sex, sey, sez,
-                         rhoxy = 0, rhoxz = 0, rhoyz = 0,
-                         alpha, two.tailed, mvrnmethod = "ed"){
-  pl <- ifelse(two.tailed, alpha/2, alpha)
-  covxy <- rhoxy * sqrt(sex^2 * sey^2)
-  covxz <- rhoxz * sqrt(sex^2 * sez^2)
-  covyz <- rhoyz * sqrt(sey^2 * sez^2)
-  mu <- c(x, y, z)
-  sigma <- matrix(c(sex^2, covxy, covxz,
-                    covxy, sey^2, covyz,
-                    covxz, covyz, sez^2), 3, 3, byrow = TRUE
-  )
-  eigen <- eigen(sigma)
-  evec <- eigen$vectors
-  eval <- eigen$values
-  if(any(eval <= 0)){
-    stop("Non-positive definite matrix 'sigma'", call. = FALSE)
-  }
-  mvn_01 <- matrix(rnorm(length(mu)*ndraws), ncol = length(mu), nrow = ndraws, byrow = FALSE)
-  mvnmusigma  <- evec %*% diag(sqrt(pmax(eval, 0))) %*% t(mvn_01)
-  mvnmusigma <- t(mvnmusigma) + rep(1, ndraws) %*% t(mu)
-  xy <- mvnmusigma[,1]*mvnmusigma[,2]
-  xz <- mvnmusigma[,1]*mvnmusigma[,3]
-  xt <- mvnmusigma[,1]*(mvnmusigma[,2]+mvnmusigma[,3])
-  clxy <- quantile(xy, probs = c(pl, 1 - pl), na.rm = TRUE)
-  clxz <- quantile(xz, probs = c(pl, 1 - pl), na.rm = TRUE)
-  clxt <- quantile(xt, probs = c(pl, 1 - pl), na.rm = TRUE)
-  lucl <- cbind(c(mean(xy), mean(xz), mean(xt)), rbind(clxy, clxz, clxt))
-  return(lucl)
 }
 
