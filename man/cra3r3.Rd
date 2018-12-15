@@ -18,8 +18,8 @@
 \title{Three-level Cluster-randomized Trials to Detect Main and Moderation Effects}
 
 \description{
-   Use \code{mdes.<design>()} to calculate minimum detectable effect size for main effect, \code{mdesd.<design>()} to calculate minimum detectable effect size difference for moderation effect, \code{power.<design>()} to calculate statistical power, and \code{mrss.<design>()} to calculate minimum required sample size.
-   Use \code{<output>.cra3r3()} for main effect, \code{<output>.mod331()} for moderator effect at level 1, \code{<output>.mod332()} for moderator effect at level 2, \code{<output>.mod333()} for moderator effect at level 3.
+   Use \code{mdes.<design>()} to calculate the minimum detectable effect size for the main effect, \code{mdesd.<design>()} to calculate the minimum detectable effect size difference for the moderation effect, \code{power.<design>()} to calculate the statistical power, and \code{mrss.<design>()} to calculate the minimum required sample size.
+   Use \code{<output>.cra3r3()} for the main effect, \code{<output>.mod331()} for the moderator effect at level 1, \code{<output>.mod332()} for the moderator effect at level 2, \code{<output>.mod333()} for the moderator effect at level 3.
 }
 
 \usage{

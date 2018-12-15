@@ -1,5 +1,4 @@
 \name{cra2r2}
-
 \alias{cra2r2}
 \alias{mdes.cra2r2}
 \alias{mdes.mod221}
@@ -18,8 +17,8 @@
 \title{Two-level Cluster-randomized Trials to Detect Main, Moderation and Mediation Effects}
 
 \description{
-  Use \code{mdes.<design>()} to calculate minimum detectable effect size for main effect, \code{mdesd.<design>()} to calculate minimum detectable effect size difference for moderation effect, \code{power.<design>()} to calculate statistical power, and \code{mrss.<design>()} to calculate minimum required sample size.
-  Use \code{<output>.cra2r2()} for main effect, \code{<output>.mod221()} for moderator effect at level 1, \code{<output>.mod222()} for moderator effect at level 2, \code{power.med211()} for 2-1-1 mediation effect, and \code{power.med221()} for 2-2-1 mediation effect.
+  Use \code{mdes.<design>()} to calculate minimum detectable effect size for the main effect, \code{mdesd.<design>()} to calculate minimum detectable effect size difference for the moderation effect, \code{power.<design>()} to calculate the statistical power, and \code{mrss.<design>()} to calculate the minimum required sample size.
+  Use \code{<output>.cra2r2()} for the main effect, \code{<output>.mod221()} for the moderator effect at level 1, \code{<output>.mod222()} for the moderator effect at level 2, \code{power.med211()} for the 2-1-1 mediation effect, and \code{power.med221()} for the 2-2-1 mediation effect.
 }
 
 \usage{
@@ -117,12 +116,12 @@ power.cra2r2(es=.629, rho2=.17, n=15, J=20)
 mrss.cra2r2(es=.629, rho2=.17, n=15)
 
 # cross-checks for the randomly varying cont. L1 moderator effect
-mdes.mod221(rho2=.17, omegam2=.10, n=15, J=20)
+mdesd.mod221(rho2=.17, omegam2=.10, n=15, J=20)
 power.mod221(es=.3563, rho2=.17, omegam2 =.10, n=15, J=20)
 mrss.mod221(es=.3563, rho2=.17, omegam2 =.10, n=15)
 
 # cross-checks for the non-randomly varying cont. L1 moderator effect
-mdes.mod221(rho2=.17, omegam2=0, n=15, J=20)
+mdesd.mod221(rho2=.17, omegam2=0, n=15, J=20)
 power.mod221(es=0.2957, rho2=.17, omegam2 =0, n=15, J=20)
 mrss.mod221(es=0.2957, rho2=.17, omegam2 =0, n=15)
 

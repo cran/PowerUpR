@@ -3,10 +3,10 @@
 \alias{mdes.bcra3f2}
 \alias{power.bcra3f2}
 \alias{mrss.bcra3f2}
-\title{Three-Level (Fixed Treatment Effect) Blocked Cluster-level Random Assignment Design, Treatment at Level 2}
+\title{Three-Level Blocked (Fixed) Cluster-level Random Assignment Design, Treatment at Level 2}
 
 \description{
-  Use \code{mdes.bcra3f2()} to calculate minimum detectable effect size, \code{power.bcra3f2()} to calculate statistical power, and \code{mrss.bcra3f2()} to calculate minimum required sample size.
+  Use \code{mdes.bcra3f2()} to calculate the minimum detectable effect size, \code{power.bcra3f2()} to calculate the statistical power, and \code{mrss.bcra3f2()} to calculate the minimum required sample size.
 }
 
 \usage{

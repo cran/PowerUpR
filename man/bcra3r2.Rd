@@ -6,7 +6,7 @@
 \title{Three-Level Blocked Cluster-level Random Assignment Design, Treatment at Level 2}
 
 \description{
-  Use \code{mdes.bcra3r2()} to calculate minimum detectable effect size, \code{power.bcra3r2()} to calculate statistical power, and \code{mrss.bcra3r2()} to calculate minimum required sample size.
+  Use \code{mdes.bcra3r2()} to calculate the minimum detectable effect size, \code{power.bcra3r2()} to calculate the statistical power, and \code{mrss.bcra3r2()} to calculate the minimum required sample size.
 }
 
 \usage{

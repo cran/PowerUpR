@@ -6,7 +6,7 @@
 \title{Two-Level Blocked Individual-level Random Assignment Design, Treatment at Level 1}
 
 \description{
-  Use \code{mdes.bira2r1()} to calculate minimum detectable effect size, \code{power.bira2r1()} to calculate statistical power, and \code{mrss.bira2r1()} to calculate minimum required sample size.
+  Use \code{mdes.bira2r1()} to calculate the minimum detectable effect size, \code{power.bira2r1()} to calculate the statistical power, and \code{mrss.bira2r1()} to calculate the minimum required sample size.
 }
 
 \usage{

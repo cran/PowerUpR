@@ -6,7 +6,7 @@
 \title{Three-Level Blocked Individual-level Random Assignment Design, Treatment at Level 1}
 
 \description{
-  Use \code{mdes.bira3r1()} to calculate minimum detectable effect size, \code{power.bira3r1()} to calculate statistical power, and \code{mrss.bira3r1()} to calculate minimum required sample size.
+  Use \code{mdes.bira3r1()} to calculate the minimum detectable effect size, \code{power.bira3r1()} to calculate the statistical power, and \code{mrss.bira3r1()} to calculate the minimum required sample size.
 }
 
 \usage{

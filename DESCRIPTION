@@ -1,25 +1,25 @@
 Package: PowerUpR
 Type: Package
 Title: Power Analysis Tools for Multilevel Randomized Experiments
-Version: 1.0.1
-Date: 2018-10-18
+Version: 1.0.2
+Date: 2018-12-15
 Authors@R: c(
-    person("Metin", "Bulus", email = "bulusmetin@gmail.com", role = c("aut", "cre", "trl")),
+    person("Metin", "Bulus", email = "bulusmetin@gmail.com", role = c("aut", "cre")),
     person("Nianbo", "Dong", role = "aut"),
     person("Benjamin", "Kelcey", role = "aut"),
     person("Jessaca", "Spybrook", role = "aut")
     )
 Description: 
- Includes tools to calculate statistical power, minimum detectable effect size, and minimum required sample size for various multilevel randomized experiments with continuous outcomes. Some of the functions can assist with planning two- and three-level cluster-randomized trials (CRTs) sensitive to moderation effects, and with planning two-level CRTs sensitive to 2-2-1 and 2-1-1 mediation effects. See 'PowerUp!' series at <https://www.causalevaluation.org/>. 
+ Includes tools to calculate statistical power, minimum detectable effect size, and minimum required sample size for various multilevel randomized experiments with continuous outcomes. Some of the functions can assist with planning two- and three-level cluster-randomized trials (CRTs) sensitive to moderation effects, and with planning two-level CRTs sensitive to 2-2-1 and 2-1-1 mediation effects. See 'PowerUp!' Excel series at <https://www.causalevaluation.org/>. 
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 License: GPL (>= 3)
 NeedsCompilation: no
-Author: Metin Bulus [aut, cre, trl],
+Author: Metin Bulus [aut, cre],
   Nianbo Dong [aut],
   Benjamin Kelcey [aut],
   Jessaca Spybrook [aut]
 Maintainer: Metin Bulus <bulusmetin@gmail.com>
-Packaged: 2018-10-18 13:15:29 UTC; METIN
+Packaged: 2018-12-15 10:45:48 UTC; METIN
 Repository: CRAN
-Date/Publication: 2018-10-18 13:30:03 UTC
+Date/Publication: 2018-12-15 10:10:03 UTC

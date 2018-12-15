@@ -9,7 +9,7 @@ mdes.ira1r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   SSE <- sqrt((1-r21)/(p*(1-p)*n))
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "main", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.ira1r1",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 p=p, r21=r21, g1=g1,

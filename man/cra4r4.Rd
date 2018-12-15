@@ -3,10 +3,10 @@
 \alias{mdes.cra4r4}
 \alias{power.cra4r4}
 \alias{mrss.cra4r4}
-\title{Four-Level Cluster-level Random Assignment Design, Treatment at Level 4}
+\title{Four-Level Cluster-randomized Trial}
 
 \description{
-  use \code{mdes.cra4r4()} calculate minimum detectable effect size, \code{power.cra4r4()} to calculate statistical power, and \code{mrss.cra4r4()} to calculate minimum required sample size.
+  use \code{mdes.cra4r4()} calculate the minimum detectable effect size, \code{power.cra4r4()} to calculate the statistical power, and \code{mrss.cra4r4()} to calculate the minimum required sample size.
 }
 
 \usage{

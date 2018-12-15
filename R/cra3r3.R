@@ -11,7 +11,7 @@ mdes.cra3r3 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                 (1-rho3-rho2)*(1-r21)/(p*(1-p)*J*K*n))
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "main", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.cra3r3",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, rho3=rho3,
@@ -64,7 +64,7 @@ mdesd.mod331 <- mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   )
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "mod", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
 
   mdes.out <- list(fun = "mdes.mod331",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
@@ -78,11 +78,11 @@ mdesd.mod331 <- mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   return(invisible(mdes.out))
 }
 
-# example
-#mdes.mod331(rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#mdes.mod331(rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, g1=1, r21=.20, r2m2=1, r2m3=1,  n=20, J=4, K=60)
+# examples
+# mdes.mod331(rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# mdes.mod331(rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, g1=1, r21=.20, r2m2=1, r2m3=1,  n=20, J=4, K=60)
 
 mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                               rho2, rho3, omegam3, g2=0, r21=0, r22=0, r2m3=0,
@@ -111,7 +111,7 @@ mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   )
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "mod", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
 
   mdes.out <- list(fun = "mdes.mod332",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
@@ -125,11 +125,11 @@ mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   return(invisible(mdes.out))
 }
 
-# example
-#mdes.mod332(rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
-#mdes.mod332(rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
-#mdes.mod332(rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
-#mdes.mod332(rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# examples
+# mdes.mod332(rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# mdes.mod332(rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# mdes.mod332(rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# mdes.mod332(rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
 
 mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                              rho2, rho3,  g3=0, r21=0, r22=0, r23=0,
@@ -151,7 +151,7 @@ mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   )
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "mod", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
 
   mdes.out <- list(fun = "mdes.mod333",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
@@ -164,9 +164,9 @@ mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   return(invisible(mdes.out))
 }
 
-# example
-#mdes.mod333(rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
-#mdes.mod333(rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
+# examples
+# mdes.mod333(rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
+# mdes.mod333(rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
 
 power.cra3r3 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                          rho2, rho3, g3=0, r21=0, r22=0, r23=0,
@@ -248,13 +248,13 @@ power.mod331 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   return(invisible(power.out))
 }
 
-# example
-#power.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#power.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#power.mod331(es=.16, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#power.mod331(es=.09, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#power.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-#power.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# examples
+# power.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# power.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# power.mod331(es=.16, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# power.mod331(es=.09, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# power.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
+# power.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
 
 
 power.mod332 <- function(es=.25, alpha=.05, two.tailed=TRUE,
@@ -298,11 +298,11 @@ power.mod332 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   return(invisible(power.out))
 }
 
-# example
-#power.mod332(es=.22, rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
-#power.mod332(es=.11, rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
-#power.mod332(es=.22, rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
-#power.mod332(es=.11, rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# examples
+# power.mod332(es=.22, rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# power.mod332(es=.11, rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# power.mod332(es=.22, rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
+# power.mod332(es=.11, rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4, K=60)
 
 power.mod333 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                               rho2, rho3, g3=0, r21=0, r22=0, r23=0,
@@ -338,9 +338,9 @@ power.mod333 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   return(invisible(power.out))
 }
 
-# example
-#power.mod333(es=.30, rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
-#power.mod333(es=.15, rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
+# examples
+# power.mod333(es=.30, rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
+# power.mod333(es=.15, rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
 
 
 mrss.cra3r3 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
@@ -448,13 +448,13 @@ mrss.mod331 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   return(invisible(mrss.out))
 }
 
-# example
-#mrss.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
-#mrss.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
-#mrss.mod331(es=.16, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
-#mrss.mod331(es=.09, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
-#mrss.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
-#mrss.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
+# examples
+# mrss.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
+# mrss.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
+# mrss.mod331(es=.16, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
+# mrss.mod331(es=.09, rho3=.05, rho2=.12, omegam2=0, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
+# mrss.mod331(es=.16, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
+# mrss.mod331(es=.09, rho3=.05, rho2=.12, omegam2=.08, omegam3=0, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4)
 
 
 
@@ -511,11 +511,11 @@ mrss.mod332 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   return(invisible(mrss.out))
 }
 
-# example
-#mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
-#mrss.mod332(es=.11, rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
-#mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
-#mrss.mod332(es=.11, rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
+# examples
+# mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
+# mrss.mod332(es=.11, rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
+# mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
+# mrss.mod332(es=.11, rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
 
 mrss.mod333 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                              rho2, rho3, g3=0, r21=0, r22=0, r23=0,
@@ -559,7 +559,7 @@ mrss.mod333 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   return(invisible(mrss.out))
 }
 
-# example
-#mrss.mod333(es=.30, rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4)
-#mrss.mod333(es=.15, rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4)
+# examples
+# mrss.mod333(es=.30, rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4)
+# mrss.mod333(es=.15, rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4)
 

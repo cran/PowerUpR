@@ -12,7 +12,7 @@ mdes.cra4r4 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                (1-rho4-rho3-rho2)*(1-r21)/(p*(1-p)*J*K*L*n))
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "main", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.cra4r4",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, rho3=rho3, rho4=rho4,

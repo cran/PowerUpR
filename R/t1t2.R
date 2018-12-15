@@ -24,9 +24,9 @@
   # plot central t distribution
   plot(funt0, xlim = c(-3,8), ylim = c(0, 0.5),
        yaxs = "i", xaxs = "i", bty = "l",
-       sub = paste("Type I = ", round(alpha ,digits = 3), ",",
-                   "Type II = ", round(beta, digits = 3), ",",
-                   "ncp =  ", round(ncp, digits = 3)),
+       sub = paste("Type I Error Rate = ", round(alpha ,digits = 3), ",",
+                   "Type II Error Rate = ", round(beta, digits = 3), "\n",
+                   "Non-centrality Parameter (NCP) =  ", round(ncp, digits = 3)),
        xlab = "", ylab = "")
 
   par(new = TRUE)
@@ -42,7 +42,7 @@
                   expression(t[alpha/2]),
                   expression(t[alpha])
            ),
-           expression(ncp)),
+           expression(NCP)),
          pch = c(19, 19, NA, NA), lty = c(NA, NA, 2, 2), cex = 1,
          col = c(adjustcolor(2, alpha.f = 0.3), adjustcolor(4, alpha.f = 0.3), 2, 4))
 
@@ -92,9 +92,9 @@ t1t2.error <- function(object){
                two.tailed = object$parms$two.tailed))
 }
 
-# example
-#design1 <- mdes.bcra4f3(rho3=.15, rho2=.15, n=10, J=4, L=27, K=4)
-#design2 <- power.bcra4f3(rho3=.15, rho2=.15, n=10, J=4, L=27, K=4)
-#t1t2.error(design1)
-#t1t2.error(design2)
+# examples
+# design1 <- mdes.bcra4f3(rho3=.15, rho2=.15, n=10, J=4, L=27, K=4)
+# design2 <- power.bcra4f3(rho3=.15, rho2=.15, n=10, J=4, L=27, K=4)
+# t1t2.error(design1)
+# t1t2.error(design2)
 

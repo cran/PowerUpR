@@ -10,7 +10,7 @@ mdes.cra2r2 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                (1-rho2)*(1-r21)/(p*(1-p)*J*n))
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "main", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.cra2r2",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, g2=g2, r21=r21, r22=r22,
@@ -49,7 +49,7 @@ mdesd.mod221 <- mdes.mod221 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   )
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "mod", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.mod221",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, omegam2=omegam2, g1=g1, r21=r21, r2m2=r2m2,
@@ -60,7 +60,7 @@ mdesd.mod221 <- mdes.mod221 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   class(mdes.out) <- c("mod221", "mdes")
   return(invisible(mdes.out))
 }
-# example
+# examples
 # mdes.mod221(omegam2=.2, r2m2=1, rho2=.20, n=4, J=20, q=.3)
 # mdes.mod221(rho2=.2, omegam2=0, r2m2=.2, n=4, J=20)
 # mdes.mod221(rho2=.2, omegam2=.2, r2m2=.2, q=.3, n=4, J=20)
@@ -83,7 +83,7 @@ mdesd.mod222 <- mdes.mod222 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   )
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "mod", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.mod222",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, g2=g2, r21=r21, r22=r22,
@@ -94,7 +94,7 @@ mdesd.mod222 <- mdes.mod222 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   class(mdes.out) <- c("mod222", "mdes")
   return(invisible(mdes.out))
 }
-# example
+# examples
 # mdes.mod222(rho2=.20, n=4, J=20)
 # mdes.mod222(rho2=.20, n=4, J=20, q=.5)
 
@@ -163,7 +163,7 @@ power.mod221 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   class(power.out) <- c("mod221", "power")
   return(invisible(power.out))
 }
-# example
+# examples
 # power.mod221(rho2=.2, omegam2=.2, r2m2=.2, n=4, J=20)
 # power.mod221(rho2=.2, omegam2=.2, r2m2=.2, q=.3, n=4, J=20)
 
@@ -200,7 +200,7 @@ power.mod222 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   class(power.out) <- c("mod222", "power")
   return(invisible(power.out))
 }
-# example
+# examples
 # power.mod222(rho2=.20, n=4, J=20)
 # power.mod222(rho2=.20, q=.3, n=4, J=20)
 

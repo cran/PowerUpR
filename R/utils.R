@@ -32,8 +32,11 @@
 
 
 # summarize mdes output
-.summ.mdes <- function(power, alpha, sse, df, two.tailed, mdes) {
-  cat("\nMinimum detectable effect size: \n--------------------------------------- \nMDES is ",
+.summ.mdes <- function(effect, power, alpha, sse, df, two.tailed, mdes) {
+  cat(ifelse(effect == "main",
+             "\nMinimum detectable effect size: \n--------------------------------------- \nMDES is ",
+             "\nMinimum detectable effect size difference: \n--------------------------------------- \nMDESD is "
+             ),
       round(mdes[1], 3), " ", 100 * (1 - round(alpha, 2)), "% CI [", round(mdes[2], 3),
       ",", round(mdes[3], 3), "] with ", round(power,3)*100,
       "% power \n---------------------------------------\nDegrees of freedom: ", df,

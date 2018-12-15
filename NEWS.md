@@ -1,3 +1,6 @@
+### Changes in PowerUpR v1.0.2
+- fixed minor typos
+
 ### Changes in PowerUpR v1.0.1
  - changed plots to accommodate confidence intervals for MDES
  - removed experimental MDES functions for mediation effects

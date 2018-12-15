@@ -10,7 +10,7 @@ mdes.bira2r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                (1-rho2)*(1-r21)/(p*(1-p)*J*n))
 
   mdes <- .mdes.fun(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed)
-  .summ.mdes(power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
+  .summ.mdes(effect = "main", power = power, alpha = alpha, sse = SSE, df = df, two.tailed = two.tailed, mdes = mdes)
   mdes.out <- list(fun = "mdes.bira2r1",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2,
