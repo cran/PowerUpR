@@ -4,7 +4,7 @@
 \alias{plot.mdes}
 \alias{plot.mrss}
 
-\description{Plots statistical power or minimum detectable effect size curves with (1-\eqn{\alpha})x100 \% confidence interval.
+\description{Plots statistical power, minimum detectable effect size (MDES), or MDES difference (MDESD) curves with (1-\eqn{\alpha})x100 \% confidence interval.
 }
 
 \usage{
@@ -33,10 +33,10 @@
   \item{xpar}{character; one of the sample sizes on \code{x} axis.}
   \item{xlim}{limits for \code{xpar}.}
   \item{ylim}{limits for \code{ypar}.}
-  \item{xlab}{\code{x} axis label.}
-  \item{ylab}{\code{y} axis label.}
-  \item{main}{title for the plot.}
-  \item{sub}{subtitle for the plot.}
+  \item{xlab}{\code{x} axis label (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
+  \item{ylab}{\code{y} axis label (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
+  \item{main}{title for the plot (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
+  \item{sub}{subtitle for the plot (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
   \item{locate}{logical; \code{TRUE} locates parameter values for design \code{x} on the plot.}
   \item{...}{other graphical parameters to pass to \code{plot.new()}.}
 }

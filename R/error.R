@@ -84,7 +84,7 @@
       err.r2 <- names(x.r2[x.r2 == 0])
       err.g <- names(x.g[x.g > 0])
       if (any(substr(err.r2, nchar(err.r2), nchar(err.r2)) == substr(err.g, 2, 2))) {
-        warning("R-squared value for a level may not be zero ",
+        warning("R-squared value for a level may not be zero",
                 call. = FALSE)
       }
     }
@@ -129,8 +129,8 @@
 
   # validty check for nsims
   if("nsims" %in% names.x){
-    if(length(x$sims) > 1 ||
-       !is.numeric(x$sims) ||
+    if(length(x$nsims) > 1 ||
+       !is.numeric(x$nsims) ||
        x$nsims < 10 ||
        x$nsims > 1e6){
       stop("Incorrect value for argument 'nsims'", call.=FALSE)

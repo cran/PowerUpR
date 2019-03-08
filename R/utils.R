@@ -57,7 +57,7 @@
 # path error variance functions
 .se.a221 <- function(esa, r2m2, p, J) {
   var.a221 <- (1-(r2m2 + p * (1 - p) * esa^2)) / (p * (1 - p) * J)
-  if(var.a221 <= 0) {
+  if(is.nan(var.a221) | var.a221 <= 0) {
     stop("Design not feasible", call. = FALSE)
   }
   return(sqrt(var.a221))
@@ -66,7 +66,7 @@
 .se.b221 <- function(esa, esb, escp, rho2, r22, r21, r2m2, p, n, J) {
   var.b221 <- (rho2 * (1 - (r22 + p * (1 - p) * (esa * esb + escp)^2 / rho2 + (esb^2 / rho2) * (1 - r2m2 - p * (1 - p) * esa^2))) +
             (1 - rho2) * (1 - r21) / n) / (J * (1 - (r2m2 + p * (1 - p) * esa^2)))
-  if(var.b221 <= 0) {
+  if(is.nan(var.b221) | var.b221 <= 0) {
     stop("Design not feasible", call. = FALSE)
   }
   sqrt(var.b221)
@@ -76,7 +76,7 @@
   t2mbar <- rhom2 * (1 - r2m2 - (p * (1 - p)  * esa^2) / rhom2)
   sig2mbar <- (1 - rhom2) * (1 - r2m1)
   var.a211 <- (t2mbar + sig2mbar / n) / (J * p * (1 - p))
-  if(var.a211 <= 0) {
+  if(is.nan(var.a211) | var.a211 <= 0) {
     stop("Design not feasible", call. = FALSE)
   }
   return(sqrt(var.a211))
@@ -86,7 +86,7 @@
   sig2mbar <- (1 - rhom2) * (1 - r2m1)
   sig2ybar <- (1 - rho2) * (1 - r21 - (((1 - rhom2) / (1 - rho2)) * esb1^2 * (1 - r2m1)))
   var.b1211 <- sig2ybar / ((J * n - J) * sig2mbar)
-  if(var.b1211 <= 0) {
+  if(is.nan(var.b1211) | var.b1211 <= 0) {
     stop("Design not feasible", call. = FALSE)
   }
   return(sqrt(var.b1211))
@@ -100,7 +100,7 @@
        (1 / (p * (1 - p))) * esB^2 * (1 - rhom2) * (1 - r2m1) / n - esa^2 * esB^2) / (1 / (p * (1 - p)))
   sig2ybar <- (1 - rho2) * (1 - r21 - (((1 - rhom2) / (1 - rho2)) * esb1^2 * (1 - r2m1)))
   var.B211 <- (t2ybar + sig2ybar / n) / (J * (t2mbar + sig2mbar / n))
-  if(var.B211 <= 0) {
+  if(is.nan(var.B211) | var.B211 <= 0) {
     stop("Design not feasible", call. = FALSE)
   }
   return(sqrt(var.B211))
@@ -108,7 +108,7 @@
 
 .se.sobel <- function(x, y, sex, sey) {
   var.sobel <- (x^2 * sey^2  + y^2 * sex^2)
-  if(var.sobel <= 0) {
+  if(is.nan(var.sobel) | var.sobel <= 0) {
     stop("Design not feasible", call. = FALSE)
   }
   return(sqrt(var.sobel))
@@ -128,7 +128,7 @@
     powerx <- .power.fun(es = x, alpha = alpha, sse = sex, two.tailed = two.tailed, df = dfx)
     powery <- .power.fun(es = y, alpha = alpha, sse = sey, two.tailed = two.tailed, df = dfy)
   })
-  return( powerx*powery)
+  return(powerx*powery)
 }
 
 .power.mc <- function(nsims, ndraws, x, y, sex, sey, alpha, two.tailed) {

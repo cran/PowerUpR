@@ -47,8 +47,8 @@
          col = c(adjustcolor(2, alpha.f = 0.3), adjustcolor(4, alpha.f = 0.3), 2, 4))
 
   # axes labels and subtitle
-  title(ylab = "P(t)", line = 2)
-  title(xlab = "t", line = 2)
+  title(ylab = "Probability Density", line = 2)
+  title(xlab = paste0(expression(t), "(df = ", df, ")"), line = 2)
 
   # draw vertical lines
   abline(v = 0, lty = 2, col = 4) # mean of central t in dashed blue line
@@ -85,11 +85,45 @@ t1t2.error <- function(object){
     object <- mrss.to.power(object)
   }
 
-  # plot type I and type II error rates
-  return(.t1t2(ncp = object$ncp,
-               df = object$df,
-               alpha = object$parms$alpha,
-               two.tailed = object$parms$two.tailed))
+  if(inherits(object, "med211")){
+    ncpa <- object$ncp[1]
+    ncpb1 <- object$ncp[2]
+    ncpB <- object$ncp[3]
+    dfa <- object$df[1]
+    dfb1 <- object$df[2]
+    dfB <- object$df[3]
+    par(mfrow=c(3, 1))
+    .t1t2(ncp = ncpa, df = dfa, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'a'")
+    .t1t2(ncp = ncpb1, df = dfb1, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'b1'")
+    .t1t2(ncp = ncpB, df = dfB, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'B'")
+    par(mfrow=c(1, 1))
+  } else if(inherits(object, "med221")){
+    ncpa <- object$ncp[1]
+    ncpb <- object$ncp[2]
+    dfa <- object$df[1]
+    dfb <- object$df[2]
+    par(mfrow=c(2, 1))
+    .t1t2(ncp = ncpa, df = dfa, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'a'")
+    .t1t2(ncp = ncpb, df = dfb, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'b'")
+    par(mfrow=c(1, 1))
+  } else if(inherits(object, c("mod221", "mod222", "mod331", "mod332", "mod333"))){
+    .t1t2(ncp = object$ncp,
+          df = object$df,
+          alpha = object$parms$alpha,
+          two.tailed = object$parms$two.tailed)
+    title(main = "t-test for moderator effect")
+  } else {
+    .t1t2(ncp = object$ncp,
+          df = object$df,
+          alpha = object$parms$alpha,
+          two.tailed = object$parms$two.tailed)
+    title(main = "t-test for treatment effect")
+  }
 }
 
 # examples

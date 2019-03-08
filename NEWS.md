@@ -1,3 +1,7 @@
+### Changes in PowerUpR v1.0.3
+- improved plots
+- fixed minor typos
+
 ### Changes in PowerUpR v1.0.2
 - fixed minor typos
 

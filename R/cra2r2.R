@@ -261,7 +261,7 @@ power.med211 <- function(esa, esb1, esB, escp, two.tailed = TRUE, alpha = .05,
                     parms = list(esa=esa, esb1=esb1, esB=esB, escp=escp,
                                  two.tailed=two.tailed, alpha=alpha,
                                  mc=mc, nsims=nsims, ndraws=ndraws,
-                                 rho2=rho2, rhom2=rhom2, r21=r21, r22=r22, r2m2=r2m2,
+                                 rho2=rho2, rhom2=rhom2, r21=r21, r22=r22, r2m1 = r2m1, r2m2=r2m2,
                                  p=p, n=n, J=J),
                     df = df,
                     ncp = ncp,
@@ -277,7 +277,7 @@ power.med211 <- function(esa, esb1, esB, escp, two.tailed = TRUE, alpha = .05,
       "\nStandardized standard error for path b1:", round(seb1211, 3),
       "\nStandardized standard error for path B:", round(seB211, 3),
       "\nType I error rate:", alpha,
-      "\nTwo-tailed test:", two.tailed)
+      "\nTwo-tailed test:", two.tailed, "\n")
   class(power.out) <- c("power", "med211")
   return(invisible(power.out))
 }
@@ -338,7 +338,7 @@ power.med221 <- function(esa, esb, escp, two.tailed = TRUE, alpha = .05,
       "\nStandardized standard error for path a:", round(sea221, 3),
       "\nStandardized standard error for path b:", round(seb221, 3),
       "\nType I error rate:", alpha,
-      "\nTwo-tailed test:", two.tailed)
+      "\nTwo-tailed test:", two.tailed, "\n")
   class(power.out) <- c("power", "med221")
   return(invisible(power.out))
 }
@@ -467,14 +467,14 @@ mrss.mod222 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   }
   J <- ifelse(df>0,round(J0),NA)
 
-  mrss.out <-  list(fun = "mrss.mod22",
+  mrss.out <-  list(fun = "mrss.mod222",
                     parms = list(es=es, power=power, alpha=alpha, two.tailed=two.tailed,
                                  n=n, J0=J0, tol=tol, rho2=rho2, g2=g2, r21=r21, r22=r22,
                                  p=p, q=q),
                     df=df,
                     ncp = M,
                     J = J)
-  class(mrss.out) <- c("mod22", "mrss")
+  class(mrss.out) <- c("mod222", "mrss")
   cat(ifelse(is.null(q), "\nContinuous moderator", "\nBinary moderator"),
       "\nJ =", J)
   return(invisible(mrss.out))
