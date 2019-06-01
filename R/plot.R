@@ -5,9 +5,9 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
                                     main = NULL, sub = NULL,
                                     locate = FALSE, ...){
 
-  if(any(c("med211", "med221") %in% class(x))) {
+  if(any(c("med211", "med221", "med321") %in% class(x))) {
 
-    .plot.med(x, ypar = ypar, xpar = xpar,
+    .plot.med(x, ypar = "power", xpar = xpar,
               xlim = xlim, ylim = ylim, locate = locate, ...)
 
   } else {
@@ -149,11 +149,16 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
                       xlim = NULL, ylim = NULL,
                       locate = FALSE, ...){
 
-  # overwrite MC specification (takes long time!)
+  # overwrite MC specification for efficiency
   x$parms$mc <- FALSE
 
-  if(!is.null(xpar)) {
-    if(!xpar %in% c("n","J")){
+  # if xpar = NULL select the top level
+  if(is.null(xpar)) {
+    ifelse(inherits(x, c("med211", "med221")),
+           xpar <- "J",
+           xpar <- "K")
+  } else {
+    if(!xpar %in% c("n", "J", "K")){
       stop("Incorrect value for argument 'xpar'", call. = FALSE)
     }
   }
@@ -166,8 +171,13 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
   if(is.null(xlim)) {
     if(xpar == "n"){
       xlim <-  c(max(6, .5 * x$parms$n), 1.5 * x$parms$n)
-    } else {
+    } else if(xpar == "J") {
       xlim <-  c(max(6, .5 * x$parms$J), 1.5 * x$parms$J)
+      if(inherits(x, "med321")){
+        stop("Specify 'xlim' argument", call. = FALSE)
+      }
+    } else if(xpar == "K") {
+      xlim <-  c(max(7, .5 * x$parms$K), 1.5 * x$parms$K)
     }
   } else {
     if(xlim[1] <= 0 || !is.numeric(xlim) || length(xlim) > 2) {
@@ -184,7 +194,7 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
   if(inherits(x, "med211")) {
     idx.t <- 1:3
     idx.sj <- 4:6
-  } else if(inherits(x, "med221")){
+  } else if(inherits(x, c("med221", "med321"))){
     idx.t <- 1:2
     idx.sj <- 3
   }
@@ -215,6 +225,11 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
         yout[i,3] <- pwr[idx.sj, "sobel"]
         yout[i,4] <- pwr[idx.sj, "joint"]
         colnames(yout) <- c("a.t", "b.t", "ab.sobel", "ab.joint")
+      } else if(inherits(x, "med321")){
+        yout[i,1:2] <- pwr[idx.t, "t"]
+        yout[i,3] <- pwr[idx.sj, "sobel"]
+        yout[i,4] <- pwr[idx.sj, "joint"]
+        colnames(yout) <- c("a.t", "B.t", "aB.sobel", "aB.joint")
       }
 
     })
@@ -248,11 +263,13 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
         if(locate) {
           points(rep(x0, 3), y0.t, pch = 21, bg = adjustcolor(2, alpha.f = 0.5), cex = 1.5)
         }
-      } else if(inherits(x, "med221")){
+      } else if(inherits(x, c("med221", "med321"))){
         lines(xseq, yout[, 1], col = adjustcolor(4, alpha.f = 0.5), lty = 1, lwd = 2)
         lines(xseq, yout[, 2], col = adjustcolor(4, alpha.f = 0.5), lty = 2, lwd = 2)
         nlines <- 2
-        legend.labels <- c(expression(a), expression(b))
+        ifelse(inherits(x, "med221"),
+               legend.labels <- c(expression(a), expression(b)),
+               legend.labels <- c(expression(a), expression(B)))
         if(locate) {
           points(rep(x0, 2), y0.t, pch = 21, bg = adjustcolor(2, alpha.f = 0.5), cex = 1.5)
         }
@@ -271,11 +288,13 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
         if(locate) {
           points(rep(x0, 3), y0, pch=21, bg = adjustcolor(2, alpha.f = 0.5), cex=1.5)
         }
-      } else if(inherits(x, "med221")){
+      } else if(inherits(x, c("med221", "med321"))){
         ifelse(i == 2, kidx <- 0, kidx  <- 1)
         lines(xseq, yout[, idx.sj + kidx], col = adjustcolor(4, alpha.f = 0.5), lty = 1, lwd = 2)
         nlines <- 1
-        legend.labels <- expression(a*b)
+        ifelse(inherits(x, "med221"),
+               legend.labels <- expression(a*b),
+               legend.labels <- expression(a*B))
         if(locate) {
           points(x0, y0, pch = 21, bg = adjustcolor(2, alpha.f = 0.5), cex = 1.5)
         }

@@ -33,8 +33,8 @@
   \item{xpar}{character; one of the sample sizes on \code{x} axis.}
   \item{xlim}{limits for \code{xpar}.}
   \item{ylim}{limits for \code{ypar}.}
-  \item{xlab}{\code{x} axis label (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
-  \item{ylab}{\code{y} axis label (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
+  \item{xlab}{\code{x} axis label (ignored for objects returned from \code{power.med211()}, \code{power.med221()}, and \code{power.med321()} functions).}
+  \item{ylab}{\code{y} axis label (ignored for objects returned from \code{power.med211()}, \code{power.med221()}, and \code{power.med321()} functions).}
   \item{main}{title for the plot (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
   \item{sub}{subtitle for the plot (ignored for objects returned from \code{power.med221()} and \code{power.med211()} functions).}
   \item{locate}{logical; \code{TRUE} locates parameter values for design \code{x} on the plot.}

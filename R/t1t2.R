@@ -110,7 +110,16 @@ t1t2.error <- function(object){
     title(main = "t-test for path 'a'")
     .t1t2(ncp = ncpb, df = dfb, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
     title(main = "t-test for path 'b'")
-    par(mfrow=c(1, 1))
+  } else if(inherits(object, "med321")){
+    ncpa <- object$ncp[1]
+    ncpB <- object$ncp[2]
+    dfa <- object$df[1]
+    dfB <- object$df[2]
+    par(mfrow=c(2, 1))
+    .t1t2(ncp = ncpa, df = dfa, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'a'")
+    .t1t2(ncp = ncpB, df = dfB, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
+    title(main = "t-test for path 'B'")
   } else if(inherits(object, c("mod221", "mod222", "mod331", "mod332", "mod333"))){
     .t1t2(ncp = object$ncp,
           df = object$df,
@@ -124,6 +133,10 @@ t1t2.error <- function(object){
           two.tailed = object$parms$two.tailed)
     title(main = "t-test for treatment effect")
   }
+
+  # change par() back to the default values
+  par(mfrow=c(1, 1), mar=c(5.1, 4.1, 4.1, 2.1))
+
 }
 
 # examples

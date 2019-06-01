@@ -18,7 +18,8 @@
 
 \description{
   Use \code{mdes.<design>()} to calculate minimum detectable effect size for the main effect, \code{mdesd.<design>()} to calculate minimum detectable effect size difference for the moderation effect, \code{power.<design>()} to calculate the statistical power, and \code{mrss.<design>()} to calculate the minimum required sample size.
-  Use \code{<output>.cra2r2()} for the main effect, \code{<output>.mod221()} for the moderator effect at level 1, \code{<output>.mod222()} for the moderator effect at level 2, \code{power.med211()} for the 2-1-1 mediation effect, and \code{power.med221()} for the 2-2-1 mediation effect.
+  Use \code{<output>.cra2r2()} for the main effect, \code{<output>.mod221()} for the moderator at level 1, \code{<output>.mod222()} for the moderator at level 2.
+  Use \code{power.med211()} for 2-1-1 mediation, and \code{power.med221()} for 2-2-1 mediation.
 }
 
 \usage{
@@ -88,7 +89,7 @@ mrss.mod222(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{r21}{proportion of level 1 variance in the outcome explained by level 1 covariates.}
   \item{r22}{proportion of level 2 variance in the outcome explained by level 2 covariates.}
   \item{r2m1}{proportion of mediator variance at level 1 explained by level 1 covariates.}
-  \item{r2m2}{proportion of variance in the moderator (or mediator) effect that is explained by level 2 covariates. For the mediation model, proportion of mediator variance at level 2 exaplained by level 2 covariates.}
+  \item{r2m2}{proportion of variance in the moderator (or mediator) effect that is explained by level 2 predictors. For the mediation model, proportion of mediator variance at level 2 explained by level 2 predictors.}
   \item{n}{harmonic mean of level 1 units across level 2 units (or simple average).}
   \item{J}{level 2 sample size.}
   \item{J0}{starting value for \code{J}.}

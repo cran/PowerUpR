@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2019-03-09" />
+<meta name="date" content="2019-06-01" />
 
 <title>Planning a Three-Level Cluster Randomized Trial Sensitive to Detect Main Treatment Effect</title>
 
@@ -70,14 +70,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Planning a Three-Level Cluster Randomized Trial Sensitive to Detect Main Treatment Effect</h1>
-<h4 class="date"><em>2019-03-09</em></h4>
+<h4 class="date"><em>2019-06-01</em></h4>
 
 
 
 <p>To install and load <code>PowerUpR</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;PowerUpR&quot;</span>)
 <span class="kw">library</span>(PowerUpR)</code></pre></div>
-<p>Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student’s algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster-randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and control conditions. In the grant proposal number of schools, clasrooms, and students needs to be justified. Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect (<span class="math inline">\(\delta\)</span>) can be estimated via the following three-level hierarchical linear model (Raudenbush &amp; Bryk, 2002)</p>
+<p>Institue of Education Science (IES) reported that evidence on effectiveness of Saxon Math curriclum on secondary school student’s algebra subject is lacking and further research is needed (U.S. Department of Education, 2016). To evaluate the effectiveness Saxon Math curriculum, assume a three-level cluster-randomized trial is considered where schools are randomly assigned to treatment (Saxon Math curriclum) and control condition (business as usual). In the grant proposal number of schools, clasrooms, and students needs to be justified. Due to nesting of students within classrooms and nesting of classrooms within schools, the treatment effect (<span class="math inline">\(\delta\)</span>) can be estimated via the following three-level hierarchical linear model (Raudenbush &amp; Bryk, 2002)</p>
 <p><span class="math display">\[\begin{eqnarray}
   L1: Y_{ijk} &amp;=&amp; \beta_{0jk} + \beta_{1jk}X + r_{ijk}, \quad r_{ijk} \thicksim N(0,\sigma_{|X}^2) \newline
   L2: \beta_{0jk} &amp;=&amp; \gamma_{00k} + \gamma_{01k}W + \mu_{0jk}, \quad \mu_{0jk} \thicksim N(0,\tau_{2|W}^2) \newline
@@ -117,7 +117,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## 
 ## Minimum detectable effect size: 
 ## --------------------------------------- 
-## MDES is 0.23 95% CI [0.069,0.392] with 80% power 
+##  0.23 95% CI [0.069,0.392]
 ## ---------------------------------------
 ## Degrees of freedom: 80
 ## Standardized standard error: 0.081
@@ -135,7 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## 
 ## Statistical power: 
 ## --------------------------------------- 
-##  80% power 
+##  0.8
 ## --------------------------------------- 
 ## Degrees of freedom: 80
 ## Standardized standard error: 0.081

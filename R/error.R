@@ -2,7 +2,8 @@
 
   names.x <- names(x)
   if(any(!names.x %in% c("", "n", "J", "K", "L", "n0", "J0", "K0", "L0", "g1", "g2", "g3", "g4",
-                         "r21","r22","r23","r24", "r2t2", "r2t3", "r2t4", "rho2", "rho3", "rho4", "rhom2",
+                         "r21","r22","r23","r24", "r2t2", "r2t3", "r2t4",
+                         "rho2", "rho3", "rho4", "rhom2", "rhom3",
                          "omega2", "omega3", "omega4", "omegam2", "omegam3", "r2m1", "r2m2", "r2m3",
                          "q", "p", "alpha", "power", "mdes", "es", "escp", "esa", "esb", "esb1", "esB",
                          "esab", "esab1", "esaB", "esa0", "esb0", "esb10", "esB0", "powera", "powerb",
@@ -43,7 +44,7 @@
 
   # validity check for variance parameters, proportions, and probabilities
   idx.var <- intersect(c("r21","r22","r23","r24", "r2t2", "r2t3", "r2t4",
-                         "r2m1", "r2m2", "r2m3","rhom2", "omegam2", "omegam3",
+                         "r2m1", "r2m2", "r2m3","rhom2", "rhom3", "omegam2", "omegam3",
                          "rho2", "rho3", "rho4", "omega2", "omega3", "omega4",
                          "q", "q", "p", "p", "alpha", "power", "powera",
                          "powerb", "powerb1", "powerB"),  names.x)
@@ -52,17 +53,6 @@
      any(x[idx.var] < 0) ||
      any(x[idx.var] > 1)) {
     stop("Incorrect value for [0, 1] bounded arguments", call.=FALSE)
-  }
-
-  # validity check for correlations
-  idx.rho <- intersect(c( "rhoab", "rhoab1", "rhoab2", "rhob1b2"),  names.x)
-  if(length(idx.rho) > 0) {
-    if(any(lapply(x[idx.rho], function(x)!is.numeric(x)) == TRUE) ||
-       any(lapply(x[idx.rho], length) > 1) ||
-       any(unlist(x[idx.rho]) > 1 ||
-           unlist(x[idx.rho]) < -1)) {
-      stop("Incorrect value for correlations", call.=FALSE)
-    }
   }
 
   # validity check for R-squared value and number of covariate consistency

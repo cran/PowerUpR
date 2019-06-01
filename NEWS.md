@@ -1,3 +1,7 @@
+### Changes in PowerUpR v1.0.4
+- added 3-2-1 mediation
+- fixed minor typos
+
 ### Changes in PowerUpR v1.0.3
 - improved plots
 - fixed minor typos

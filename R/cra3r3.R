@@ -17,7 +17,7 @@ mdes.cra3r3 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3,
                                 g3=g3, r21=r21, r22=r22, r23=r23,
                                 p=p, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = mdes[1]/SSE,
                    mdes = mdes)
   class(mdes.out) <- c("main", "mdes")
@@ -40,18 +40,18 @@ mdesd.mod331 <- mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
     if(omegam3 != 0 || r2m3 != 1) {
       omegam3 <- 0
       r2m3 <- 1
-      message("Arguments 'omegam3' and/or 'r3m2' are ignored")
+      message("Arguments 'omegam3' and/or 'r2m3' are ignored")
     }
-    cat("\nNon-randomly varying (level 2 and 3)",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Non-randomly varying (level 2 and 3) \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   } else if(omegam3 == 0 || r2m3 == 1) {
     df <- J*K - K - g1 - 2
-    cat("\nNon-randomly varying (level 3)",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Non-randomly varying (level 3) \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   } else {
     df <- K - g1 - 1
-    cat("\nRandomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   }
 
   SSE <- ifelse(is.null(q),
@@ -71,7 +71,7 @@ mdesd.mod331 <- mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3, omegam2=omegam2, omegam3=omegam3,
                                 r21=r21, r2m2=r2m2, r2m3=r2m3,
                                 g1=g1, p=p, q=q, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = mdes[1]/SSE,
                    mdes = mdes)
   class(mdes.out) <- c("mod", "mdes")
@@ -82,7 +82,7 @@ mdesd.mod331 <- mdes.mod331 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 # mdes.mod331(rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
 # mdes.mod331(rho3=.05, rho2=.12, omegam2=.08, omegam3=.07, p=.4, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
 # mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, q=.7, g1=1, r21=.20, r2m2=0, r2m3=0,  n=20, J=4, K=60)
-# mdes.mod331(rho3=.05, rho2=.12, omegam2=0.1, omegam3=0, p=.4, g1=1, r21=.20, r2m2=1, r2m3=1,  n=20, J=4, K=60)
+# mdes.mod331(rho3=.05, rho2=.12, omegam2=0, omegam3=0, p=.4, g1=1, r21=.20, r2m2=1, r2m3=1,  n=20, J=4, K=60)
 
 mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                               rho2, rho3, omegam3, g2=0, r21=0, r22=0, r2m3=0,
@@ -93,12 +93,12 @@ mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 
   if(omegam3 == 0 || r2m3 == 1) {
     df <- J*K - K - g2 - 2
-    cat("\nNon-randomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Non-randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   } else {
     df <- K - g2 - 1
-    cat("\nRandomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   }
 
   SSE <- ifelse(is.null(q),
@@ -118,7 +118,7 @@ mdesd.mod332 <- mdes.mod332 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3, omegam3=omegam3,
                                 r21=r21, r22=r22, r2m3=r2m3,
                                 g2=g2, p=p, q=q, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = mdes[1]/SSE,
                    mdes = mdes)
   class(mdes.out) <- c("mod332", "mdes")
@@ -138,7 +138,7 @@ mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
-  cat(ifelse(is.null(q), "\nContinuous moderator", "\nBinary moderator"))
+  cat(ifelse(is.null(q), "\nModerator type: Continuous\n", "\nModerator type: Binary\n"))
 
   df <- K-g3-4
   SSE <- ifelse(is.null(q),
@@ -157,7 +157,7 @@ mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, rho3=rho3, r21=r21, r22=r22, r23=r23,
                                 g3=g3, p=p, q=q, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = mdes[1]/SSE,
                    mdes = mdes)
   class(mdes.out) <- c("mod333", "mdes")
@@ -170,7 +170,7 @@ mdesd.mod333 <- mdes.mod333 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 
 power.cra3r3 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                          rho2, rho3, g3=0, r21=0, r22=0, r23=0,
-                         p=.50, q=NULL, n, J, K){
+                         p=.50, n, J, K){
 
   user.parms <- as.list(match.call())
   .error.handler(user.parms)
@@ -187,7 +187,7 @@ power.cra3r3 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                                   rho2=rho2, rho3=rho3,
                                   g3=g3, r21=r21, r22=r22, r23=r23,
                                   p=p, n=n, J=J, K=K),
-                     df=df,
+                     df = df,
                      ncp = es/SSE,
                      power = power)
   class(power.out) <- c("main", "power")
@@ -210,18 +210,18 @@ power.mod331 <- function(es=.25, alpha=.05, two.tailed=TRUE,
     if(omegam3 != 0 || r2m3 != 1) {
       omegam3 <- 0
       r2m3 <- 1
-      message("Arguments 'omegam3' and/or 'r3m2' are ignored")
+      message("Arguments 'omegam3' and/or 'r2m3' are ignored")
     }
-    cat("\nNon-randomly varying (level 2 and 3)",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Non-randomly varying (level 2 and 3) \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   } else if(omegam3 == 0 || r2m3 == 1) {
     df <- J*K - K - g1 - 2
-    cat("\nNon-randomly varying (level 3)",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Non-randomly varying (level 3) \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   } else {
     df <- K - g1 - 1
-    cat("\nRandomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   }
 
   SSE <- ifelse(is.null(q),
@@ -241,7 +241,7 @@ power.mod331 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3, omegam2=omegam2, omegam3=omegam3,
                                 r21=r21, r2m2=r2m2, r2m3=r2m3,
                                 g1=g1, p=p, q=q, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = es/SSE,
                    power = power)
   class(power.out) <- c("mod331", "power")
@@ -266,12 +266,12 @@ power.mod332 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 
   if(omegam3 == 0 || r2m3 == 1) {
     df <- J*K - K - g2 - 2
-    cat("\nNon-randomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Non-randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   } else {
     df <- K - g2 - 1
-    cat("\nRandomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"))
+    cat("\nModerator effect: Randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"))
   }
 
   SSE <- ifelse(is.null(q),
@@ -291,7 +291,7 @@ power.mod332 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3, omegam3=omegam3,
                                 g2=g2, r21=r21, r22=r22, r2m3=r2m3,
                                 p=p, q=q, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = es/SSE,
                    power = power)
   class(power.out) <- c("mod332", "power")
@@ -311,7 +311,7 @@ power.mod333 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   user.parms <- as.list(match.call())
   .error.handler(user.parms)
 
-  cat(ifelse(is.null(q), "\nContinuous moderator", "\nBinary moderator"))
+  cat(ifelse(is.null(q), "\nModerator type: Continuous\n", "\nModerator type: Binary\n"))
 
   df <- K-g3-4
   SSE <- ifelse(is.null(q),
@@ -331,7 +331,7 @@ power.mod333 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3,
                                 g3=g3, r21=r21, r22=r22, r23=r23,
                                 p=p, q=q, n=n, J=J, K=K),
-                   df=df,
+                   df = df,
                    ncp = es/SSE,
                    power = power)
   class(power.out) <- c("mod333", "power")
@@ -342,6 +342,73 @@ power.mod333 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 # power.mod333(es=.30, rho3=.1, rho2=.1, q=.5, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
 # power.mod333(es=.15, rho3=.1, rho2=.1, g3=1, r21=.3, r22=.4, r23=.5, n=20, J=4, K=60)
 
+power.med321 <- function(esa, esB, two.tailed = TRUE, alpha = .05,
+                         mc = FALSE, nsims = 1000, ndraws = 1000,
+                         rhom3, rho2, rho3, r2m2, r2m3, r21, r22, r23,
+                         p = .50, n, J, K) {
+
+  user.parms <- as.list(match.call())
+  .error.handler(user.parms)
+
+  dfa <- K - 5
+  dfB <- K - 6
+  df <- rbind(dfa, dfB)
+  colnames(df) <- "df"
+  rownames(df) <- c("a", "B")
+
+  sea321 <- .se.a321(rhom3 = rhom3, r2m2 = r2m2, r2m3 = r2m3, p = p, J = J, K = K)
+  seB321 <- .se.B321(rhom3 = rhom3, rho2 = rho2, rho3 = rho3, r2m2 = r2m2, r2m3 = r2m3,
+                     r21 = r21, r22 = r22, r23 = r23, p = p, n = n, J = J, K = K)
+  ncpa <- esa/sea321
+  ncpB <- esB/seB321
+  ncp <- rbind(ncpa, ncpB)
+  colnames(ncp) <- "ncp"
+  rownames(ncp) <- c("a", "B")
+
+  powera <- .power.fun(es = esa, alpha = alpha, sse = sea321, two.tailed = two.tailed, df = dfa)
+  powerB <- .power.fun(es = esB, alpha = alpha, sse = seB321, two.tailed = two.tailed, df = dfB)
+  power.sobel.aB <- .power.sobel(x = esa, y = esB, sex = sea321, sey = seB321, alpha = alpha, two.tailed = two.tailed)
+  power.joint.aB <- .power.jt(x = esa, y = esB, sex = sea321, sey = seB321, alpha = alpha, dfx = dfa, dfy = dfB, two.tailed = two.tailed)
+  power.mc.aB <- ifelse(mc, .power.mc(nsims = nsims, ndraws = ndraws, x = esa, y =esB, sex = sea321, sey = seB321, alpha = alpha, two.tailed = two.tailed), NA)
+
+  power <- rbind(
+    c(round(powera, 3), NA, NA, NA),
+    c(round(powerB, 3), NA, NA, NA),
+    c(NA, round(power.sobel.aB, 3), round(power.joint.aB, 3), round(power.mc.aB, 3))
+  )
+  colnames(power) <- c("t", "sobel", "joint", "mc")
+  rownames(power) <- c("a", "B", "aB")
+
+  power.out <- list(fun = "power.med321",
+                    parms = list(esa = esa, esB = esB,
+                                 two.tailed = two.tailed, alpha = alpha,
+                                 mc = mc, nsims = nsims, ndraws = ndraws,
+                                 rhom3 = rhom3, rho2 = rho2, rho3 = rho3, r2m2 = r2m2, r2m3 = r2m3,
+                                 r21 = r21, r22 = r22, r23 = r23, p = p, n = n, J = J, K = K),
+                    df = df,
+                    ncp = ncp,
+                    power = round(power, 3))
+  cat("Statistical power: \n")
+  cat("------------------------------------ \n")
+  print(power)
+  cat("------------------------------------ \n")
+  cat("Degrees of freedom for path a:", dfa,
+      "\nDegrees of freedom for path B:", dfB,
+      "\nStandardized standard error for path a:", round(sea321, 3),
+      "\nStandardized standard error for path B:", round(seB321, 3),
+      "\nType I error rate:", alpha,
+      "\nTwo-tailed test:", two.tailed, "\n")
+  class(power.out) <- c("power", "med321")
+  return(invisible(power.out))
+}
+# examples
+# power.med321(esa= .49, esB = .30, rhom3 = 0.26, rho2 = .15, rho3 = .20,
+#              r2m2 = .07, r2m3 = .17, r21 = .02, r22 = .41, r23 = .38,
+#              p = .50, n = 20, J = 4, K = 30)
+#
+# power.med321(esa= .51, esB = .30, rhom3 = 0.27, rho2 = .15, rho3 = .19,
+#              r2m2 = .07, r2m3 = .16, r21 = .02, r22 = .41, r23 = .38,
+#              p = .50, n = 20, J = 4, K = 60)
 
 mrss.cra3r3 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                         n, J, K0=10, tol=.10,
@@ -371,7 +438,7 @@ mrss.cra3r3 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                                  n=n, J=J, K0=K0, tol=tol,
                                  rho2=rho2, rho3=rho3,
                                  p=p, r21=r21, r22=r22, r23=r23, g3=g3),
-                    df=df,
+                    df = df,
                     ncp = M,
                     K = K)
   class(mrss.out) <- c("main", "mrss")
@@ -425,25 +492,28 @@ mrss.mod331 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3, omegam2=omegam2, omegam3=omegam3,
                                 r21=r21, r2m2=r2m2, r2m3=r2m3,
                                 g1=g1, p=p, q=q, n=n, J=J, K0=K0, tol=tol),
-                   df=df,
+                   df = df,
                    ncp = M,
                    K = K)
+
   if(omegam2 == 0 || r2m2 == 1) {
     if(omegam3 != 0 || r2m3 != 1) {
-      message("Arguments 'omegam3' and/or 'r3m2' are ignored")
+      message("Arguments 'omegam3' and/or 'r2m3' are ignored")
     }
-    cat("\nNon-randomly varying (level 2 and 3)",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"),
+    cat("\nModerator effect: Non-randomly varying (level 2 and 3) \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"),
         "\nK =", K)
   } else if(omegam3 == 0 || r2m3 == 1) {
-    cat("\nNon-randomly varying (level 3)",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"),
+    cat("\nModerator effect: Non-randomly varying (level 3) \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"),
         "\nK =", K)
   } else {
-    cat("\nRandomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"),
+    cat("\nModerator effect: Randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"),
         "\nK =", K)
   }
+
+
   class(mrss.out) <- c("mod331", "mrss")
   return(invisible(mrss.out))
 }
@@ -495,18 +565,20 @@ mrss.mod332 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3, omegam3=omegam3,
                                 g2=g2, r21=r21, r22=r22, r2m3=r2m3,
                                 p=p, q=q, n=n, J=J, K0=K0, tol=tol),
-                   df=df,
+                   df = df,
                    ncp = M,
                    K = K)
+
   if(omegam3 == 0 || r2m3 == 1) {
-    cat("\nNon-randomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"),
+    cat("\nModerator effect: Non-randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"),
         "\nK =", K)
   } else {
-    cat("\nRandomly varying",
-        ifelse(is.null(q), "continuous moderator", "binary moderator"),
+    cat("\nModerator effect: Randomly varying \nModerator type:",
+        ifelse(is.null(q), "Continuous\n", "Binary\n"),
         "\nK =", K)
   }
+
   class(mrss.out) <- c("mod332", "mrss")
   return(invisible(mrss.out))
 }
@@ -514,7 +586,7 @@ mrss.mod332 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 # examples
 # mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=.05, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
 # mrss.mod332(es=.11, rho3=.1, rho2=.1, omegam3=.05, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
-# mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=0, q=.5, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
+# mrss.mod332(es=.22, rho3=.1, rho2=.1, omegam3=0, q=.2, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
 # mrss.mod332(es=.11, rho3=.1, rho2=.1, omegam3=0, g2=1, r21=.30, r22=.4, r2m3=0,  n=20, J=4)
 
 mrss.mod333 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
@@ -550,10 +622,10 @@ mrss.mod333 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                                 rho2=rho2, rho3=rho3,
                                 g3=g3, r21=r21, r22=r22, r23=r23,
                                 p=p, q=q, n=n, J=J, K0=K0, tol=tol),
-                   df=df,
+                   df = df,
                    ncp = M,
                    K = K)
-  cat(ifelse(is.null(q), "\nContinuous moderator", "\nBinary moderator"),
+  cat(ifelse(is.null(q), "\nModerator type: Continuous\n", "\nModerator type: Binary\n"),
       "\nK =", K)
   class(mrss.out) <- c("mod333", "mrss")
   return(invisible(mrss.out))

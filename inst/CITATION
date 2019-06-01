@@ -3,13 +3,13 @@ citHeader("To cite PowerUpR in publications use:")
 bibentry(bibtype = "Manual",
   title        = "{PowerUpR}: Power Analysis Tools for Multilevel Randomized Experiments",
   author       = as.person("Metin Bulus, Nianbo Dong, Benjamin Kelcey, Jessaca Spybrook"),
-  note         = "R package version 1.0.3",
+  note         = "R package version 1.0.4",
   year         = "2019",
   url = "https://CRAN.R-project.org/package=PowerUpR",
 
   textVersion  =
   paste("Bulus, M., Dong, N., Kelcey, B., & Spybrook, J. (2019).",
         "PowerUpR:  Power Analysis Tools for Multilevel Randomized Experiments.",
-        "R package version 1.0.3.",
+        "R package version 1.0.4.",
         "https://CRAN.R-project.org/package=PowerUpR")
 )
