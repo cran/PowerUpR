@@ -1,11 +1,15 @@
 # main plotting function
-plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
+plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "power", xpar = NULL,
                                     xlim = NULL, ylim = NULL,
                                     xlab = NULL, ylab = NULL,
                                     main = NULL, sub = NULL,
                                     locate = FALSE, ...){
 
-  if(any(c("med211", "med221", "med321") %in% class(x))) {
+  if(any(c("med211", "med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32") %in% class(x))) {
+
+    if(ypar == "mdes") {
+      warning("MDES plots are not available for mediation designs", call. = FALSE)
+    }
 
     .plot.med(x, ypar = "power", xpar = xpar,
               xlim = xlim, ylim = ylim, locate = locate, ...)
@@ -145,7 +149,7 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
 
 
 # plots for mediation effects
-.plot.med <- function(x, ypar = "power", xpar = "J",
+.plot.med <- function(x, ypar = "power", xpar = NULL,
                       xlim = NULL, ylim = NULL,
                       locate = FALSE, ...){
 
@@ -154,47 +158,67 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
 
   # if xpar = NULL select the top level
   if(is.null(xpar)) {
-    ifelse(inherits(x, c("med211", "med221")),
-           xpar <- "J",
-           xpar <- "K")
+
+   if(class(x)[2] %in% c("med_pn21", "med_pn31", "med_pn32")) {
+     ifelse(inherits(x, c("med_pn21")),
+            xpar <- "J_trt",
+            xpar <- "K_trt")
+   } else {
+     ifelse(inherits(x, c("med211", "med221")),
+            xpar <- "J",
+            xpar <- "K")
+   }
+
   } else {
-    if(!xpar %in% c("n", "J", "K")){
+
+    if(!xpar %in% c("n", "n_trt", "n_ctrl", "J", "J_trt", "K", "K_trt")){
       stop("Incorrect value for argument 'xpar'", call. = FALSE)
     }
-  }
 
-  if(ypar!= "power") {
-    stop("Only power curves allowed for mediation effects", call. = FALSE)
   }
 
   # default xlim if NULL
   if(is.null(xlim)) {
-    if(xpar == "n"){
-      xlim <-  c(max(6, .5 * x$parms$n), 1.5 * x$parms$n)
-    } else if(xpar == "J") {
-      xlim <-  c(max(6, .5 * x$parms$J), 1.5 * x$parms$J)
-      if(inherits(x, "med321")){
-        stop("Specify 'xlim' argument", call. = FALSE)
+
+    if(class(x)[2] %in% c("med_pn21", "med_pn31", "med_pn32")) {
+      if(xpar %in% c("n", "n_ctrl", "n_trt")){
+        if(xpar == "n") warning("Assuming `n` is defined for treatment arm. Otherwise specify `n_ctrl`", call. = FALSE)
+        ifelse(xpar %in% c("n","n_trt"),
+               xlim <-  c(max(6, .5 * x$parms$n_trt), 1.5 * x$parms$n_trt),
+               xlim <-  c(max(6, .5 * x$parms$n_ctrl), 1.5 * x$parms$n_ctrl))
+      } else if(xpar %in% c("J", "J_trt")) {
+        xlim <-  c(max(6, .5 * x$parms$J_trt), 1.5 * x$parms$J_trt)
+      } else if(xpar %in% c("K", "K_trt")) {
+        xlim <-  c(max(7, .5 * x$parms$K_trt), 1.5 * x$parms$K_trt)
       }
-    } else if(xpar == "K") {
-      xlim <-  c(max(7, .5 * x$parms$K), 1.5 * x$parms$K)
+    } else {
+      if(xpar == "n"){
+        xlim <-  c(max(6, .5 * x$parms$n), 1.5 * x$parms$n)
+      } else if(xpar == "J") {
+        xlim <-  c(max(6, .5 * x$parms$J), 1.5 * x$parms$J)
+      } else if(xpar == "K") {
+        xlim <-  c(max(7, .5 * x$parms$K), 1.5 * x$parms$K)
+      }
     }
+
   } else {
     if(xlim[1] <= 0 || !is.numeric(xlim) || length(xlim) > 2) {
       stop("Incorrect value for argument 'xlim'", call. = FALSE)
     }
   }
 
+  # computation intervals
   if(xlim[2] - xlim[1] > 20) {
     xseq <- seq(xlim[1], xlim[2], .25)
   } else {
     xseq <- seq(xlim[1], xlim[2], .125)
   }
 
+  # indices for subsetting output
   if(inherits(x, "med211")) {
     idx.t <- 1:3
     idx.sj <- 4:6
-  } else if(inherits(x, c("med221", "med321"))){
+  } else if(class(x)[2] %in% c("med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32")) {
     idx.t <- 1:2
     idx.sj <- 3
   }
@@ -207,7 +231,7 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
   y0.sobel <- x$power[idx.sj,"sobel"]
   y0.joint <- x$power[idx.sj,"joint"]
 
-  # plot data
+  # value grid for plotting data
   yout <- matrix(NA, nrow = length(xseq), ncol = length(idx.t)^2)
   for(i in 1:nrow(yout)) {
     x$parms[idx] <- xseq[i]
@@ -217,25 +241,24 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
         yout[i,1:3] <- pwr[idx.t, "t"]
         yout[i,4:6] <- pwr[idx.sj, "sobel"]
         yout[i,7:9] <- pwr[idx.sj, "joint"]
-        colnames(yout) <- c("a.t", "b1.t", "B.t",
-                            "ab1.sobel", "ab2.sobel", "aB.sobel",
-                            "ab1.joint", "ab2.joint", "aB.joint")
+        # colnames(yout) <- c("a.t", "b1.t", "B.t",
+        #                     "ab1.sobel", "ab2.sobel", "aB.sobel",
+        #                     "ab1.joint", "ab2.joint", "aB.joint")
       } else if(inherits(x, "med221")){
         yout[i,1:2] <- pwr[idx.t, "t"]
         yout[i,3] <- pwr[idx.sj, "sobel"]
         yout[i,4] <- pwr[idx.sj, "joint"]
-        colnames(yout) <- c("a.t", "b.t", "ab.sobel", "ab.joint")
-      } else if(inherits(x, "med321")){
+        # colnames(yout) <- c("a.t", "b.t", "ab.sobel", "ab.joint")
+      } else if(class(x)[2] %in% c("med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32")) {
         yout[i,1:2] <- pwr[idx.t, "t"]
         yout[i,3] <- pwr[idx.sj, "sobel"]
         yout[i,4] <- pwr[idx.sj, "joint"]
-        colnames(yout) <- c("a.t", "B.t", "aB.sobel", "aB.joint")
+        # colnames(yout) <- c("a.t", "B.t", "aB.sobel", "aB.joint")
       }
-
     })
   }
 
-  # plot
+  # plots
   par(mfrow=c(3, 1))
   ylab <- c("Power for t-test", "Power for Sobel Test", "Power for Joint Test")
 
@@ -263,7 +286,7 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
         if(locate) {
           points(rep(x0, 3), y0.t, pch = 21, bg = adjustcolor(2, alpha.f = 0.5), cex = 1.5)
         }
-      } else if(inherits(x, c("med221", "med321"))){
+      } else if(class(x)[2] %in% c("med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32")) {
         lines(xseq, yout[, 1], col = adjustcolor(4, alpha.f = 0.5), lty = 1, lwd = 2)
         lines(xseq, yout[, 2], col = adjustcolor(4, alpha.f = 0.5), lty = 2, lwd = 2)
         nlines <- 2
@@ -288,7 +311,7 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
         if(locate) {
           points(rep(x0, 3), y0, pch=21, bg = adjustcolor(2, alpha.f = 0.5), cex=1.5)
         }
-      } else if(inherits(x, c("med221", "med321"))){
+      } else if(class(x)[2] %in% c("med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32")) {
         ifelse(i == 2, kidx <- 0, kidx  <- 1)
         lines(xseq, yout[, idx.sj + kidx], col = adjustcolor(4, alpha.f = 0.5), lty = 1, lwd = 2)
         nlines <- 1
@@ -305,7 +328,7 @@ plot.mrss <- plot.power <- plot.mdes <- function(x, ypar = "mdes", xpar = NULL,
     if(locate) {
       abline(v = x0, lty = 5, col = adjustcolor(2, alpha.f = 0.5))
     }
-    # benchmark value for power
+    # benchmark for power
     abline(h = .80, lty = 5, col = adjustcolor(2, alpha.f = 0.5))
 
     legend("topright",

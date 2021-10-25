@@ -1,5 +1,6 @@
 mdes.bcra4r2 <- function(power=.80, alpha=.05, two.tailed=TRUE,
-                        rho2, rho3, rho4, omega3, omega4,
+                        rho2, rho3, rho4, esv3=NULL, esv4=NULL,
+                        omega3=esv3/rho3, omega4=esv4/rho4,
                         p=.50, r21=0, r22=0, r2t3=0, r2t4=0, g4=0,
                         n, J, K, L){
 
@@ -17,7 +18,7 @@ mdes.bcra4r2 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   mdes.out <- list(fun = "mdes.bcra4r2",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, rho3=rho3, rho4=rho4,
-                                omega3=omega3, omega4=omega4,
+                                esv3=esv3, esv4=esv4, omega3=omega3, omega4=omega4,
                                 p=p, r21=r21, r22=r22, r2t3=r2t3, r2t4=r2t4, g4=g4,
                                 n=n, J=J, K=K, L=L),
                    df=df,
@@ -26,12 +27,12 @@ mdes.bcra4r2 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   class(mdes.out) <- c("main", "mdes")
   return(invisible(mdes.out))
 }
-
 # example
 # mdes.bcra4r2(rho4=.05, rho3=.15, rho2=.15, omega4=.50, omega3=.50, n=10, J=4, K=4, L=20)
 
 power.bcra4r2 <- function(es=.25, alpha=.05, two.tailed=TRUE,
-                         rho2, rho3, rho4, omega3, omega4,
+                         rho2, rho3, rho4, esv3=NULL, esv4=NULL,
+                         omega3=esv3/rho3, omega4=esv4/rho4,
                          p=.50, r21=0, r22=0, r2t3=0, r2t4=0, g4=0,
                          n, J, K, L){
 
@@ -49,7 +50,7 @@ power.bcra4r2 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   power.out <-  list(fun = "power.bcra4r2",
                      parms = list(es=es, alpha=alpha, two.tailed=two.tailed,
                                   rho2=rho2, rho3=rho3, rho4=rho4,
-                                  omega3=omega3, omega4=omega4,
+                                  esv3=esv3, esv4=esv4, omega3=omega3, omega4=omega4,
                                   p=p, r21=r21, r22=r22, r2t3=r2t3, r2t4=r2t4, g4=g4,
                                   n=n, J=J, K=K, L=L),
                      df=df,
@@ -64,7 +65,8 @@ power.bcra4r2 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 
 mrss.bcra4r2 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                          n, J, K, L0=10, tol=.10,
-                         rho2, rho3, rho4, omega3, omega4,
+                         rho2, rho3, rho4, esv3=NULL, esv4=NULL,
+                         omega3=esv3/rho3, omega4=esv4/rho4,
                          p=.50, r21=0, r22=0, r2t3=0, r2t4=0, g4=0){
 
   user.parms <- as.list(match.call())
@@ -92,7 +94,7 @@ mrss.bcra4r2 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                     parms = list(es=es, power=power, alpha=alpha, two.tailed=two.tailed,
                                  n=n, J=J, K=K, L0=L0, tol=tol,
                                  rho2=rho2, rho3=rho3, rho4=rho4,
-                                 omega3=omega3, omega4=omega4,
+                                 esv3=esv3, esv4=esv4, omega3=omega3, omega4=omega4,
                                  p=p, r21=r21, r22=r22, r2t3=r2t3, r2t4=r2t4, g4=g4),
                     df=df,
                     ncp = M,
@@ -101,6 +103,5 @@ mrss.bcra4r2 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   cat("L =", L, "\n")
   return(invisible(mrss.out))
 }
-
 # example
 # mrss.bcra4r2(rho4=.05, rho3=.15, rho2=.15, omega4=.50, omega3=.50, n=10, J=2, K=10)

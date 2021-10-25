@@ -18,7 +18,7 @@
 \examples{
   \dontrun{
 
-    design1 <- mdes.bira2r1(rho2=.35, omega2=.10,
+    design1 <- mdes.bira2(rho2=.35, omega2=.10,
                             n=83, J=480)
     t1t2.error(design1)
 

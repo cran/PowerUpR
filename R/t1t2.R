@@ -48,7 +48,7 @@
 
   # axes labels and subtitle
   title(ylab = "Probability Density", line = 2)
-  title(xlab = paste0(expression(t), "(df = ", df, ")"), line = 2)
+  title(xlab = paste0(expression(t), "(df = ", round(df, digits = 3), ")"), line = 2)
 
   # draw vertical lines
   abline(v = 0, lty = 2, col = 4) # mean of central t in dashed blue line
@@ -110,7 +110,7 @@ t1t2.error <- function(object){
     title(main = "t-test for path 'a'")
     .t1t2(ncp = ncpb, df = dfb, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
     title(main = "t-test for path 'b'")
-  } else if(inherits(object, "med321")){
+  } else if(inherits(object, c("med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32"))){
     ncpa <- object$ncp[1]
     ncpB <- object$ncp[2]
     dfa <- object$df[1]
@@ -120,7 +120,7 @@ t1t2.error <- function(object){
     title(main = "t-test for path 'a'")
     .t1t2(ncp = ncpB, df = dfB, two.tailed = object$parms$two.tailed, alpha =object$parms$alpha)
     title(main = "t-test for path 'B'")
-  } else if(inherits(object, c("mod221", "mod222", "mod331", "mod332", "mod333"))){
+  } else if(inherits(object, c("mod211", "mod212", "mod221", "mod222", "mod331", "mod332", "mod333"))){
     .t1t2(ncp = object$ncp,
           df = object$df,
           alpha = object$parms$alpha,

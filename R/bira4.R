@@ -1,5 +1,6 @@
 mdes.bira4r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
-                        rho2, rho3, rho4, omega2, omega3, omega4,
+                        rho2, rho3, rho4, esv2=NULL, esv3=NULL, esv4=NULL,
+                        omega2=esv2/rho2, omega3=esv3/rho3, omega4=esv4/rho4,
                         p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0,
                         n, J, K, L){
 
@@ -17,6 +18,7 @@ mdes.bira4r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   mdes.out <- list(fun = "mdes.bira4r1",
                    parms = list(power=power, alpha=alpha, two.tailed=two.tailed,
                                 rho2=rho2, rho3=rho3, rho4=rho4,
+                                esv2=esv2, esv3=esv3, esv4=esv4,
                                 omega2=omega2, omega3=omega3, omega4=omega4,
                                 p=p, r21=r21, r2t2=r2t2, r2t3=r2t3, r2t4=r2t4, g4=g4,
                                 n=n, J=J, K=K, L=L),
@@ -28,10 +30,11 @@ mdes.bira4r1 <- function(power=.80, alpha=.05, two.tailed=TRUE,
 }
 # example
 # mdes.bira4r1(rho4=.05, rho3=.15, rho2=.15, omega4=.50, omega3=.50, omega2=.50, n=10, J=4, L=27, K=4)
-
+mdes.bira4 <- mdes.bira4r1
 
 power.bira4r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
-                         rho2, rho3, rho4, omega2, omega3, omega4,
+                         rho2, rho3, rho4, esv2=NULL, esv3=NULL, esv4=NULL,
+                         omega2=esv2/rho2, omega3=esv3/rho3, omega4=esv4/rho4,
                          p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0,
                          n, J, K, L){
 
@@ -49,6 +52,7 @@ power.bira4r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
   power.out <-  list(fun = "power.bira4r1",
                      parms = list(es=es, alpha=alpha, two.tailed=two.tailed,
                                   rho2=rho2, rho3=rho3, rho4=rho4,
+                                  esv2=esv2, esv3=esv3, esv4=esv4,
                                   omega2=omega2, omega3=omega3, omega4=omega4,
                                   p=p, r21=r21, r2t2=r2t2, r2t3=r2t3, r2t4=r2t4, g4=g4,
                                   n=n, J=J, K=K, L=L),
@@ -60,10 +64,12 @@ power.bira4r1 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 }
 # example
 # power.bira4r1(rho4=.05, rho3=.15, rho2=.15, omega4=.50, omega3=.50, omega2=.50, n=10, J=4, L=27, K=4)
+power.bira4 <- power.bira4r1
 
 mrss.bira4r1 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                          n, J, K, L0=10, tol=.10,
-                         rho2, rho3, rho4, omega2, omega3, omega4,
+                         rho2, rho3, rho4, esv2=NULL, esv3=NULL, esv4=NULL,
+                         omega2=esv2/rho2, omega3=esv3/rho3, omega4=esv4/rho4,
                          p=.50, r21=0, r2t2=0, r2t3=0, r2t4=0, g4=0){
 
   user.parms <- as.list(match.call())
@@ -91,6 +97,7 @@ mrss.bira4r1 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                     parms = list(es=es, power=power, alpha=alpha, two.tailed=two.tailed,
                                  n=n, J=J, K=K, L0=L0, tol=tol,
                                  rho2=rho2, rho3=rho3, rho4=rho4,
+                                 esv2=esv2, esv3=esv3, esv4=esv4,
                                  omega2=omega2, omega3=omega3, omega4=omega4,
                                  p=p, r21=r21, r2t2=r2t2, r2t3=r2t3, r2t4=r2t4, g4=g4),
                     df=df,
@@ -102,3 +109,4 @@ mrss.bira4r1 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 }
 # examples
 # mrss.bira4r1(rho4=.05, rho3=.15, rho2=.15, omega4=.50, omega3=.50, omega2=.50, n=10, J=2, K=10)
+mrss.bira4 <- mrss.bira4r1

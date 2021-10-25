@@ -1,3 +1,12 @@
+### Changes in PowerUpR v1.1.0
+- MRSS functions for designs with fixed blocks find number of clusters per block rather than number of blocks
+- shorter function names, e.g., `mdes.cra3()` <= `mdes.cra3r3()`, `mdes.bira3()` <= `mdes.bira3r1()` (still accommodates older function names)
+- added `mod211` and `mod212` functions (Dong, Kelcey, \& Spybrook, 2021)
+- added `power.med331()` and `power.med311()` functions (Kelcey, Xie, Spybrook, \& Dong, 2020)
+- added `power.rep()` and `mdh.rep()` functions (Hedges \& Schauer, 2019)
+- added partially nested designs (Kelcey, Bai, \& Xie, 2020; Lohr, Schochet, \& Sanders, 2014)
+- added optional effect size variability argument to blocked designs 
+
 ### Changes in PowerUpR v1.0.4
 - added 3-2-1 mediation
 - fixed minor typos

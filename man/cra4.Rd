@@ -1,27 +1,31 @@
-\name{cra4r4}
+\name{cra4}
+\alias{cra4}
 \alias{cra4r4}
+\alias{mdes.cra4}
+\alias{power.cra4}
+\alias{mrss.cra4}
 \alias{mdes.cra4r4}
 \alias{power.cra4r4}
 \alias{mrss.cra4r4}
 \title{Four-Level Cluster-randomized Trial}
 
 \description{
-  use \code{mdes.cra4r4()} calculate the minimum detectable effect size, \code{power.cra4r4()} to calculate the statistical power, and \code{mrss.cra4r4()} to calculate the minimum required sample size.
+For main treatment effects, use \code{mdes.cra4()} calculate the minimum detectable effect size, \code{power.cra4()} to calculate the statistical power, and \code{mrss.cra4()} to calculate the minimum required sample size.
 }
 
 \usage{
-mdes.cra4r4(power=.80, alpha=.05, two.tailed=TRUE,
-            rho2, rho3, rho4, p=.50, r21=0, r22=0, r23=0, r24=0, g4=0,
-            n, J, K, L)
+mdes.cra4(power=.80, alpha=.05, two.tailed=TRUE,
+          rho2, rho3, rho4, p=.50, r21=0, r22=0, r23=0, r24=0, g4=0,
+          n, J, K, L)
 
-power.cra4r4(es=.25, alpha=.05, two.tailed=TRUE,
-             rho2, rho3, rho4, p=.50, r21=0, r22=0, r23=0, r24=0, g4=0,
-             n, J, K, L)
+power.cra4(es=.25, alpha=.05, two.tailed=TRUE,
+           rho2, rho3, rho4, p=.50, r21=0, r22=0, r23=0, r24=0, g4=0,
+           n, J, K, L)
 
-mrss.cra4r4(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
-            n, J, K, L0=10, tol=.10,
-            rho2, rho3, rho4, p=.50,
-            r21=0, r22=0, r23=0, r24=0, g4=0)
+mrss.cra4(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
+          n, J, K, L0=10, tol=.10,
+          rho2, rho3, rho4, p=.50,
+          r21=0, r22=0, r23=0, r24=0, g4=0)
 }
 
 \arguments{
@@ -56,17 +60,12 @@ mrss.cra4r4(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
   \item{L}{number of level 4 units.}
 }
 
-
 \examples{
 # cross-checks
-mdes.cra4r4(rho4=.05, rho3=.05, rho2=.10,
-            n=10, J=2, K=3, L=20)
-power.cra4r4(es = .412, rho4=.05, rho3=.05, rho2=.10,
-             n=10, J=2, K=3, L=20)
-mrss.cra4r4(es = .412, rho4=.05, rho3=.05, rho2=.10,
-            n=10, J=2, K=3)
-}
-
-\seealso{
-  \code{\link[cosa]{cosa.crd4r4}}
+mdes.cra4(rho4=.05, rho3=.05, rho2=.10,
+          n=10, J=2, K=3, L=20)
+power.cra4(es = .412, rho4=.05, rho3=.05, rho2=.10,
+           n=10, J=2, K=3, L=20)
+mrss.cra4(es = .412, rho4=.05, rho3=.05, rho2=.10,
+          n=10, J=2, K=3)
 }

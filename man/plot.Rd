@@ -8,19 +8,19 @@
 }
 
 \usage{
-  \method{plot}{power}(x, ypar = "mdes",  xpar = NULL,
+  \method{plot}{power}(x, ypar = "power",  xpar = NULL,
           xlim = NULL, ylim = NULL,
           xlab = NULL, ylab = NULL,
           main = NULL, sub = NULL,
           locate = FALSE, ...)
 
-  \method{plot}{mdes}(x, ypar = "mdes",  xpar = NULL,
+  \method{plot}{mdes}(x, ypar = "power",  xpar = NULL,
           xlim = NULL, ylim = NULL,
           xlab = NULL, ylab = NULL,
           main = NULL, sub = NULL,
           locate = FALSE, ...)
 
-  \method{plot}{mrss}(x, ypar = "mdes",  xpar = NULL,
+  \method{plot}{mrss}(x, ypar = "power",  xpar = NULL,
           xlim = NULL, ylim = NULL,
           xlab = NULL, ylab = NULL,
           main = NULL, sub = NULL,
@@ -43,11 +43,11 @@
 
 
 \examples{
-design1 <- mdes.cra3r3(rho3=.06, rho2=.17, n=15, J=3, K=60)
+design1 <- mdes.cra3(rho3=.06, rho2=.17, n=15, J=3, K=60)
 plot(design1, ypar = "mdes", xpar = "K", xlim = c(30, 100))
 plot(design1, ypar = "power", xpar = "K", xlim = c(30, 100))
 
-design2 <- power.cra3r3(es=.269, rho3=.06, rho2=.17, n=15, J=3, K=60)
+design2 <- power.cra3(es=.269, rho3=.06, rho2=.17, n=15, J=3, K=60)
 plot(design2, ypar = "mdes", xpar = "K", xlim = c(30, 100))
 plot(design2, ypar = "power", xpar = "K", xlim = c(30, 100))
 }

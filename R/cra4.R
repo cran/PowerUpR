@@ -24,9 +24,9 @@ mdes.cra4r4 <- function(power=.80, alpha=.05, two.tailed=TRUE,
   class(mdes.out) <- c("main", "mdes")
   return(invisible(mdes.out))
 }
-
 # example
 # mdes.cra4r4(rho4=.05, rho3=.05, rho2=.10, n=10, J=2, K=3, L=20,  two.tailed = FALSE, r23 = .80)
+mdes.cra4 <- mdes.cra4r4
 
 power.cra4r4 <- function(es=.25, alpha=.05, two.tailed=TRUE,
                          rho2, rho3, rho4, p=.50, r21=0, r22=0, r23=0, r24=0, g4=0,
@@ -56,6 +56,7 @@ power.cra4r4 <- function(es=.25, alpha=.05, two.tailed=TRUE,
 }
 # example
 # power.cra4r4(rho4=.05, rho3=.05, rho2=.10, n=10, J=2, K=3, L=20)
+power.cra4 <- power.cra4r4
 
 mrss.cra4r4 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
                         n, J, K, L0=10, tol=.10,
@@ -96,3 +97,4 @@ mrss.cra4r4 <- function(es=.25, power=.80, alpha=.05, two.tailed=TRUE,
 }
 # example
 # mrss.cra4r4(rho4=.05, rho3=.05, rho2=.10, n=10, J=2, K=3)
+mrss.cra4 <- mrss.cra4r4

@@ -1,7 +1,7 @@
 # define object conversion functions
 mrss.to.mdes <- function(object) {
 
-  if(any(c("med211", "med221") %in% class(object))) {
+  if(any(c("med211", "med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32") %in% class(object))) {
     stop("Indirect effects are currently not supported in object conversion functions", call. = FALSE)
   }
 
@@ -9,16 +9,26 @@ mrss.to.mdes <- function(object) {
     idx.par <- match(c("n","J","K","L"), names(object$parms))
     nlevels <- sum(!is.na(idx.par)) + 1
     parms <- object$parms
+
+    fun.parsed <- scan(text = object$fun, what = "character", sep=".", quiet = TRUE)
+    fixed <- substr(fun.parsed[2], nchar(fun.parsed[2])-1, nchar(fun.parsed[2])-1)
+
     if(nlevels == 1) {
       parms$n <- object$n
     }else if(nlevels == 2) {
-      parms$J <- object$J
+      ifelse(fixed == "f",
+             parms$n <- object$n,
+             parms$J <- object$J)
     }else if(nlevels == 3) {
-      parms$K <- object$K
+      ifelse(fixed == "f",
+             parms$J <- object$J,
+             parms$K <- object$K)
     }else if(nlevels == 4) {
-      parms$L <- object$L
+      ifelse(fixed == "f",
+             parms$K <- object$K,
+             parms$L <- object$L)
     }
-    fun.parsed <- scan(text = object$fun, what = "character", sep=".", quiet = TRUE)
+
     if(length(fun.parsed) == 2){
       fun <- paste0("mdes", ".", fun.parsed[2])
     }else{
@@ -34,24 +44,34 @@ mrss.to.mdes <- function(object) {
 
 mrss.to.power <- function(object) {
 
-  if(any(c("med211", "med221") %in% class(object))) {
+  if(any(c("med211", "med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32") %in% class(object))) {
     stop("Indirect effects are currently not supported in object conversion functions", call. = FALSE)
   }
+
+  fun.parsed <- scan(text = object$fun, what = "character", sep=".", quiet = TRUE)
+  fixed <- substr(fun.parsed[2], nchar(fun.parsed[2])-1, nchar(fun.parsed[2])-1)
 
   if(inherits(object, "mrss")) {
     idx.par <- intersect(c("n","J","K","L"), names(object$parms))
     nlevels <- length(idx.par) + 1
     parms <- object$parms
+
     if(nlevels == 1) {
       parms$n <- object$n
     }else if(nlevels == 2) {
-      parms$J <- object$J
+      ifelse(fixed == "f",
+             parms$n <- object$n,
+             parms$J <- object$J)
     }else if(nlevels == 3) {
-      parms$K <- object$K
+      ifelse(fixed == "f",
+             parms$J <- object$J,
+             parms$K <- object$K)
     }else if(nlevels == 4) {
-      parms$L <- object$L
+      ifelse(fixed == "f",
+             parms$K <- object$K,
+             parms$L <- object$L)
     }
-    fun.parsed <- scan(text = object$fun, what = "character", sep=".", quiet = TRUE)
+
     if(length(fun.parsed) == 2){
       fun <- paste0("power", ".", fun.parsed[2])
     }else{
@@ -64,9 +84,10 @@ mrss.to.power <- function(object) {
   }
 }
 
+
 power.to.mdes <- function(object) {
 
-  if(any(c("med211", "med221") %in% class(object))) {
+  if(any(c("med211", "med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32") %in% class(object))) {
     stop("Indirect effects are currently not supported in object conversion functions", call. = FALSE)
   }
 
@@ -90,7 +111,7 @@ power.to.mdes <- function(object) {
 
 mdes.to.power <- function(object){
 
-  if(any(c("med211", "med221") %in% class(object))) {
+  if(any(c("med211", "med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32") %in% class(object))) {
     stop("Indirect effects are currently not supported in object conversion functions", call. = FALSE)
   }
 
@@ -114,7 +135,7 @@ mdes.to.power <- function(object){
 
 mdes.to.pctl <- function(object){
 
-  if(any(c("med211", "med221") %in% class(object))) {
+  if(any(c("med211", "med221", "med311", "med321", "med331", "med_pn21", "med_pn31", "med_pn32") %in% class(object))) {
     stop("Indirect effects are currently not supported in object conversion functions", call. = FALSE)
   }
 
